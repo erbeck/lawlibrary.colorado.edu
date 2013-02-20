@@ -1,0 +1,56 @@
+* { height: auto; }
+body {
+  font-size: 12pt;
+}
+#search,
+#main-menu-wrapper,
+#secondary-menu-wrapper,
+.region-footer,
+.sidebar,
+#slider-wrapper,
+#backstretch,
+.breadcrumb {
+  display: none;
+}
+#branding {
+  border-bottom: 1px solid #ddd;
+  padding: 20px;
+}
+#branding h1 {
+  margin: 0;
+  padding:0;
+}
+#branding h1 a,
+#branding #logo a {
+  font-size: 18pt;
+  color: #000;
+  text-decoration: none;
+  height: auto;
+}
+#main h1 {
+  font-size: 24pt;
+  margin: 0;
+  padding: 0;
+}
+#main h2 {
+  font-size: 21pt;
+}
+#main h3 {
+  font-size: 18pt;
+}
+#main h4 {
+  font-size: 17pt;
+}
+#main h5 {
+  font-size: 16pt;
+}
+#main h6 {
+  font-size: 15pt;
+  margin: 0;
+  padding: 0;
+}
+
+
+.ui-accordion-content {
+  display: block !important;
+}
