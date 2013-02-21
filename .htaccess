@@ -129,8 +129,3 @@ DirectoryIndex index.php index.html index.htm
     </FilesMatch>
   </IfModule>
 </IfModule>
-
- #Redirect to old conference page
-	Redirect 301 /boulder-conference http://www.colorado.edu/law/lawlib/Boulder_Conference.html
-	
-  
