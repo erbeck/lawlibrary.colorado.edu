@@ -1,6 +1,12 @@
 <?php
-//dpm($content);
-$q = 'type=' . $content['field_event_type'][0]['#markup'] . '&number=' . $content['field_event_number'][0]['#markup'] . '&category=' . $content['field_event_category'][0]['#markup'] . '&expire=' . $content['field_event_expire'][0]['#markup'];
+$categories = $content['field_event_category'];
+$children = array_intersect_key($categories, element_children($categories));
+foreach($children as $child) {
+  $eventcategories[] = $child['#markup'];
+}
+$categories = join('%2c', $eventcategories);
+
+$q = 'type=' . $content['field_event_type'][0]['#markup'] . '&number=' . $content['field_event_number'][0]['#markup'] . '&category=' . $categories . '&expire=' . $content['field_event_expire'][0]['#markup'] . '&ics=' . $content['field_event_subcategories'][0]['#markup'];
 $t = $content['field_event_template'][0]['#markup'];
 
 //print $q; 

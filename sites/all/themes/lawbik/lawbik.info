@@ -1,0 +1,4 @@
+name = Lawbik
+description = Administration theme for CU-Boulder Law School baed on Rubik
+base theme = rubik
+core = 7.x

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the views-alpha feature.
+ */
+
+include_once 'views_alpha.features.inc';

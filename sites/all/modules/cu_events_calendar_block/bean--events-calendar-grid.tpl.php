@@ -1,5 +1,12 @@
 <?php
   $grid_id = 'events-grid-' . rand();
+  
+  $categories = $content['field_event_category'];
+  $children = array_intersect_key($categories, element_children($categories));
+  foreach($children as $child) {
+    $eventcategories[] = $child['#markup'];
+  }
+  $categories = join('%2c', $eventcategories);
 ?>
 <div class="events-calendar-grid" id="<?php print $grid_id; ?>">
 <?php
@@ -9,7 +16,7 @@
     <a href="#<?php print $grid_id; ?>" class="grid-prev">&laquo; <span>Previous</span></a>  <a href="<?php print $grid_id; ?>" class="grid-next"><span>Next</span> &raquo;</a>
   </div>  
 <?php endif; ?>
-<script language="javascript" src="http://events.colorado.edu/minicalsyndicator.aspx?type=<?php print $content['field_event_type'][0]['#markup']; ?>&numberofmonths=<?php print $content['field_event_months'][0]['#markup']; ?>&winmode=S&category=<?php print $content['field_event_category'][0]['#markup']; ?>&view=Grid"></script>
+<script language="javascript" src="http://events.colorado.edu/minicalsyndicator.aspx?type=<?php print $content['field_event_type'][0]['#markup']; ?>&numberofmonths=<?php print $content['field_event_months'][0]['#markup']; ?>&winmode=S&category=<?php print $categories; ?>&ics=<?php print $content['field_event_subcategories'][0]['#markup']; ?>&view=Grid"></script>
 
 
 <?php

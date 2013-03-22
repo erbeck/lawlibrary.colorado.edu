@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the othersettings-alpha feature.
+ */
+
+include_once 'othersettings_alpha.features.inc';

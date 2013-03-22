@@ -23,7 +23,7 @@ function cu_events_calendar_block_field_default_fields() {
   $fields['bean-cu_events_calendar_block-field_event_category'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_event_category',
@@ -77,7 +77,7 @@ function cu_events_calendar_block_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '0',
+        'weight' => '1',
       ),
     ),
   );
@@ -143,7 +143,7 @@ function cu_events_calendar_block_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '2',
+        'weight' => '4',
       ),
     ),
   );
@@ -222,7 +222,7 @@ function cu_events_calendar_block_field_default_fields() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_field',
-        'weight' => '3',
+        'weight' => '5',
       ),
     ),
   );
@@ -306,7 +306,72 @@ function cu_events_calendar_block_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '1',
+        'weight' => '3',
+      ),
+    ),
+  );
+
+  // Exported field: 'bean-cu_events_calendar_block-field_event_subcategories'.
+  $fields['bean-cu_events_calendar_block-field_event_subcategories'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_event_subcategories',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          'Y' => 'Yes',
+          'N' => 'No',
+        ),
+        'allowed_values_function' => '',
+        'allowed_values_php' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'cu_events_calendar_block',
+      'default_value' => array(
+        0 => array(
+          'value' => 'N',
+        ),
+      ),
+      'default_value_function' => '',
+      'default_value_php' => '',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_key',
+          'weight' => '6',
+        ),
+      ),
+      'entity_type' => 'bean',
+      'fences_wrapper' => 'no_wrapper',
+      'field_name' => 'field_event_subcategories',
+      'label' => 'Include sub-categories',
+      'required' => 1,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => '2',
       ),
     ),
   );
@@ -371,7 +436,7 @@ function cu_events_calendar_block_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '4',
+        'weight' => '6',
       ),
     ),
   );
@@ -437,7 +502,7 @@ function cu_events_calendar_block_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '31',
+        'weight' => '8',
       ),
     ),
   );
@@ -446,7 +511,7 @@ function cu_events_calendar_block_field_default_fields() {
   $fields['bean-events_calendar_grid-field_event_category'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_event_category',
@@ -645,6 +710,71 @@ function cu_events_calendar_block_field_default_fields() {
     ),
   );
 
+  // Exported field: 'bean-events_calendar_grid-field_event_subcategories'.
+  $fields['bean-events_calendar_grid-field_event_subcategories'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_event_subcategories',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          'Y' => 'Yes',
+          'N' => 'No',
+        ),
+        'allowed_values_function' => '',
+        'allowed_values_php' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'events_calendar_grid',
+      'default_value' => array(
+        0 => array(
+          'value' => 'N',
+        ),
+      ),
+      'default_value_function' => '',
+      'default_value_php' => '',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_key',
+          'weight' => '4',
+        ),
+      ),
+      'entity_type' => 'bean',
+      'fences_wrapper' => 'no_wrapper',
+      'field_name' => 'field_event_subcategories',
+      'label' => 'Include sub-categories',
+      'required' => 1,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => '40',
+      ),
+    ),
+  );
+
   // Exported field: 'bean-events_calendar_grid-field_event_type'.
   $fields['bean-events_calendar_grid-field_event_type'] = array(
     'field_config' => array(
@@ -716,6 +846,7 @@ function cu_events_calendar_block_field_default_fields() {
   t('Category');
   t('Choose how your events calendar feed will display');
   t('Expire');
+  t('Include sub-categories');
   t('Link');
   t('Months');
   t('Number');
