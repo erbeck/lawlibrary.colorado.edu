@@ -663,8 +663,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	padding: 0;	
 }
 #lib-info {
-	position:relative;
-	float:left;	
+	position:relative;	
 	width:280px;
 }
 #cu-info {
