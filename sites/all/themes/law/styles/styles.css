@@ -662,8 +662,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	border:none;
 	padding: 0;	
 }
+#site-info-wrapper {
+	height:100px;
+}
 #lib-info {
-	position:relative;	
+	position:absolute;
+	float:left;	
 	width:280px;
 }
 #cu-info {
