@@ -664,15 +664,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 }
 #site-info-wrapper {
 	height:100px;
+	position:relative;
 }
 #lib-info {
 	position:absolute;
-	float:left;	
-	width:630px;
+	text-align:left;	
+	width:100%;
 }
 #cu-info {
 	float:right;
-	position:relative;	
-	width:230px;
+	position:absolute;	
+	width:95.75%;
 	text-align:right;
 }
