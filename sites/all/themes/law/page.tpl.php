@@ -209,7 +209,7 @@
             	<?php print render($page['fatfooter']); ?>
           	<?php endif; ?>
           </div>
-          <div id="site-info-wrapper" class="clearfix">
+          <div id="site-info-wrapper">
                     
             <div id="lib-info">
               <a href="http://lawlibrary.colorado.edu"><strong>William A. Wise Law Library</strong></a><br />
