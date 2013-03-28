@@ -210,19 +210,15 @@
           	<?php endif; ?>
           </div>
           <div id="site-info-wrapper" class="clearfix">
-            <?php if(!empty($page['site_info'])) : ?>
-              <div id="site-info" class="grid-8">
-                <?php print render($page['site_info']); ?>	
-              </div>
-            <?php endif; ?>
-            <div id="lib-info" class="<?php print ns('grid-12', $page['site_info'], 8); ?>">
+                    
+            <div id="lib-info">
               <a href="http://lawlibrary.colorado.edu"><strong>William A. Wise Law Library</strong></a><br />
               University of Colorado Law School<br />
               Wolf Law Building, 2nd Floor<br />
               2450 Kittredge Loop Drive<br />
               Boulder, CO 80309-0402
             </div>
-            <div id="cu-info" class="<?php print ns('grid-12', $page['site_info'], 8); ?>">
+            <div id="cu-info">
               <a href="http://www.colorado.edu"><strong>University of Colorado Boulder</strong></a><br />
               &copy; Regents of the University of Colorado<br />
              <a href="http://www.colorado.edu/about/privacy-statement">Privacy</a> &bull; <a href="http://www.colorado.edu/about/legal-trademarks">Legal &amp; Trademarks</a>
