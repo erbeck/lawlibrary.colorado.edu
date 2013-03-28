@@ -666,8 +666,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	height:98px;
 }
 #lib-info {
-	float:left;
-	position:relative;
+	position:absolute;
 	text-align:left;	
 	width:280px;
 	padding-left:20px;
