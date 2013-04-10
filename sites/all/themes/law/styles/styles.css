@@ -172,14 +172,21 @@ ul#secondary-menu a:hover {
 }
 .region-quicklinks {
   position: absolute;
-  top:10px;
-  right:20px;
+  top:13px;
+  right:40px;
   z-index: 5;
   width:420px;
+  text-align:right;
 }
 .region-quicklinks h2 {
   display: none;
 }
+.region-quicklinks select {
+	width:180px;
+}
+
+
+/*
 .region-quicklinks ul.menu {
   padding:0;
   margin:0;
@@ -196,6 +203,7 @@ ul#secondary-menu a:hover {
 .region-quicklinks ul.menu li.first a {
   border-right:none;	
 }
+*/
 
 /* SUBNAVIGATION */
 
@@ -361,6 +369,11 @@ ul#secondary-menu a:hover {
 	float:left;
 	width:180px;
 	padding:5px 0px 5px 5px;	
+}
+#block-block-3 {
+	z-index:20;
+	left:775px;
+	position:absolute;	
 }
 
 
@@ -677,4 +690,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	width:230px;
 	text-align:right;
 	padding-right:20px;
+}
+
+
+/* ALERT */
+
+#lawbrary-alert {
+	background: #990000;
+	padding: 15px;
+	color: #fff;
+	margin: 0;
+	font-weight: normal;
+	font-size: 21px;
+	line-height: 120%;
+	border:1px solid #000;
 }

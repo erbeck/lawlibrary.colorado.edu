@@ -59,11 +59,11 @@
               ?>
             </div>
             <?php if(!(empty($page['quicklinks']))): ?>
-        	<div id="quicklinks">
-        	<?php print render($page['quicklinks']); ?>
-        	</div>
-			<?php endif; ?>
-            </div>
+            	<div id="quicklinks">
+        		<?php print render($page['quicklinks']); ?>
+        		</div>
+				<?php endif; ?>
+            	</div>
       </div><!-- /#main-menu-wrapper -->
     <?php else: ?>
       <div id="no-main-menu"></div>  
