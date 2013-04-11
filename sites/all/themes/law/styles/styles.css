@@ -372,8 +372,9 @@ ul#secondary-menu a:hover {
 }
 #block-block-3 {
 	z-index:20;
-	left:775px;
+	left:755px;
 	position:absolute;	
+	display:inline;
 }
 
 
