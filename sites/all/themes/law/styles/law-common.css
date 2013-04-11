@@ -506,6 +506,14 @@ td.views-field-field-last-name div {
 .sidebar ul.menu a.active {
   font-weight: bold;
 }
+/*nolink style added to sidebar to style the 'placeholder' menu items made possible by the Special Menu Items module 4/11/2013 tc*/
+.sidebar .nolink {
+  background-position: left center;
+  background-repeat: no-repeat;
+  display: block;
+  padding: 8px 0 8px 10px;
+  border-bottom:1px solid #e5e5e5;
+}
 body ul.menu li a.menu_icon {
   padding:5px;
   background-image: none;
