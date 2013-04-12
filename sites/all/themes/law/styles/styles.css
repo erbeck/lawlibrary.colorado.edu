@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 body {
   background-color: #222;
 }
@@ -345,6 +344,13 @@ ul#secondary-menu a:hover {
 #fatfooter a:hover {
   color: #fff;
 }
+
+/*nolink style added to fatfooter to style the 'placeholder' menu items made possible by the Special Menu Items module 4/11/2013 tc*/
+
+#fatfooter .nolink {
+	color: #fff;
+}
+
 #block-multiblock-2 {
 	float:left;
 	width:160px;
@@ -1052,9 +1058,7 @@ ul#secondary-menu a:hover {
 }
 #fatfooter a:hover {
   color: #fff;
-}/*nolink style added to fatfooter to style the 'placeholder' menu items made possible by the Special Menu Items module 4/11/2013 tc*/#fatfooter .nolink {
-	color:#fff;  
-}
+}
 #block-multiblock-2 {
 	float:left;
 	width:160px;
@@ -1415,5 +1419,4 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	font-size: 21px;
 	line-height: 120%;
 	border:1px solid #000;
->>>>>>> styles for 'nolink' menu placeholders added
 }
