@@ -26,9 +26,11 @@
   background-position: left center;
   background-repeat: no-repeat;
 }
-.ui-accordion h3.ui-accordion-header a {
+.ui-accordion .ui-accordion-header a {
   font-size:16px;
   font-weight:bold;
+  padding-left: 0px;
+  padding-top:10px;
 }
 .ui-accordion h3.ui-accordion-header.ui-state-active a {
   background-image: url(../images/collapse.png);
