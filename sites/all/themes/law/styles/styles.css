@@ -332,7 +332,7 @@ ul#secondary-menu a:hover {
 #fatfooter {
 	background-color: #212121;
 	padding:20px 15px;
-	height:380px;	
+	height:420px;	
 }
 #fatfooter h2{
 	font-size:18px;
@@ -1431,7 +1431,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 
 /* Accordion */
 
-#.ui-accordion .ui-accordion-content {
+.ui-accordion .ui-accordion-content {
 	padding-left: 0px;	
 }
 
