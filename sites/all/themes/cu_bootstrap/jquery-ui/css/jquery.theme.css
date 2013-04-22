@@ -26,13 +26,17 @@
   background-position: left center;
   background-repeat: no-repeat;
 }
+.ui-accordion h3.ui-accordion-header a {
+  font-size:16px;
+  font-weight:bold;
+}
 .ui-accordion h3.ui-accordion-header.ui-state-active a {
   background-image: url(../images/collapse.png);
   font-weight: bold;
   color:#363636;
 }
 .ui-accordion .ui-accordion-content {
-  padding:5px 5px 5px 25px;
+  padding:5px 5px 5px 0px;
   margin:0;
 }
 .ui-accordion .ui-accordion-content .block {
