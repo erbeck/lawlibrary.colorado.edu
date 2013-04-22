@@ -21,7 +21,7 @@
         <div id="secondary-navigation" class="container-12 clearfix">
           <div class="nav-wrapper grid-12">
           	<div id="law-backlink">
-        		<a href="http://www.colorado.edu/law/" title="Colorado Law"><< Law School</a>
+        		<a href="http://www.colorado.edu/law/" title="Colorado Law">Law School</a>
 			</div> 
 		  	<?php print $secondary_menu_links; ?>
           </div>
