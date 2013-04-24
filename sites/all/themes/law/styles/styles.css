@@ -644,6 +644,10 @@ input#frontSearchButton {
 #featured-text {
 	padding-left: 10px;
 }
+div#moreResources {
+	text-align:center;
+	width:670;	
+}
 .panel-col-bottom {
 	padding-top:20px;	
 }
