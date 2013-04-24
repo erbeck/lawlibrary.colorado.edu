@@ -615,7 +615,31 @@ zoom: 1;
 
 #frontSearch {
 	background-image: url(../images/searchBackground.png);
-	height:360px;
+	height:330px;
+}
+#frontBox {
+	position:absolute;
+	margin-top:64px;
+	margin-left:105px;
+	height:200px;
+	width:700px;
+	background-color:#E3E4DE;
+	border:1px solid #666;					
+}
+#frontSearchForm {
+	display:block;
+	margin-top:38px;
+	margin-left:16px;	
+}
+input#frontSearchBox {
+	width: 485px;
+	font: 24px Arial, sans-serif;
+	border: 1px solid #666;
+}
+input#frontSearchButton {
+	padding: 5px 20px;
+	font-size: 18px;
+	background-color: #D0B87C;
 }
 #featured-text {
 	padding-left: 10px;
