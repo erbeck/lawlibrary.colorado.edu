@@ -349,6 +349,7 @@ ul#secondary-menu a:hover {
 
 #fatfooter .nolink {
 	color: #fff;
+	padding-bottom: 5px !important; 
 }
 
 #block-multiblock-2 {
@@ -1093,7 +1094,6 @@ ul#secondary-menu a:hover {
   color: #fff;
 }
 
-
 #block-multiblock-2 {
 	float:left;
 	width:160px;
@@ -1125,6 +1125,7 @@ ul#secondary-menu a:hover {
 	left:775px;
 	position:absolute;	
 }
+
 
 
 /* TABLES */
