@@ -806,10 +806,12 @@ table.calendar-legend tr.even .stripe {
   text-align: center;
   z-index: 0;
 }
+/** added "text-align: center;" 5-7-2013 tc **/
 
 .view .date-nav-wrapper .date-heading h3 {
   line-height: 30px;
   font-size: 1.7em;
+  text-align: center;
 }
 
 .view .date-nav-wrapper .date-next {
