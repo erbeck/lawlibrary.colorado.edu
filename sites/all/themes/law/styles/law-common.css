@@ -249,7 +249,7 @@ table tbody {
   background: #f0f0f0;
 }
 #content table td {
-  border: 1px solid #eee;
+  border: none;
   padding: 8px;
   vertical-align: top;
 }

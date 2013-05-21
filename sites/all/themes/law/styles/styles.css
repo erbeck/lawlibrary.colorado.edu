@@ -753,8 +753,32 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 .ui-accordion .ui-accordion-content {
 	padding: 5px 5px 5px 0px;
 }
-
 .ui-accordion .ui-accordion-header a {
 	font-size:16px;
 	font-weight:bold;	
+}
+
+/* 	FIND PAGE */
+
+#block-views-guided-search-block {
+	margin:30px 0px 0px 27px;	
+}
+#edit-field-what-are-you-looking-for-value-wrapper {
+	margin-bottom:40px;	
+}
+#findSearchBox, #edit-field-what-are-you-looking-for-value {
+	width: 550px;
+	font:20px Arial sans-serif;
+	border:1px solid #666;	
+}
+#findSearchButton, #edit-submit-guided-search, #edit-reset {
+	padding:5px 15px;
+	font-size:15px;
+	background-color:#D0B87C;	
+}
+.findBox {
+	margin: 0; 
+    padding: 0;
+	margin-top:30px;
+    text-align: center;	
 }
