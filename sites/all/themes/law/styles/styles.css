@@ -334,12 +334,6 @@ ul#secondary-menu a:hover {
 	padding:20px 15px;
 	height:420px;	
 }
-
-/*nolink style added to fatfooter to style the 'placeholder' menu items made possible by the Special Menu Items module 4/11/2013 tc*/
-
-#fatfooter .nolink {
-	color: #fff;}
-
 #fatfooter h2{
 	font-size:18px;
 	color:#fff;
@@ -351,7 +345,12 @@ ul#secondary-menu a:hover {
   color: #fff;
 }
 
+/*nolink style added to fatfooter to style the 'placeholder' menu items made possible by the Special Menu Items module 4/11/2013 tc*/
 
+#fatfooter .nolink {
+	color: #fff;
+	padding-bottom: 5px !important; 
+}
 
 #block-multiblock-2 {
 	float:left;
