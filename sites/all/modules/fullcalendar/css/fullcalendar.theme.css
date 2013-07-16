@@ -36,9 +36,9 @@
 .fc-event-lawlib, .fc-event-skin,
 .fc-event-lawlib, .fc-event-time,
 .fc-event-lawlib a {
-	border-color: #000;
+	/* border-color: #000;
 	border-style: solid;
-	background-color: #fff;
+	background-color: #fff; */
 	color: #000;
 }
 

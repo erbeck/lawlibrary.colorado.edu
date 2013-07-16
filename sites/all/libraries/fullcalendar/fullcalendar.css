@@ -17,7 +17,7 @@
 	
 html .fc,
 .fc table {
-border: 1px solid black;
+border: 1px solid black; /* tacoberly */
 	font-size: 1em;
 	}
 	
@@ -389,6 +389,7 @@ table.fc-border-separate {
 .fc-grid .fc-day-number {
 	float: right;
 	padding: 0 2px;
+	font-weight: bold;
 	}
 	
 .fc-grid .fc-other-month .fc-day-number {
@@ -402,6 +403,7 @@ table.fc-border-separate {
 .fc-grid .fc-day-content {
 	clear: both;
 	padding: 2px 2px 1px; /* distance between events and day edges */
+	border: 1px solid black;
 	}
 	
 /* event styles */
