@@ -387,6 +387,17 @@ ul#secondary-menu a:hover {
 	width: 550px;	
 }
 
+/* FULLCALENDAR */
+
+.fc-lawlib-event,
+.fc-lawlib-event .fc-event-skin,
+.fc-lawlib-event .fc-event-time,
+.fc-lawlib-event .a {
+	border-color: #36c;
+	border-style: solid;
+	background-color: #36c;
+	color: #fff;
+}
 
 /* TABLES */
 
