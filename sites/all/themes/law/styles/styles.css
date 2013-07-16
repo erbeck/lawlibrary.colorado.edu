@@ -389,14 +389,14 @@ ul#secondary-menu a:hover {
 
 /* FULLCALENDAR */
 
-.fc-lawlib-event,
-.fc-lawlib-event .fc-event-skin,
-.fc-lawlib-event .fc-event-time,
-.fc-lawlib-event .a {
+.fc-event-default,
+.fc-event-default .fc-event-skin,
+.fc-event-default .fc-event-time,
+.fc-event-default .a {
 	border-color: #36c;
 	border-style: solid;
-	background-color: #36c;
-	color: #fff;
+	background-color: #fff;
+	color: #000;
 }
 
 /* TABLES */
