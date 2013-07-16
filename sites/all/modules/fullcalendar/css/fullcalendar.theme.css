@@ -6,7 +6,7 @@
 /* Undo Drupal default theme link colors */
 .fc-content a:link,
 .fc-content a:visited {
-  color: #fff;
+  color: #000;  /* tacoberly - changed from #fff to #000 */
   text-decoration: none;
 }
 
@@ -31,7 +31,7 @@
   color: #000;
 }
 
-/* Set FullCalendar Lawlib style */
+/* tacoberly - Set FullCalendar Lawlib style */
 .fc-event-lawlib,
 .fc-event-lawlib, .fc-event-skin,
 .fc-event-lawlib, .fc-event-time,
