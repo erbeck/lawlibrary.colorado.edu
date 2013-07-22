@@ -350,6 +350,7 @@ table.fc-border-separate {
 .fc-border-separate th,
 .fc-border-separate td {
 	border-width: 1px 0 0 1px;
+	border: 1px solid #e3e4de !important; /* tacoberly 7/22/2013 */
 	}
 	
 .fc-border-separate th.fc-last,
@@ -365,7 +366,6 @@ table.fc-border-separate {
 .fc-border-separate tbody tr.fc-first td,
 .fc-border-separate tbody tr.fc-first th {
 	border-top-width: 0;
-	border: 1px solid #e3e4de !important; /* tacoberly 7/22/2013 */
 	}
 	
 	
