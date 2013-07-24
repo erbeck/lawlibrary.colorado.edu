@@ -22,7 +22,8 @@
   <?php else: ?>
     <p><?php print t('Thanks you for reporting this issue.  The Wise Law Library will address the issue as soon as possible.'); ?></p>
   <?php endif; ?>
-</div>
+
 <p>
-  <a href="node/39"><?php print t('Go back to LexisNexis & Westlaw Printing') ?></a>
+  <a href="students/lexisnexis-printing"><?php print t('Go back to LexisNexis & Westlaw Printing') ?></a>
 </p>
+</div>
