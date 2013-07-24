@@ -338,7 +338,8 @@ ul#secondary-menu a:hover {
 /*nolink style added to fatfooter to style the 'placeholder' menu items made possible by the Special Menu Items module 4/11/2013 tc*/
 
 #fatfooter .nolink {
-	color: #fff;}
+	color: #fff;
+	border-bottom: 10px;}
 
 #fatfooter h2{
 	font-size:18px;
