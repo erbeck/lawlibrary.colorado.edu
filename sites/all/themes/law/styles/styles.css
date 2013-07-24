@@ -649,9 +649,9 @@ zoom: 1;
 #frontBox {
 	position:absolute;
 	margin-top:64px;
-	margin-left:95px;
+	margin-left:85px;
 	height:200px;
-	width:730px;
+	width:750px;
 	background-color:#E3E4DE;
 	border:1px solid #666;					
 }
@@ -673,7 +673,7 @@ input#frontSearchButton {
 	padding-left: 10px;
 }
 div#researchResources {
-	width:700px;
+	width:710px;
 	padding-left:10px;	
 }
 .panel-col-bottom {
