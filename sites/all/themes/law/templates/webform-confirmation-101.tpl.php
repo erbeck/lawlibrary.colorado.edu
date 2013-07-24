@@ -20,10 +20,10 @@
   <?php if ($confirmation_message): ?>
     <?php print $confirmation_message ?>
   <?php else: ?>
-    <p><?php print t('Thank you, your submission has been received.'); ?></p>
+    <p><?php print t('Thanks you for reporting this issue.  The Wise Law Library will address the issue as soon as possible.'); ?></p>
   <?php endif; ?>
 </div>
 
 <div class="links">
-  <a href="<?php print url('node/'. $node->nid) ?>"><?php print t('Go back to the form') ?></a>
+  <a href="node/39"><?php print t('Go back to LexisNexis & Westlaw Printing') ?></a>
 </div>
