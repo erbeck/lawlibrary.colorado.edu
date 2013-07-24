@@ -649,9 +649,9 @@ zoom: 1;
 #frontBox {
 	position:absolute;
 	margin-top:64px;
-	margin-left:105px;
+	margin-left:95px;
 	height:200px;
-	width:710px;
+	width:730px;
 	background-color:#E3E4DE;
 	border:1px solid #666;					
 }
