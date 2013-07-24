@@ -24,6 +24,3 @@
   <?php endif; ?>
 </div>
 
-<div class="links">
-  <a href="<?php print url('node/'. $node->nid) ?>"><?php print t('Go back to the form') ?></a>
-</div>
