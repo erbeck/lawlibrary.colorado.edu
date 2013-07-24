@@ -339,7 +339,8 @@ ul#secondary-menu a:hover {
 
 #fatfooter .nolink {
 	color: #fff;
-	border-bottom: 10px;}
+	margin-bottom: 10px;
+}
 
 #fatfooter h2{
 	font-size:18px;
