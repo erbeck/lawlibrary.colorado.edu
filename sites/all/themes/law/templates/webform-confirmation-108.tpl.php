@@ -25,5 +25,5 @@
 </div>
 
 <div class="links">
-  <a href="?q=community/document-delivery"><?php print t('Go back to Document Delivery') ?></a>
+  <a href="node/56"><?php print t('Go back to Document Delivery') ?></a>
 </div>

@@ -25,5 +25,5 @@
 </div>
 
 <div class="links">
-  <a href="?q=students/lexis-and-westlaw-printing"><?php print t('Go back to LexisNexis & Westlaw Printing') ?></a>
+  <a href="node/39"><?php print t('Go back to LexisNexis & Westlaw Printing') ?></a>
 </div>
