@@ -660,7 +660,7 @@ zoom: 1;
 	margin-left:16px;	
 }
 input#frontSearchBox {
-	width: 540px;
+	width: 550px;
 	font: 24px Arial, sans-serif;
 	border: 1px solid #666;
 }
@@ -673,7 +673,7 @@ input#frontSearchButton {
 	padding-left: 10px;
 }
 div#researchResources {
-	width:710px;
+	width:700px;
 	padding-left:10px;	
 }
 .panel-col-bottom {
