@@ -26,7 +26,7 @@ function cu_search_form_google_appliance_block_form_alter(&$form, &$form_state, 
   $form['actions']['#suffix'] = '</div>';
 
   $form['cu_links'] = array(
-    '#markup' => '<div class="culinks"><strong>CU:</strong> <a href="/">Home</a> &bull; <a href="/atoz">A to Z</a> &bull; <a href="/campusmap">Campus Map</a></div>',
+    '#markup' => '<div class="culinks"><strong>CU:</strong> <a href="http://www.colorado.edu">Home</a> &bull; <a href="http://www.colorado.edu/atoz">A to Z</a> &bull; <a href="http://www.colorado.edu/campusmap">Campus Map</a></div>',
     '#weight' => 99,
   );
 }
