@@ -775,6 +775,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	border:1px solid #000;
 }
 
+#lawbrary-welcome {
+	background: #D0B87C;
+	padding: 15px 25px 15px 25px;
+	margin: 0;
+	font-weight: normal;
+	font-size: 21px;
+	line-height: 120%;
+	border:1px solid #000;
+}
+
 
 /* 	ACCORDION */
 
