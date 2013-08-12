@@ -918,7 +918,24 @@ ul.arizList li{
 	width:325px;
 	padding:0px;
 }
-
 #digitool-submit-arizonacalifornia {
 	margin:20px 0px 0px 250px;
+}
+#edit-field-avc-year-value-wrapper .description {
+	margin: -45px 0px 0px 40px;	
+	position:absolute;
+	font-size:11px;
+	display:none
+}
+#edit-field-avc-author-value-wrapper:hover .description {
+	display:block;	
+}
+#edit-field-avc-author-value-wrapper .description {
+	margin: -48px 0px 0px 58px;	
+	position:absolute;
+	font-size:11px;
+	display:none
+}
+#edit-field-avc-year-value-wrapper:hover .description {
+	display:block;	
 }
