@@ -934,4 +934,6 @@ ol.arizList li{
 #edit-field-avc-author-value-wrapper:hover .description {
 	display:block;	
 }
-
+#autocomplete li{
+	margin:0px
+}
