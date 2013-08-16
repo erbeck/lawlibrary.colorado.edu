@@ -332,7 +332,7 @@ ul#secondary-menu a:hover {
 #fatfooter {
 	background-color: #212121;
 	padding:20px 15px;
-	height:420px;	
+	height:450px;	
 }
 
 /*nolink style added to fatfooter to style the 'placeholder' menu items made possible by the Special Menu Items module 4/11/2013 tc*/
@@ -695,9 +695,9 @@ zoom: 1;
 #frontBox {
 	position:absolute;
 	margin-top:64px;
-	margin-left:85px;
+	margin-left:70px;
 	height:200px;
-	width:750px;
+	width:780px;
 	background-color:#E3E4DE;
 	border:1px solid #666;					
 }
@@ -881,10 +881,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 ol.arizList li{
 	padding:15px 15px 15px 15px;	
 }
-.views-row-even {
+ol.arizList li.views-row-even {
 	background-color:#eeeeee;	
 }
-.views-row-even views-row-last {
+ol.arizList li.views-row-even views-row-last {
 	background-color:#eeeeee;		
 }
 #edit-field-avc-year-value {
