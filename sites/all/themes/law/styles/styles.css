@@ -703,7 +703,7 @@ zoom: 1;
 }
 #frontSearchForm {
 	display:block;
-	margin-left:16px;	
+	margin-left:25px;	
 }
 input#frontSearchBox {
 	width: 560px;
@@ -719,7 +719,7 @@ input#frontSearchButton {
 	padding-left: 10px;
 }
 div#researchResources {
-	width:700px;
+	width:720px;
 	padding-left:10px;	
 }
 .panel-col-bottom {
