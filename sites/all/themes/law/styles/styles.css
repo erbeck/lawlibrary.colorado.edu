@@ -782,6 +782,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	background-color:#E3E4DE;
 	border:1px solid #999;
 }
+
+
+/* added to remove border from library hours on front page - agenda block within a pane  8-26-2013 tacoberly */
+
+#front-info .pane-content #front-info .pane-content{
+	border: none;
+}
+
 #frontLibraryHours .pane-content {
 	border:none;
 	padding: 0;	
