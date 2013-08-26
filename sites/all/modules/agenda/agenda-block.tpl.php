@@ -5,6 +5,7 @@
  * Template for displaying the agenda in a block
  */
 // 
+// Commented out because Today and Tomorrow display one day off  8/26/2013 tacoberly
 // Build some neat dates
 /*$today = time() - time() % (3600 * 24);
 $dates[date('Y-m-d', $today)]         = t('Today');
