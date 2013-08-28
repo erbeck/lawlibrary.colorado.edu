@@ -354,11 +354,17 @@ ul#secondary-menu a:hover {
 }
 
 
-
+#block-multiblock-6 {
+	float:left;
+	width:160px;
+	padding:5px;	
+}
 #block-multiblock-2 {
 	float:left;
 	width:160px;
 	padding:5px;	
+	position:absolute;
+	margin-top:185px
 }
 #block-multiblock-1 {
 	float:left;
