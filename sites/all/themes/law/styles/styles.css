@@ -774,6 +774,15 @@ background: -ms-linear-gradient(top,  #4c4c4c 0%,#474747 19%,#2b2b2b 57%,#1c1c1c
 background: linear-gradient(to bottom,  #4c4c4c 0%,#474747 19%,#2b2b2b 57%,#1c1c1c 84%,#131313 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ); /* IE6-9 */
 }
+
+/* added to style title of Library Hours pane 9/4/2013 tacoberly */
+#front-info #front-info h2.pane-title  {
+color: #000 !important;
+background: none;
+font-size: 18px;
+}
+
+
 #front-info h3{
 	text-align:center;	
 }
@@ -782,6 +791,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	background-color:#E3E4DE;
 	border:1px solid #999;
 }
+
+
 
 
 /* added to remove border from library hours on front page - agenda block within a pane  8-26-2013 tacoberly */
