@@ -785,7 +785,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 #front-info #front-info h2.pane-title  {
 color: #000 !important;
 background: none;
-font-size: 120%;
+font-size: 18.75px;
+line-height: 22.5px;
 }
 
 
