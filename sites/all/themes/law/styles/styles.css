@@ -807,6 +807,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr=
 
 #front-info .pane-content #front-info .pane-content{
 	border: none;
+	padding: 1px;
 }
 
 #frontLibraryHours .pane-content {
