@@ -786,7 +786,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 color: #000 !important;
 background: none;
 font-size: 18.75px;
-line-height: 12px;
+line-height: 13px;
+filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#e3e4de', EndColorStr='#e3e4de');
 }
 
 
