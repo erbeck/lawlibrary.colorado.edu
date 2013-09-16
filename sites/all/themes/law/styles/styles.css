@@ -1005,19 +1005,20 @@ ol.arizList li.views-row-even views-row-last {
 
 /* 	Gov Docs */
 #edit-field-govdoc-sudoc-number-value {
-	height:26px;
+	height:22px;
 	width:150px;
 	font-size:16px;	
+	padding: 0px;
 }
 #edit-field-govdoc-agency-value {
-	height: 26px;
-	font-size: 16px;
+	height: 22px;
+	font-size: 15px;
 	width: 300px;
 	padding: 0px;	
 }
 #edit-title-govdoc {
-	height: 26px;
-	font-size: 16px;
+	height: 22px;
+	font-size: 15px;
 	width: 400px;
 	padding: 0px;	
 }
