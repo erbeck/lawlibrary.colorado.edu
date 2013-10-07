@@ -4,9 +4,11 @@ package = Fields
 core = 7.x
 dependencies[] = field
 
-; Information added by drupal.org packaging script on 2013-02-11
-version = "7.x-1.0"
+files[] = views/range_views_handler_filter_range.inc
+
+; Information added by drupal.org packaging script on 2013-10-01
+version = "7.x-1.1-beta1+1-dev"
 core = "7.x"
 project = "range"
-datestamp = "1360578884"
+datestamp = "1380624801"
 
