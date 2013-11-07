@@ -20,7 +20,6 @@ If your theme uses a different class or id, or you only want to target certain v
 ~~~
 #my-video-container
 .content
-.region
 body
 ~~~
 
