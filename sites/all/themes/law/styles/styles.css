@@ -992,35 +992,47 @@ ol.arizList li.views-row-even views-row-last {
 /* 	Colorado Session Laws */
 
 #block-views-colorado-session-laws-block-1 {
-	margin-top:-30px;	
+	margin-top:-100px;	
 }
-#edit-field-session-chapter-number-value {
+#edit-field-session-year-value {
 	height:26px;
 	width:75px;
-	font-size:16px;	
+	font-size:16px;
+	padding:0px;		
 }
-#edit-field-session-session-type-value {
+
+#edit-field-session-chapter-number-value {
+	height:26px;
+	width:50px;
+	font-size:16px;
+	padding:0px;	
+}
+#edit-field-session-type-value {
 	height:26px;
 	width:150px;
-	font-size:16px;	
+	font-size:16px;
+	padding:0px;	
 }
 #edit-field-session-page-to {
 	display:none;
 }
 #edit-field-session-page-from {
 	height:26px;
-	width:75px;
+	width:50px;
 	font-size:16px;	
+	padding:0px;
 }
 #edit-field-session-newsubject-value{
 	height:26px;
 	width:200px;
-	font-size:16px;	
+	font-size:16px;
+	padding:0px;	
 }
 #edit-field-session-title-value {
 	height:26px;
 	width:300px;
-	font-size:16px;	
+	font-size:16px;
+	padding:0px;	
 }
 #edit-submit-colorado-session-laws {
 	padding:5px 15px;
