@@ -1059,7 +1059,7 @@ ol.arizList li.views-row-even views-row-last {
 /* 	Colorado Session Laws */
 
 #block-views-colorado-session-laws-block-1 {
-	margin-top:-85px;	
+
 }
 #views-exposed-form-colorado-session-laws-block-1 {
 	width:615px;
@@ -1105,7 +1105,7 @@ ol.arizList li.views-row-even views-row-last {
 }
 #sessionLawsDigitoolSearch {
 	width:310px;
-	border-left: 1px solid;
+	border-left: 1px solid #999;
 	padding:15px 0px 15px 46px;
 	position:absolute;
 	margin:15px 0px 0px 605px;
