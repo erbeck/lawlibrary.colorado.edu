@@ -1063,7 +1063,7 @@ ol.arizList li.views-row-even views-row-last {
 }
 #views-exposed-form-colorado-session-laws-block-1 {
 	width:615px;
-	margin-bottom:25px;
+	margin-bottom:20px;
 }
 #edit-field-session-year-value {
 	height:22px;
@@ -1109,7 +1109,7 @@ ol.arizList li.views-row-even views-row-last {
 	border-left: 1px solid #CCC;
 	padding:15px 0px 15px 46px;
 	position:absolute;
-	margin:12px 0px 0px 605px;
+	margin:0px 0px 0px 605px;
 	z-index:100;
 }
 #digitoolSearchboxSessionLaws {
