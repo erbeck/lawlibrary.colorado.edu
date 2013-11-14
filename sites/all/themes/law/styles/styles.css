@@ -1103,11 +1103,11 @@ ol.arizList li.views-row-even views-row-last {
 	padding:0px;	
 }
 #sessionLawsDigitoolSearch {
-	width:285px;
-	background-color:#E3E4DE;
-	padding:15px;
+	width:310px;
+	border-left: 1px solid;
+	padding:20px;
 	position:absolute;
-	margin:210px 0px 0px 605px;
+	margin:20px 0px 0px 605px;
 	z-index:100;
 }
 #digitoolSearchboxSessionLaws {
