@@ -989,6 +989,46 @@ ol.arizList li.views-row-even views-row-last {
 	margin:0px
 }
 
+/* 	Colorado Session Laws */
+
+#block-views-colorado-session-laws-block-1 {
+	margin-top:-30px;	
+}
+#edit-field-session-chapter-number-value {
+	height:26px;
+	width:75px;
+	font-size:16px;	
+}
+#edit-field-session-session-type-value {
+	height:26px;
+	width:150px;
+	font-size:16px;	
+}
+#edit-field-session-page-to {
+	display:none;
+}
+#edit-field-session-page-from {
+	height:26px;
+	width:75px;
+	font-size:16px;	
+}
+#edit-field-session-newsubject-value{
+	height:26px;
+	width:200px;
+	font-size:16px;	
+}
+#edit-field-session-title-value {
+	height:26px;
+	width:300px;
+	font-size:16px;	
+}
+#edit-submit-colorado-session-laws {
+	padding:5px 15px;
+	font-size:15px;
+	background-color:#D0B87C;	
+}
+
+
 /* Agenda Module css modifications  8/26/2013 tacoberly */
 
 .agenda-block .cal_0 { background-color: #E3e4de; }
