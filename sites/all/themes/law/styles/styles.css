@@ -1037,7 +1037,7 @@ ol.arizList li.views-row-even views-row-last {
 /* 	Colorado Session Laws */
 
 #block-views-colorado-session-laws-block-1 {
-	margin-top:-100px;
+	margin-top:-85px;
 	width:615px;	
 }
 #edit-field-session-year-value {
@@ -1079,6 +1079,20 @@ ol.arizList li.views-row-even views-row-last {
 	width:225px;
 	font-size:15px;
 	padding:0px;	
+}
+#sessionLawsSearch {
+	width:280px;
+	background-color:#E3E4DE;
+	padding:15px;
+	position:absolute;
+	margin:45px 0px 0px 560px;
+	z-index:100;
+}
+#digitoolSearchbox {
+	height:22px;
+	font-size:15px;	
+	width:165px;
+	padding:0px;
 }
 
 /* Agenda Module css modifications  8/26/2013 tacoberly */
