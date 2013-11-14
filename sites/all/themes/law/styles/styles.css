@@ -1059,8 +1059,10 @@ ol.arizList li.views-row-even views-row-last {
 /* 	Colorado Session Laws */
 
 #block-views-colorado-session-laws-block-1 {
-	margin-top:-85px;
-	width:615px;	
+	margin-top:-85px;	
+}
+#views-exposed-form-colorado-ession-laws-block-1 {
+	width:615px;
 }
 #edit-field-session-year-value {
 	height:22px;
@@ -1068,7 +1070,6 @@ ol.arizList li.views-row-even views-row-last {
 	font-size:15px;
 	padding:0px;		
 }
-
 #edit-field-session-chapter-number-value {
 	height:22px;
 	width:110px;
@@ -1105,9 +1106,9 @@ ol.arizList li.views-row-even views-row-last {
 #sessionLawsDigitoolSearch {
 	width:310px;
 	border-left: 1px solid;
-	padding:20px;
+	padding:15px 0px 15px 46px;
 	position:absolute;
-	margin:20px 0px 0px 605px;
+	margin:12px 0px 0px 605px;
 	z-index:100;
 }
 #digitoolSearchboxSessionLaws {
