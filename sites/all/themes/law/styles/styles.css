@@ -1120,13 +1120,14 @@ ol.arizList li.views-row-even views-row-last {
 	width:185px;
 	padding:0px;
 }
+#block-block-14 {
+	margin-top:14px;	
+}
 #session-laws-bottom {	
 	background-color: #E3E4DE;
     border: thin solid #CCCCCC;
     padding: 15px;
 	height:350px;
-	position:relative;
-	margin-top:15px;
 }
 #session-laws-bottom-left {
 	width:23%;
