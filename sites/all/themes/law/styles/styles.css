@@ -1143,6 +1143,8 @@ ol.arizList li.views-row-even views-row-last {
 	float:left;
 	padding:10px;
 	height:310px;
+	display: table-cell;
+    vertical-align: bottom;
 }
 
 /* Agenda Module css modifications  8/26/2013 tacoberly */
