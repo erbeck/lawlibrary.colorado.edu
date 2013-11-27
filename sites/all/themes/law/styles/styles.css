@@ -1121,6 +1121,27 @@ ol.arizList li.views-row-even views-row-last {
 	width:185px;
 	padding:0px;
 }
+#session-laws-bottom {
+	width:900%;	
+	background-color: #E3E4DE;
+    border: thin solid #CCCCCC;
+    padding: 15px 25px;
+}
+#session-laws-bottom-left {
+	width:25%;
+	position:relative;
+	float:left;	
+}
+#session-laws-bottom-middle {
+	width:50%;
+	position:relative;
+}
+#session-laws-bottom-right {
+	width:25%;	
+	position:relative;
+	float:right;
+	vertical-align:bottom;	
+}
 
 /* Agenda Module css modifications  8/26/2013 tacoberly */
 
