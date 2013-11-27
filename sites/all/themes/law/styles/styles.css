@@ -1063,7 +1063,6 @@ ol.arizList li.views-row-even views-row-last {
 	margin-top:-80px;	
 	z-index:100; 
 }
-
 #views-exposed-form-colorado-session-laws-sessionlawspage {
 	width:615px;
 	margin-bottom:20px;
@@ -1125,26 +1124,27 @@ ol.arizList li.views-row-even views-row-last {
 	background-color: #E3E4DE;
     border: thin solid #CCCCCC;
     padding: 15px;
-	height:275px;
+	height:350px;
 }
 #session-laws-bottom-left {
 	width:23%;
 	float:left;	
 	padding:10px;
-	height:250px;
+	height:310px;
 }
 #session-laws-bottom-middle {
 	width:47%;
 	float:left;	
 	padding:10px;
-	height:250px;
+	height:310px;
 }
 #session-laws-bottom-right {
 	width:23%;	
 	float:left;
-	vertical-align:bottom;	
 	padding:10px;
-	height:250px;
+	height:310px;
+	bottom:0;
+	left:0;
 }
 
 /* Agenda Module css modifications  8/26/2013 tacoberly */
