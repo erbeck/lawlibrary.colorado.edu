@@ -1122,7 +1122,7 @@ ol.arizList li.views-row-even views-row-last {
 	padding:0px;
 }
 #session-laws-bottom {
-	width:90%;	
+	width:100%;	
 	background-color: #E3E4DE;
     border: thin solid #CCCCCC;
     padding: 15px 25px;
@@ -1135,11 +1135,12 @@ ol.arizList li.views-row-even views-row-last {
 #session-laws-bottom-middle {
 	width:50%;
 	position:relative;
+	float:left;	
 }
 #session-laws-bottom-right {
 	width:25%;	
 	position:relative;
-	float:right;
+	float:left;
 	vertical-align:bottom;	
 }
 
