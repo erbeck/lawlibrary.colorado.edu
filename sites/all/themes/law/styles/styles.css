@@ -1127,20 +1127,17 @@ ol.arizList li.views-row-even views-row-last {
     padding: 10px 25px;
 }
 #session-laws-bottom-left {
-	width:25%;
-	position:relative;
+	width:20%;
 	float:left;	
 	padding:10px;
 }
 #session-laws-bottom-middle {
-	width:50%;
-	position:relative;
+	width:45%;
 	float:left;	
 	padding:10px;
 }
 #session-laws-bottom-right {
-	width:25%;	
-	position:relative;
+	width:20%;	
 	float:left;
 	vertical-align:bottom;	
 	padding:10px;
