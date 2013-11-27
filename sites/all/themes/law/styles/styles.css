@@ -1059,13 +1059,12 @@ ol.arizList li.views-row-even views-row-last {
 /* 	Colorado Session Laws */
 
 #sesshead {
- margin-top:-75px;	
+ margin-top:-80px;	
 }
 
 #views-exposed-form-colorado-session-laws-sessionlawspage {
 	width:615px;
 	margin-bottom:20px;
-	margin-top:-75px;
 }
 #edit-field-session-year-value {
 	height:22px;
