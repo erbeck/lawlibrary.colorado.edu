@@ -1128,6 +1128,7 @@ ol.arizList li.views-row-even views-row-last {
     border: thin solid #CCCCCC;
     padding: 15px;
 	height:350px;
+	font-size: 11px;
 }
 #session-laws-bottom-left {
 	width:23%;
