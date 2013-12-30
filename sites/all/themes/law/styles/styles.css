@@ -649,7 +649,7 @@ body a.button-blue {
 	border:1px solid #014863;
 	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;			
 }
-#edit-submit-colorado-session-laws {
+#edit-submit-session-laws-advanced-search {
 	background-color:#045c7d;
 	background-image:-webkit-gradient(linear,left top,left bottom,from(#045c7d),to(#014863));
 	background-image:-webkit-linear-gradient(top,#045c7d,#014863);
@@ -1058,13 +1058,16 @@ ol.arizList li.views-row-even views-row-last {
 
 /* 	Colorado Session Laws */
 
-#sesshead {
+#seshtabs {
 	position:relative;
 	margin-top:-80px;	
 	z-index:100; 
 }
-#views-exposed-form-colorado-session-laws-sessionlawspage {
-	width:615px;
+#views-exposed-form-session-laws-basic-search-page {
+	margin-bottom:20px;
+}
+#views-exposed-form-session-laws-advanced-search-page {
+	width:300px;
 	margin-bottom:20px;
 }
 #edit-field-session-year-value {
@@ -1086,7 +1089,7 @@ ol.arizList li.views-row-even views-row-last {
 	padding:0px;	
 }
 #edit-field-session-page-to {
-
+	display:none;	
 }
 #edit-field-session-page-from {
 	height:22px;
@@ -1111,7 +1114,7 @@ ol.arizList li.views-row-even views-row-last {
 	border-left: 1px solid #CCC;
 	padding:15px 0px 15px 46px;
 	position:absolute;
-	margin:-15px 0px 0px 605px;
+	margin:45px 0px 0px 605px;
 	z-index:100;
 }
 #digitoolSearchboxSessionLaws {
