@@ -649,6 +649,28 @@ body a.button-blue {
 	border:1px solid #014863;
 	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;			
 }
+#edit-submit-session-laws-basic-search {
+	background-color:#045c7d;
+	background-image:-webkit-gradient(linear,left top,left bottom,from(#045c7d),to(#014863));
+	background-image:-webkit-linear-gradient(top,#045c7d,#014863);
+	background-image:-moz-linear-gradient(top,#045c7d,#014863);
+	background-image:-o-linear-gradient(top,#045c7d,#014863);
+	background-image:-ms-linear-gradient(top,#045c7d,#014863);
+	background-image:linear-gradient(top,#045c7d,#014863);
+	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#045c7d',EndColorStr='#014863');	
+	color:#fff;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	display:inline-block;
+	padding:3px 6px;
+	text-shadow:0px 1px 1px #000;
+	-webkit-box-shadow:0px 1px 1px 0px #888;
+	-moz-box-shadow:0px 1px 1px 0px #888;
+	box-shadow:0px 1px 1px 0px #888;
+	border:1px solid #014863;
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;				
+}
 #edit-submit-session-laws-advanced-search {
 	background-color:#045c7d;
 	background-image:-webkit-gradient(linear,left top,left bottom,from(#045c7d),to(#014863));
@@ -1058,9 +1080,9 @@ ol.arizList li.views-row-even views-row-last {
 
 /* 	Colorado Session Laws */
 
-#seshtabs {
+.seshtabs {
 	position:relative;
-	margin-top:-80px;	
+	margin-top:-75px;	
 	z-index:100; 
 }
 #views-exposed-form-session-laws-basic-search-page {
@@ -1068,7 +1090,7 @@ ol.arizList li.views-row-even views-row-last {
 }
 #views-exposed-form-session-laws-advanced-search-page {
 	width:300px;
-	margin-bottom:20px;
+	margin:0px 0px 20px 10px;
 }
 #edit-field-session-year-value {
 	height:22px;
@@ -1083,6 +1105,12 @@ ol.arizList li.views-row-even views-row-last {
 	padding:0px;	
 }
 #edit-field-session-type-value {
+	height:22px;
+	width:150px;
+	font-size:15px;
+	padding:0px;	
+}
+#edit-field-session-document-type-value {
 	height:22px;
 	width:150px;
 	font-size:15px;
