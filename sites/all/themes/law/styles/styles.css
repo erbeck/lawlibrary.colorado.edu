@@ -1086,7 +1086,7 @@ ol.arizList li.views-row-even views-row-last {
 	z-index:100; 
 }
 #views-exposed-form-session-laws-basic-search-page {
-	margin-bottom:20px;
+	margin:0px 0px 20px 10px
 }
 #views-exposed-form-session-laws-advanced-search-page {
 	width:300px;
@@ -1096,7 +1096,8 @@ ol.arizList li.views-row-even views-row-last {
 	height:22px;
 	width:125px;
 	font-size:15px;
-	padding:0px;		
+	padding:0px;
+	display:inline;		
 }
 #edit-field-session-chapter-number-value {
 	height:22px;
