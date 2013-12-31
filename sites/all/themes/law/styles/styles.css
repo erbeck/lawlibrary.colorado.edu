@@ -579,7 +579,9 @@ body a.button-blue {
 	border:1px solid #014863;
 	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-
+.views-exposed-widget views-reset-button {
+	padding-left:0px;
+}
 #edit-submit-arizonacalifornia {
 	background-color:#045c7d;
 	background-image:-webkit-gradient(linear,left top,left bottom,from(#045c7d),to(#014863));
@@ -1090,7 +1092,7 @@ ol.arizList li.views-row-even views-row-last {
 	margin:0px 0px 20px 10px
 }
 #views-exposed-form-session-laws-advanced-search-page {
-	width:300px;
+	width:335px;
 	margin:0px 0px 20px 50px;
 }
 #edit-field-session-year-value {
@@ -1135,7 +1137,7 @@ ol.arizList li.views-row-even views-row-last {
 	padding:0px;
 	display:inline-block;	
 }
-#edit-advanced-year-value-wrapper .views-widget {
+#edit-advanced-document-type-value-wrapper .views-widget {
 	display:inline;
 	float:right;
 	margin-left:22px;
