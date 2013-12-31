@@ -692,7 +692,7 @@ body a.button-blue {
 	box-shadow:0px 1px 1px 0px #888;
 	border:1px solid #014863;
 	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-	margin-left:215px;				
+	margin-left:165px;				
 }
 #digitool-submit-sessionlaws {
 	background-color:#045c7d;
@@ -1109,7 +1109,7 @@ ol.arizList li.views-row-even views-row-last {
 	font-size:15px;
 	padding:0px;	
 }
-lable#edit-advanced-year-value {
+.edit-advanced-year-value-wrapper label {
 	display:inline-block;
 	width:130px;
 	text-align:left;
@@ -1161,7 +1161,7 @@ lable#edit-advanced-year-value {
 	padding:0px;	
 }
 #sessionLawsDigitoolSearch {
-	width:330px;
+	width:300px;
 	background-color:#E3E4DE;
 	padding:30px;
 	position:absolute;
