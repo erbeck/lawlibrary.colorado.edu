@@ -1090,7 +1090,7 @@ ol.arizList li.views-row-even views-row-last {
 }
 #views-exposed-form-session-laws-advanced-search-page {
 	width:300px;
-	margin:0px 0px 20px 10px;
+	margin:0px 0px 20px 50px;
 }
 
 #edit-field-session-year-value-wrapper {
@@ -1101,6 +1101,13 @@ ol.arizList li.views-row-even views-row-last {
 	width:125px;
 	font-size:15px;
 	padding:0px;	
+}
+#edit-advanced-year-value {
+	height:22px;
+	width:190px;
+	font-size:15px;
+	padding:0px;	
+	display:inline-block;
 }
 #edit-field-session-chapter-number-value {
 	height:22px;
@@ -1120,6 +1127,13 @@ ol.arizList li.views-row-even views-row-last {
 	font-size:15px;
 	padding:0px;	
 }
+#edit-advanced-document-type-value {
+	height:22px;
+	width:190px;
+	font-size:15px;
+	padding:0px;
+	display:inline-block;	
+}
 #edit-field-session-page-to {
 	display:none;	
 }
@@ -1131,22 +1145,22 @@ ol.arizList li.views-row-even views-row-last {
 }
 #edit-field-session-newsubject-value{
 	height:22px;
-	width:175px;
+	width:320px;
 	font-size:15px;
 	padding:0px;	
 }
 #edit-field-session-title-value {
 	height:22px;
-	width:225px;
+	width:320px;
 	font-size:15px;
 	padding:0px;	
 }
 #sessionLawsDigitoolSearch {
-	width:310px;
-	border-left: 1px solid #CCC;
-	padding:15px 0px 15px 46px;
+	width:330px;
+	background-color:#E3E4DE;
+	padding:15px;
 	position:absolute;
-	margin:45px 0px 0px 580px;
+	margin:45px 0px 0px 510px;
 	z-index:100;
 }
 #digitoolSearchboxSessionLaws {
