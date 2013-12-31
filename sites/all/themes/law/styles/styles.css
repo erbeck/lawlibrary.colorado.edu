@@ -1114,7 +1114,7 @@ ol.arizList li.views-row-even views-row-last {
 #edit-advanced-year-value-wrapper .views-widget {
 	display:inline;
 	float:right;
-	margin-left:95px;
+	/*margin-left:95px;*/
 }
 #edit-field-session-chapter-number-value {
 	height:22px;
