@@ -1142,7 +1142,7 @@ ol.arizList li.views-row-even views-row-last {
 	display:inline-block;	
 }
 #edit-advanced-document-type-value-wrapper {
-	padding-top:18px;	
+	padding-top:16px;	
 }
 #edit-advanced-document-type-value-wrapper .views-widget {
 	display:inline;
@@ -1167,6 +1167,9 @@ ol.arizList li.views-row-even views-row-last {
 	width:320px;
 	font-size:15px;
 	padding:0px;	
+}
+#edit-field-session-title-value-wrapper {
+	padding-top:12px;	
 }
 #edit-field-session-title-value {
 	height:22px;
