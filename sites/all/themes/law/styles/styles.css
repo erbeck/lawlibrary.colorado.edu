@@ -1101,6 +1101,10 @@ ol.arizList li.views-row-even views-row-last {
 	font-size:15px;
 	padding:0px;	
 }
+#edit-advanced-year-value-wrapper {
+	overflow:auto;
+	margin: 30px auto 0 auto;	
+}
 #edit-advanced-year-value {
 	height:22px;
 	width:190px;
@@ -1114,7 +1118,7 @@ ol.arizList li.views-row-even views-row-last {
 #edit-advanced-year-value-wrapper .views-widget {
 	display:inline;
 	float:right;
-	/*margin-left:95px;*/
+	margin-left:95px;
 }
 #edit-field-session-chapter-number-value {
 	height:22px;
@@ -1142,7 +1146,9 @@ ol.arizList li.views-row-even views-row-last {
 	display:inline-block;	
 }
 #edit-advanced-document-type-value-wrapper {
-	padding-top:16px;	
+	padding-top:16px;
+	overflow:auto;
+	margin: 30px auto 0 auto;	
 }
 #edit-advanced-document-type-value-wrapper .views-widget {
 	display:inline;
