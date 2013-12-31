@@ -1102,7 +1102,7 @@ ol.arizList li.views-row-even views-row-last {
 	padding:0px;	
 }
 #edit-advanced-year-value-wrapper {
-	width:350px;
+	width:330px;
 }
 #edit-advanced-year-value {
 	height:22px;
@@ -1117,7 +1117,6 @@ ol.arizList li.views-row-even views-row-last {
 #edit-advanced-year-value-wrapper .views-widget {
 	display:inline;
 	float:right;
-	margin-left:95px;
 }
 #edit-field-session-chapter-number-value {
 	height:22px;
@@ -1146,12 +1145,11 @@ ol.arizList li.views-row-even views-row-last {
 }
 #edit-advanced-document-type-value-wrapper {
 	padding-top:16px;
-	width:350px;	
+	width:330px;	
 }
 #edit-advanced-document-type-value-wrapper .views-widget {
 	display:inline;
 	float:right;
-	margin-left:15px;
 }
 #edit-advanced-document-type-value-wrapper label {
 	text-align:left;
@@ -1168,7 +1166,7 @@ ol.arizList li.views-row-even views-row-last {
 }
 #edit-field-session-newsubject-value{
 	height:22px;
-	width:320px;
+	width:330px;
 	font-size:15px;
 	padding:0px;	
 }
@@ -1177,7 +1175,7 @@ ol.arizList li.views-row-even views-row-last {
 }
 #edit-field-session-title-value {
 	height:22px;
-	width:320px;
+	width:330px;
 	font-size:15px;
 	padding:0px;	
 }
