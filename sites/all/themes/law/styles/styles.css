@@ -1102,8 +1102,7 @@ ol.arizList li.views-row-even views-row-last {
 	padding:0px;	
 }
 #edit-advanced-year-value-wrapper {
-	overflow:auto;
-	margin: 30px auto 0 auto;	
+	width:350px;
 }
 #edit-advanced-year-value {
 	height:22px;
@@ -1147,8 +1146,7 @@ ol.arizList li.views-row-even views-row-last {
 }
 #edit-advanced-document-type-value-wrapper {
 	padding-top:16px;
-	overflow:auto;
-	margin: 30px auto 0 auto;	
+	width:350px;	
 }
 #edit-advanced-document-type-value-wrapper .views-widget {
 	display:inline;
