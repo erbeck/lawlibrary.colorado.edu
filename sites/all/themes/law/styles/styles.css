@@ -692,7 +692,7 @@ body a.button-blue {
 	box-shadow:0px 1px 1px 0px #888;
 	border:1px solid #014863;
 	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-	margin-left:170px;				
+	margin-left:150px;				
 }
 #digitool-submit-sessionlaws {
 	background-color:#045c7d;
@@ -1105,14 +1105,10 @@ ol.arizList li.views-row-even views-row-last {
 	font-size:15px;
 	padding:0px;	
 }
-#edit-advanced-year-value-wrapper label {
-	width:100px;
-	text-align:left;
-	display:inline;
-}
 #edit-advanced-year-value-wrapper .views-widget {
 	display:inline;
 	float:right;
+	margin-left:100px;
 }
 #edit-field-session-chapter-number-value {
 	height:22px;
@@ -1138,6 +1134,11 @@ ol.arizList li.views-row-even views-row-last {
 	font-size:15px;
 	padding:0px;
 	display:inline-block;	
+}
+#edit-advanced-year-value-wrapper .views-widget {
+	display:inline;
+	float:right;
+	margin-left:22px;
 }
 #edit-field-session-page-to {
 	display:none;	
