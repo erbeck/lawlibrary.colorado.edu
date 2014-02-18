@@ -604,6 +604,28 @@ body a.button-blue {
 	border:1px solid #014863;
 	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;		
 }
+#edit-submit-arizona-v-california-collection {
+	background-color:#045c7d;
+	background-image:-webkit-gradient(linear,left top,left bottom,from(#045c7d),to(#014863));
+	background-image:-webkit-linear-gradient(top,#045c7d,#014863);
+	background-image:-moz-linear-gradient(top,#045c7d,#014863);
+	background-image:-o-linear-gradient(top,#045c7d,#014863);
+	background-image:-ms-linear-gradient(top,#045c7d,#014863);
+	background-image:linear-gradient(top,#045c7d,#014863);
+	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#045c7d',EndColorStr='#014863');	
+	color:#fff;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	display:inline-block;
+	padding:5px 10px;
+	text-shadow:0px 1px 1px #000;
+	-webkit-box-shadow:0px 1px 1px 0px #888;
+	-moz-box-shadow:0px 1px 1px 0px #888;
+	box-shadow:0px 1px 1px 0px #888;
+	border:1px solid #014863;
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;		
+}
 
 #digitool-submit-arizonacalifornia {
 	margin:20px 0px 0px 250px;
@@ -1044,7 +1066,7 @@ ol.arizList li.views-row-even views-row-last {
 #edit-field-avc-item-title-value {
 	height:26px;
 	font-size:16px;	
-	width:450px;
+	width:355px;
 	padding:0px;	
 }
 #edit-field-avc-item-title-value-wrapper {
@@ -1055,7 +1077,7 @@ ol.arizList li.views-row-even views-row-last {
 	background-color:#E3E4DE;
 	padding:15px;
 	position:absolute;
-	margin:45px 0px 0px 560px;
+	margin:40px 0px 0px 560px;
 	z-index:100;
 }
 #digitoolSearchbox {
