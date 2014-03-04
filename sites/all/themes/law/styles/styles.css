@@ -1094,10 +1094,6 @@ ol.arizList li.views-row-even views-row-last {
 	position:absolute;
 	font-size:12px;
 	color:#666;
-	display:none
-}
-#edit-field-avc-author-value-wrapper:hover .description {
-	display:block;	
 }
 #autocomplete li{
 	margin:0px
