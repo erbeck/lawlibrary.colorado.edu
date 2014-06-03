@@ -6,9 +6,9 @@ dependencies[] = field
 
 files[] = views/range_views_handler_filter_range.inc
 
-; Information added by Drupal.org packaging script on 2014-02-20
-version = "7.x-1.1"
+; Information added by drupal.org packaging script on 2013-10-01
+version = "7.x-1.1-beta1+1-dev"
 core = "7.x"
 project = "range"
-datestamp = "1392893015"
+datestamp = "1380624801"
 
