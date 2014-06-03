@@ -375,19 +375,17 @@ function range_field_formatter_view($entity_type, $entity, $field, $instance, $l
     case 'range_integer':
     case 'range_decimal':
       foreach ($items as $delta => $item) {
-        $from = number_format($item['from'], $settings['scale'], $settings['decimal_separator'], $settings['thousand_separator']);
-        $to = number_format($item['to'], $settings['scale'], $settings['decimal_separator'], $settings['thousand_separator']);
+        $from_value = number_format($item['from'], $settings['scale'], $settings['decimal_separator'], $settings['thousand_separator']);
+        $to_value = number_format($item['to'], $settings['scale'], $settings['decimal_separator'], $settings['thousand_separator']);
 
         // Combine values if they are equal.
-        $output = $from;
-        if (!$settings['range_combine'] || ($settings['range_combine'] && $from !== $to)) {
-          $output .= $settings['range_separator'] . $to;
+        if (!empty($settings['range_combine']) && $from_value === $to_value) {
+          $output = _range_field_formatter_view_combined_value($from_value, $settings, $instance['settings']);
+        }
+        else {
+          $output = _range_field_formatter_view_separate_values($from_value, $to_value, $settings, $instance['settings']);
         }
 
-        $from = _range_field_formatter_view_prefix_suffix($from, $settings['from_prefix_suffix'], $instance['settings']['from']);
-        $to = _range_field_formatter_view_prefix_suffix($to, $settings['to_prefix_suffix'], $instance['settings']['to']);
-
-        $output = $from . $settings['range_separator'] . $to;
         $element[$delta] = array('#markup' => $output);
       }
       break;
@@ -403,21 +401,91 @@ function range_field_formatter_view($entity_type, $entity, $field, $instance, $l
 }
 
 /**
+ * Helper function. Decides what prefix/suffix use for combined value and
+ * returns field markup.
+ *
+ * FROM and TO might have different prefixes/suffixes.
+ * Code below decides which one to use, based on the following:
+ *   1. If both are disabled - show naked value
+ *   2. If either FROM or TO are enabled - show prefix/suffix of the
+ *      enabled one
+ *   3. If both are enabled, show prefix from FROM and suffix from TO
+ *
+ * @param string $value
+ *  Field value.
+ * @param array $settings
+ *  Display settings array.
+ * @param array $instance_settings
+ *  Field instance settings array.
+ * @return string
+ *  Field markup.
+ */
+function _range_field_formatter_view_combined_value($value, $settings, $instance_settings) {
+  $output = '';
+
+  $from_prefix_suffix = !empty($settings['from_prefix_suffix']);
+  $to_prefix_suffix = !empty($settings['to_prefix_suffix']);
+
+  // Option #1: both are disabled.
+  if (empty($from_prefix_suffix) && empty($to_prefix_suffix)) {
+    $output = $value;
+  }
+  // Option #2a: FROM is enabled.
+  elseif (!empty($from_prefix_suffix) && empty($to_prefix_suffix)) {
+    $output = _range_field_formatter_view_prefix_suffix($value, TRUE, $instance_settings['from']);
+  }
+  // Option #2b: TO is enabled.
+  elseif (empty($from_prefix_suffix) && !empty($to_prefix_suffix)) {
+    $output = _range_field_formatter_view_prefix_suffix($value, TRUE, $instance_settings['to']);
+  }
+  // Option #3: both are enabled.
+  else {
+    $prefix = isset($instance_settings['from']['prefix']) ? field_filter_xss($instance_settings['from']['prefix']) : '';
+    $suffix = isset($instance_settings['to']['suffix']) ? field_filter_xss($instance_settings['to']['suffix']) : '';
+    return $prefix . $value . $suffix;
+  }
+
+  return $output;
+}
+
+/**
+ * Helper function. Adds prefixes/suffixes for the field value and
+ * returns field markup.
+ *
+ * @param string $from_value
+ *  Field FROM value.
+ * @param string $to_value
+ *  Field TO value.
+ * @param array $settings
+ *  Display settings array.
+ * @param array $instance_settings
+ *  Field instance settings array.
+ * @return string
+ *  Field markup.
+ */
+function _range_field_formatter_view_separate_values($from_value, $to_value, $settings, $instance_settings) {
+  $from = _range_field_formatter_view_prefix_suffix($from_value, $settings['from_prefix_suffix'], $instance_settings['from']);
+  $to = _range_field_formatter_view_prefix_suffix($to_value, $settings['to_prefix_suffix'], $instance_settings['to']);
+
+  return $from . $settings['range_separator'] . $to;
+}
+
+/**
  * Helper function. Adds prefix and suffix to the given range field value.
  *
  * @param string $value
  *  FROM/TO range field value.
  * @param boolean $display_prefix
  *  Whether to add suffix/prefix or not.
- * @param array $settings
+ * @param array $instance_settings
  *  Field instance FROM/TO value settings.
  * @return string
  *  Range field value with added prefix/suffix.
  */
-function _range_field_formatter_view_prefix_suffix($value, $display_prefix, $settings) {
+function _range_field_formatter_view_prefix_suffix($value, $display_prefix, $instance_settings) {
   if ($display_prefix) {
-    $prefix = isset($settings['prefix']) ? field_filter_xss($settings['prefix']) : '';
-    $suffix = isset($settings['suffix']) ? field_filter_xss($settings['suffix']) : '';
+    $prefix = isset($instance_settings['prefix']) ? field_filter_xss($instance_settings['prefix']) : '';
+    $suffix = isset($instance_settings['suffix']) ? field_filter_xss($instance_settings['suffix']) : '';
     return $prefix . $value . $suffix;
   }
 
@@ -601,8 +669,7 @@ function range_metadata_field_range_callback(&$info, $entity_type, $field, $inst
  * Defines info for the properties of the range field data structure.
  */
 function range_property_field_item_range_info($field) {
-  $type = $field['type'] == 'range_integer' ? 'int' : 'decimal';
-//  $type = $field['cardinality'] != 1 ? "list<$type>" : $type;
+  $type = $field['type'] == 'range_integer' ? 'integer' : 'decimal';
 
   $properties['from'] = array(
     'type' => $type,
