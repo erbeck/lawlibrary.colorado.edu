@@ -533,6 +533,18 @@ body a.call-to-action {
   font-size: 120%;
 }
 
+/* ORANGE BUTTON */
+body a.button-orange {
+	background-image: -moz-linear-gradient(center top , #A04015, #883512);
+    border: 1px solid #883512;
+	border-radius: 5px;
+    box-shadow: 0 1px 1px 0 #888888;
+    color: #FFFFFF;
+    display: inline-block;
+    padding: 5px 10px;
+	text-shadow: 0 1px 1px #000000;
+}
+
 /* BLUE BUTTON */
 body a.button-blue {
 	background-color:#045c7d;
