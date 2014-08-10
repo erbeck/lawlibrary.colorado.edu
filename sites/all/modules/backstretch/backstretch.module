@@ -152,27 +152,47 @@ function backstretch_field_formatter_settings_form($field, $instance, $view_mode
     ),
   );
 
-  // Make duration and fade setting only available for multiple value field.
+  $element['tokens'] = array(
+    '#type' => 'container',
+    '#theme' => 'token_tree',
+    '#token_types' => array($instance['entity_type']),
+    '#dialog' => TRUE,
+    '#states' => array(
+      'visible' => array(
+        ':input[name$="[element]"]' => array('value' => 'other'),
+      ),
+    ),
+  );
+
+
+  $element['duration'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Duration'),
+    '#default_value' => $settings['duration'],
+    '#description' => t('Amount of time in between slides.'),
+    '#size' => 10,
+    '#field_suffix' => 'ms',
+    '#element_validate' => array('element_validate_integer_positive'),
+  );
+
+  // Disable duration setting if it is a one value field.
+  if ($field['cardinality'] == '1') {
+    $element['duration']['#disabled'] = TRUE;
+    $element['duration']['#description'] = '<strong>' . t('Duration setting is only allowed for multi value fields.') . '</strong>';
+  }
+
+  $element['fade'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Fade'),
+    '#default_value' => $settings['fade'],
+    '#description' => t('Speed of fade transition between slides.'),
+    '#size' => 10,
+    '#field_suffix' => 'ms',
+    '#element_validate' => array('backstretch_element_validate_duration'),
+  );
+
+  // Make cardinality setting only available for multiple value field.
   if ($field['cardinality'] != '1') {
-    $element['duration'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Duration'),
-      '#default_value' => $settings['duration'],
-      '#description' => t('Amount of time in between slides.'),
-      '#size' => 10,
-      '#field_suffix' => 'ms',
-      '#element_validate' => array('element_validate_integer_positive'),
-    );
-
-    $element['fade'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Fade'),
-      '#default_value' => $settings['fade'],
-      '#description' => t('Speed of fade transition between slides. Can be an integer or a string like: %slow or %fast.', array('%slow' => 'slow', '%fast' => 'fast')),
-      '#size' => 10,
-      '#element_validate' => array('backstretch_element_validate_duration'),
-    );
-
     $element['delta'] = array(
       '#type' => 'select',
       '#title' => t('Which image should be displayed?'),
@@ -226,6 +246,9 @@ function backstretch_field_formatter_settings_summary($field, $instance, $view_m
       if ($name == 'image_style' && $value == '') {
         continue;
       }
+      if ($name == 'duration' || $name == 'fade') {
+        $value .= ' ms';
+      }
       if ($name == 'delta' && $value == '') {
         continue;
       }
@@ -260,7 +283,7 @@ function backstretch_field_formatter_settings_summary($field, $instance, $view_m
 
   // Remove slideshow specific settings when only one image is allowed.
   if ($field['cardinality'] == '1') {
-    unset($options['duration'], $options['fade'], $options['delta']);
+    unset($options['duration'], $options['delta']);
   }
 
   // Remove image field setting when field type is not entityreference.
@@ -302,10 +325,20 @@ function backstretch_field_formatter_view($entity_type, $entity, $field, $instan
         continue;
       }
 
+      // Replace tokens in the "Other element" field.
+      if ($name == 'element_other') {
+        $value = token_replace($value, array($entity_type => $entity));
+      }
+
       // We only put the setting into $options when it is
       // not the default value.
       if ($value != $default[$name] && $js) {
         $options[$js] = $value;
+      }
+
+      // The fade option has to be an integer otherwise it doesn't work.
+      if ($name == 'fade' && $value != $default[$name] && is_numeric($value) && intval($value) == $value) {
+        $options[$name] = (int) $options[$name];
       }
     }
   }
@@ -450,7 +483,7 @@ function backstretch_formatter_options() {
 function backstretch_element_validate_duration($element, &$form_state) {
   $value = $element['#value'];
   // A duration can be an integer or a string like 'slow' or 'fast'.
-  if ($value !== '' && !(is_numeric($value) && intval($value) == $value && $value >= 0) && ($value != 'slow' && $value != 'fast')) {
-    form_error($element, t('%name must be an integer or a string like "slow" or "fast".', array('%name' => $element['#title'])));
+  if ($value !== '' && !is_numeric($value) && intval($value) == $value && $value >= 0) {
+    form_error($element, t('%name must be an integer.', array('%name' => $element['#title'])));
   }
 }
