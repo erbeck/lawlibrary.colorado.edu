@@ -16,7 +16,8 @@ class fullcalendar_handler_field_gcal extends views_handler_field {
   function option_definition() {
     $options = parent::option_definition();
     $options['label'] = array('default' => $this->definition['title'], 'translatable' => TRUE);
-    $options['gcal'] = array('default' => '');
+    $options['googleCalendarId'] = array('default' => '');
+    $options['googleCalendarApiKey'] = array('default' => '');
     $options['class'] = array('default' => 'fc-event-default fc-event-gcal');
     $options['timezone'] = array('default' => date_default_timezone_get());
     return $options;
@@ -29,12 +30,18 @@ class fullcalendar_handler_field_gcal extends views_handler_field {
       '#default_value' => isset($this->options['label']) ? $this->options['label'] : '',
       '#description' => t('The label for this field that will be displayed to end users if the style requires it.'),
     );
-    $form['gcal'] = array(
+    $form['googleCalendarId'] = array(
       '#type' => 'textfield',
-      '#title' => t('Feed URL'),
+      '#title' => t('Google Calendar ID'),
       '#maxlength' => 1024,
-      '#default_value' => $this->options['gcal'],
+      '#default_value' => $this->options['googleCalendarId'],
     );
+  $form['googleCalendarApiKey'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Google Calendar API key'),
+      '#maxlength' => 1024,
+      '#default_value' => $this->options['googleCalendarApiKey'],
+  );
     $form['class'] = array(
       '#type' => 'textfield',
       '#title' => t('CSS class'),
@@ -56,6 +63,8 @@ class fullcalendar_handler_field_gcal extends views_handler_field {
         'editable' => FALSE,
         'className' => $this->options['class'],
         'currentTimezone' => $this->options['timezone'],
+        'googleCalendarApiKey' => $this->options['googleCalendarApiKey'],
+        'googleCalendarId' => $this->options['googleCalendarId'],
       ),
     );
   }
