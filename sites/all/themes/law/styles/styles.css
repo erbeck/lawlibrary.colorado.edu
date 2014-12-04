@@ -1287,3 +1287,14 @@ ol.arizList li.views-row-even views-row-last {
 	width: 360px;
 	padding: 0px;	
 }
+
+
+/* FullCalendar - messing with css to add border around days -tc 12/3/2014 */
+
+.fc-border-separate th, .fc-border-separate td {
+    border-width: 1px 0 0 1px !important;
+}
+
+.fc-widget-header, .fc-widget-content {
+    border: 1px solid #ddd !important;
+}
