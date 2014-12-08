@@ -1,32 +1,13 @@
-
-/**
- * Modifide for Drupal.
- *
- * Changes to the original 960.css packaged with 960.gs:
- *  - Tabs changed to spaces.
- *  - Underscores changed to dashes.
- *  - Changed the purpose of the .clear class. Use br.clear instead.
- *  - Added line-height: 0; to .clearfix. Prevents unwanted vertical dimension.
- */
+/* $Id: 960.css,v 1.1.2.2.4.1 2011/01/10 21:30:12 dvessel Exp $ */
 
 /*
   960 Grid System ~ Core CSS.
   Learn more ~ http://960.gs/
 
   Licensed under GPL and MIT.
+
+  Modified for Drupal.
 */
-
-/*
-  Forces backgrounds to span full width,
-  even if there is horizontal scrolling.
-  Increase this if your layout is wider.
-
-  Note: IE6 works fine without this fix.
-*/
-
-body {
-  min-width: 960px;
-}
 
 /* `Containers
 ----------------------------------------------------------------------------------------------------*/
@@ -59,26 +40,9 @@ body {
 .grid-16 {
   display: inline;
   float: left;
+  position: relative;
   margin-left: 10px;
   margin-right: 10px;
-}
-
-.push-1, .pull-1,
-.push-2, .pull-2,
-.push-3, .pull-3,
-.push-4, .pull-4,
-.push-5, .pull-5,
-.push-6, .pull-6,
-.push-7, .pull-7,
-.push-8, .pull-8,
-.push-9, .pull-9,
-.push-10, .pull-10,
-.push-11, .pull-11,
-.push-12, .pull-12,
-.push-13, .pull-13,
-.push-14, .pull-14,
-.push-15, .pull-15 {
-  position: relative;
 }
 
 .container-12 .grid-3,
@@ -612,56 +576,4 @@ body {
 
 .container-16 .pull-15 {
   left: -900px;
-}
-
-/* `Clear Floated Elements
-----------------------------------------------------------------------------------------------------*/
-
-/* http://sonspring.com/journal/clearing-floats
-
- - This technique from 960.gs source removed. Use br.clear instead for the
-   same effect and use .clear for general clearing of blocks with content.
-
-.clear {
-  clear: both;
-  display: block;
-  overflow: hidden;
-  visibility: hidden;
-  width: 0;
-  height: 0;
-}
-*/
-
-.clear {
-  clear: both;
-}
-
-br.clear {
-  line-height: 0;
-}
-
-/* http://www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified */
-
-.clearfix:before,
-.clearfix:after {
-  content: '\0020';
-  display: block;
-  overflow: hidden;
-  visibility: hidden;
-  width: 0;
-  height: 0;
-}
-
-.clearfix:after {
-  clear: both;
-  line-height: 0;
-}
-
-/*
-  The following zoom:1 rule is specifically for IE6 + IE7.
-  Move to separate stylesheet if invalid CSS is a problem.
-*/
-
-.clearfix {
-  zoom: 1;
 }

@@ -1,15 +1,7 @@
-
-/**
- * Addon for Drupal's right to left language support. This does not directly
- * mirror RTL styles from 960.gs source do to the way Drupal includes RTL
- * style sheets.
- */
+/* $Id: 960-rtl.css,v 1.1.2.3.4.1 2011/01/10 21:30:12 dvessel Exp $ */
 
 /*
-  960 Grid System ~ Core CSS.
-  Learn more ~ http://960.gs/
-
-  Licensed under GPL and MIT.
+   Addon for Drupal's right to left language support. 
 */
 
 /* `Grid >> Global
@@ -32,19 +24,19 @@
 .grid-15,
 .grid-16 {
   float: right;
-  margin-left: 10px;
-  margin-right: 10px;
 }
 
 /* `Grid >> Children (Alpha ~ First, Omega ~ Last)
 ----------------------------------------------------------------------------------------------------*/
 
 .alpha {
+  margin-left: 10px;
   margin-right: 0;
 }
 
 .omega {
   margin-left: 0;
+  margin-right: 10px;
 }
 
 /* `Prefix and Suffix Extra Space Reset >> 12 and 16 Columns

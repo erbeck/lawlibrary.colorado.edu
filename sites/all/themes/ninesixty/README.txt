@@ -1,7 +1,13 @@
+// $Id: README.txt,v 1.2.2.3.4.1 2011/01/10 21:30:11 dvessel Exp $
 
 This "framework" theme is based on the 960 Grid System created by Nathan Smith.
-The CSS framework is licenced under GPL and MIT. This Drupal theme is licensed
-under GPL.
+It is being proposed for the core base theme in Drupal 7. The CSS framework is
+licenced under GPL and MIT. This Drupal theme is licensed under GPL.
+
+See these pages:
+  Issue queue:       http://drupal.org/node/293540
+  g.d.o discussion:  http://groups.drupal.org/node/16200
+  960 post on g.d.o: http://groups.drupal.org/node/16457
 
 Homepage and download for 960:
   http://960.gs/
@@ -30,14 +36,15 @@ Modifications:
   changed to hyphens.
 
 - Additional .push-x and .pull-x classes have been added.
-  update: The push and pull classes have been incorporated into 960.gs source.
 
-- Right-to-left languages are supported. It does not use the RTL styles
-  included with 960.gs source due to the way Drupal core handles RTL styles.
+- Right-to-left languages are supported. It's not part of the 960 download.
+  It has been extended to support Drupal's rtl language system.
 
-- The ".clear" class from 960.css repurposed to clear blocks with content. The
-  br.clear method can be used in its place while .clear can be applied to
-  elements that contain content. 
+- Removed ".clear-fix" and ".clear" classes from 960.css. Drupal works with
+  ".clear-block" which uses the same technique used in .clear-fix. The .clear
+  class on the other hand is too commonly used as a class name and the
+  properties can cause confusion since anything with that property will
+  disappear. A standard <br /> tag can be used in its place.
 
 - Removed the "outline:0;" rule from reset.css. Adding it back manually
   prevents OS specific outline styles from being used. Specifically Webkit and
@@ -47,57 +54,31 @@ Modifications:
 - Removed the large left margin for list items inside text.css. It interferes
   in many places.
 
-- From this point forward, any modifications to the source 960.gs files will
-  will be noted at the top of each file.
-
 ==============================================================================
 Notes and rules to play nice with the grids:
 
 - The class .container-[N] ([N] being a numeric value) is a subdivision of the
-  overall width (960 pixels). It can be .container-12, .container-16 or
-  .container-24. Depending on which is used, each grid unit (.grid-[N] class)
-  will be a certain width:
+  overall width (960 pixels). It can either be .container-12 or .container-16.
+  Depending on which is used, each grid unit (.grid-[N] class) will either be
+  in multiples of 80 pixels for 12 subdivisions or in multiple of 60 pixels for
+  16 subdivisions. All grid blocks include a 10 pixel margin on the left and
+  right side.
 
-  .container-12
-    .grid-1 =  80px [ 10px margin |  60px width  | 10px margin ]
-    .grid-2 = 160px [ 10px margin | 140px width  | 10px margin ]
-    .grid-3 = 240px [ 10px margin | 220px width  | 10px margin ]
+- Add a .show-grid class to the body tag to see the grid. It will add a
+  background graphic to guide you. This theme includes a printable sketch
+  sheet and templates for Photoshop and various other formats to guide you
+  from start to finish. See the "extras" folder within this theme.
 
-  .container-16
-    .grid-1 =  60px [ 10px margin |  40px width  | 10px margin ]
-    .grid-2 = 120px [ 10px margin | 100px width  | 10px margin ]
-    .grid-3 = 180px [ 10px margin | 160px width  | 10px margin ]
-
-  .container-24
-    .grid-1 =  40px [  5px margin |  30px width  |  5px margin ]
-    .grid-2 =  80px [  5px margin |  70px width  |  5px margin ]
-    .grid-3 = 120px [  5px margin | 110px width  |  5px margin ]
-
-  Note the progression of the inner width and the constant margins of the 12
-  and 16 versions vs. what's used for the 24 column version.
-
-- 12 and 16 columns can be used in tandem on a single page given that they
-  stay within their own containers. The 24 column version encompasses both the
-  12, 16 and beyond in terms of its ability to subdivide the layout so mixing
-  .container-24 with the other two is not recommended. The margins also differ
-  which will throw off your layout be 5 pixels.
-
-- The default 960 style includes both 12 and 16 column containers. You can
-  tell your theme to pick an alternate version with a simple .info entry in
-  your theme.
-
-  settings[ns_columns_select] = 12
-  settings[ns_columns_select] = 16
-  settings[ns_columns_select] = 24
-  settings[ns_columns_select] = 12+16 ; the default set by ninesixty base
+- Do not add left or right margins or padding to anything that's assigned a
+  grid class or it may throw off the alignment.
 
 - Use the .push-[N] and .pull-[N] classes so the order the layout is presented
   does not depend on source order. For example, if the source order was this:
   [content][side-1][side-2], and the desired presentation order was this:
   [side-1][content][side-2]. Adding a .pull-[N] class to #side-1 with the same
   numeric grid value as #content and adding a .push-[N] class to #content with
-  the same numeric grid value of #side-1 will swap their positions. These
-  classes can also be used for the general shifting of content when needed.
+  the same numeric grid value of #side-1 will swap their display. These classes
+  can also be used for the general shifting of content when needed.
 
   <div class="container-16">
     <div id="content" class="grid-9 push-4">
@@ -113,19 +94,42 @@ Notes and rules to play nice with the grids:
     </div>
   </div>
 
-- Use the .prefix-[N] and .suffix-[N] classes to pad an empty space. Do not
-  confuse this with the push/pull classes which are for positioning.
+  Any element assigned a .push-[N] or .pull-[N] class should also have a
+  .grid-[N] class. As an alternative, a "position:relative;" rule can be
+  applied to the element.
+
+- Use the .prefix-[N] and .suffix-[N] classes if you need to fill empty space.
+  Do not confuse this with the .push/pull-[N] classes which can overlap
+  adjacent areas.
+
+- Right to left languages will have the page reflow automatically. See
+  960-rtl.css inside the "styles" folder. As long as the theme uses the
+  positioning classes from this framework, it will be automatic.
 
 - When embedding a grid within a grid, use .alpha and .omega classes. The
   first block must be assigned .alpha and the last, .omega. This will chop off
-  the margin so it fits neatly into the grid.
+  the 10px margin so it fits neatly into the grid. This depends more on the
+  visual order than the source order when using the push/pull classes.
 
-- When using push/pull in combination with the alpha/omega classes, Which
-  element you apply the alpha/omega classes depends more on the
-  presentation order than the source order.
+As long as you stay within the framework, any browser positioning quirks
+_especially from IE_ should be minimal. 
 
-As long as you stay within the framework, any positioning quirks especially
-from Internet Explorer 6 and 7 should be minimal. 
+==============================================================================
+To-dos:
+
+- * Update: see next section *
+  Helper function to calculate grid classes based on context. The standard
+  $body_classes within page.tpl.php which contains the state of the sidebars
+  will be less useful in this grid system. It's often used to change the width
+  of the content region depending on the presence of sidebars. This new helper
+  function will need to replace that functionality. It also gives us an
+  opportunity to have a more flexible system. Instead of focusing on sidebars,
+  it can be more fine grained in its awareness of adjacent grids and push out
+  classes appropriately. This helper function must be as simple as possible to
+  *work with*.
+
+- Separate issue but this can help add grid classes easier.
+  Add $classes to hook templates: http://drupal.org/node/306358
 
 ==============================================================================
 Adding classes based on context:
@@ -215,41 +219,24 @@ The main points to remember are these:
     a value.
 
 ==============================================================================
-Other notes:
+Problem with .clearfix and .clear-block in IE:
 
-- If you need to include a style above all others add this to your themes
-  .info file.
+The .clearfix (aka .clear-block) method of clearing divs does not always play
+well with 960.gs in IE6 (haven't tried IE7). The problem is twofold:
 
-  ; first include it normally with the stylesheets key.
-  stylesheets[all][] = STYLENAME.css
+   1. If a div is assigned a container-X class, you must add the clearfix class
+      after it, like so:
+      <div class="container-12 clearfix">
 
-  ; Now direct it to "float" or include it before other styles.
-  settings[css_float][] = STYLENAME.css
+   2. If a div is assigned a grid-X class, adding clearfix will break your
+      layout. You must used an "inner" div instead, like so:
+      <div class="grid-8"><div class="clearfix">My content</div></div>
 
-  The base NineSixty theme does this for reset.css and text.css. Setting your
-  own floats will ignore what was set from NineSixty so be sure to include them
-  too.
-
-- Problem with .clearfix and .clear-block in IE:
-
-  The .clearfix (aka .clear-block) method of clearing divs does not always play
-  well with 960.gs in IE6 (haven't tried IE7). The problem is twofold:
-
-    1. If a div is assigned a container-X class, you must add the clearfix class
-       after it, like so:
-
-       <div class="container-12 clearfix">
-
-    2. If a div is assigned a grid-X class, adding clearfix will break your
-       layout. You must used an "inner" div instead, like so:
-
-       <div class="grid-8"><div class="clearfix">My content</div></div>
-
-  This problem has been seen in IE6. IE7 has not yet been tested. Please see
-  this issue for more information: http://drupal.org/node/422240
+This problem has been seen in IE6. IE7 has not yet been tested. Please see
+this issue for more information: http://drupal.org/node/422240
 
 ==============================================================================
 
-If you have any questions, suggestions, bug report or fixes, please post it in
-the issue queue. http://drupal.org/project/issues/ninesixty
+If you have any questions or suggestions. Please post in the group discussion.
+http://groups.drupal.org/node/16457 or contact me @ joon at dvessel dot com.
 
