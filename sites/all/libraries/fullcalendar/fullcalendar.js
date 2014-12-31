@@ -26,7 +26,7 @@ var defaults = {
 		right: 'today prev,next'
 	},
 	weekends: true,
-	weekNumbers: true,
+	weekNumbers: false,
 	weekNumberCalculation: 'iso',
 	weekNumberTitle: 'W',
 	
@@ -35,10 +35,7 @@ var defaults = {
 	//disableDragging: false,
 	//disableResizing: false,
 
-	//calendar will have either 4,5, or 6 weeks depending on the month. Each week will have the same constant height.
-	fixedWeekCount: false,
-	height: "auto",
-	
+		
 	allDayDefault: true,
 	ignoreTimezone: true,
 	
