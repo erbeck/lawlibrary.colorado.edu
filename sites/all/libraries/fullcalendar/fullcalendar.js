@@ -38,6 +38,11 @@ var defaults = {
 	allDayDefault: true,
 	ignoreTimezone: true,
 	
+	//calendar will have either 4,5, or 6 weeks depending on the month. Each week will have the same constant height.
+	fixedWeekCount: false,
+	height: 'auto',
+
+
 	// event ajax
 	lazyFetching: true,
 	startParam: 'start',
