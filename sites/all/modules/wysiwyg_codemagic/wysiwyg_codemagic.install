@@ -31,16 +31,21 @@ function wysiwyg_codemagic_requirements($phase) {
           'title' => t('TinyMCE CodeMagic'),
           'description' => t('In order for Wysiwyg CodeMagic to work, the TinyMCE CodeMagic plugin should be downloaded and put in %path directory', array('!settings' => l('settings', 'admin/config/wysiwyg/codemagic'), '%path' => $path)),
           'severity' => ($phase == 'install') ? REQUIREMENT_WARNING : REQUIREMENT_ERROR,
-          'value' => t('Third party !tinymce_codemagic software missing', array('!tinymce_codemagic' => l('TinyMCE CodeMagic plugin', 'http://codemagic.sutulustus.com/'))),
+          'value' => t('Third party !tinymce_codemagic (for TinyMCE 3) or !tinymce_codemagic_4 (for TinyMCE 4) software missing',
+            array(
+              '!tinymce_codemagic' => l('TinyMCE CodeMagic plugin', 'https://github.com/tinymce-plugins/codemagic/zipball/master'),
+              '!tinymce_codemagic_4' => l('TinyMCE 4 CodeMagic plugin', 'http://sourceforge.net/projects/codemagictinymce4/files/latest/download'),
+            )),
         );
       }
-      elseif (!file_exists("$path/editor_plugin.js")) {
+      elseif (!file_exists("$path/editor_plugin.js") && !file_exists("$path/plugin.js")) {
         $requirements['tinymce_codemagic'] = array(
           'title' => t('TinyMCE CodeMagic'),
-          'description' => t('The <code>%path</code> path exists but it appears that the directory structure underneath is incorrect. Please check that <code>%editor_plugin</code> and <code>%config</code> exist.',
+          'description' => t('The <code>%path</code> path exists but it appears that the directory structure underneath is incorrect. Please check that (<code>%editor_plugin</code> or <code>%editor_plugin_4</code>) and <code>%path</code> exist.',
           array(
             '%path' => $path,
             '%editor_plugin' => "$path/editor_plugin.js",
+            '%editor_plugin_4' => "$path/plugin.js",
           )),
           'severity' => $phase == 'install' ? REQUIREMENT_WARNING : REQUIREMENT_ERROR,
           'value' => t('TinyMCE CodeMagic plugin not properly installed'),

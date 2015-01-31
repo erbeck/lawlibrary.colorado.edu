@@ -6,9 +6,22 @@
  */
 
 function _wysiwyg_codemagic_default_path() {
-  return function_exists('wysiwyg_get_path')
-      ? wysiwyg_get_path('tinymce') . '/jscripts/tiny_mce/plugins/codemagic'
-      : 'sites/all/libraries/tinymce/jscripts/tiny_mce/plugins/codemagic';
+  $tinymce = wysiwyg_get_editor('tinymce');
+  if ($tinymce) {
+    $version = explode('.', $tinymce['installed version']);
+    if ($version[0] <= 3) {
+      return wysiwyg_get_path('tinymce') . '/jscripts/tiny_mce/plugins/codemagic';
+    }
+    elseif ($version[0] == 4) {
+      return wysiwyg_get_path('tinymce') . '/js/tinymce/plugins/codemagic';
+    }
+    else {
+      return 'sites/all/libraries/tinymce/jscripts/tiny_mce/plugins/codemagic';
+    }
+  }
+  else {
+    return 'sites/all/libraries/tinymce/jscripts/tiny_mce/plugins/codemagic';
+  }
 }
 
 /**
@@ -35,8 +48,20 @@ function wysiwyg_codemagic_wysiwyg_plugin($editor) {
             'filename' => 'editor_plugin.js',
             'buttons' => array('codemagic' => t('CodeMagic')),
             'url' => 'http://drupal.org/project/wysiwyg_codemagic/',
-            'internal' => FALSE, 
-	    'load' => TRUE,
+            'internal' => FALSE,
+            'load' => TRUE,
+          ),
+        );
+      }
+      elseif (file_exists("$path/plugin.js")) { // for Codemagic clone to TinyMCE 4
+        return array(
+          'codemagic' => array(
+            'path' => $path,
+            'filename' => 'plugin.js',
+            'buttons' => array('codemagic' => t('CodeMagic')),
+            'url' => 'http://drupal.org/project/wysiwyg_codemagic/',
+            'internal' => FALSE,
+            'load' => TRUE,
           ),
         );
       }
