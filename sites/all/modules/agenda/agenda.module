@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * The default path to the Colorbox directory.
+ */
+define('AGENDA_MIN_API_VERSION', '1.1.2');
+
+/**
  * Implements hook_menu().
  */
 function agenda_menu() {
@@ -41,12 +46,14 @@ function agenda_menu() {
   );
 
   $items['admin/config/services/agenda/%/configure'] = array(
-    'title'            => 'Configure agenda block',
-    'type'             => MENU_CALLBACK,
+    'title'            => 'Configure agenda block settings',
+    'type'             => MENU_LOCAL_ACTION,
+    'context'          => MENU_CONTEXT_INLINE,
     'page callback'    => 'drupal_get_form',
     'page arguments'   => array('agenda_admin_configure', 4),
     'access arguments' => array('configure agenda blocks'),
     'file'             => 'agenda.admin.php',
+    'weight'           => -4,
   );
 
   $items['admin/config/services/agenda/%/delete'] = array(
@@ -56,23 +63,29 @@ function agenda_menu() {
     'page arguments'   => array('agenda_admin_delete', 4),
     'access arguments' => array('configure agenda blocks'),
     'file'             => 'agenda.admin.php',
+    'weight'           => -3,
   );
 
   $items['admin/config/services/agenda/%/debug'] = array(
-    'title'            => 'Test settings',
-    'type'             => MENU_CALLBACK,
+    'title'            => 'Debug agenda block',
+    'type'             => MENU_LOCAL_ACTION,
+    'context'          => MENU_CONTEXT_INLINE,
     'page callback'    => 'agenda_debug',
     'page arguments'   => array(4),
     'access arguments' => array('configure agenda blocks'),
     'file'             => 'agenda.admin.php',
+    'weight'           => -2,
   );
 
   $items['admin/config/services/agenda/%/clear'] = array(
-    'type'             => MENU_CALLBACK,
+    'title'            => 'Clear agenda block cache',
+    'type'             => MENU_LOCAL_ACTION,
+    'context'          => MENU_CONTEXT_INLINE,
     'page callback'    => 'agenda_clear',
     'page arguments'   => array(4),
     'access arguments' => array('configure agenda blocks'),
     'file'             => 'agenda.admin.php',
+    'weight'           => -1,
   );
 
   return $items;
@@ -93,6 +106,33 @@ function agenda_permission() {
       'description' => t('Create and edit Agenda blocks'),
     ),
   );
+}
+
+
+/**
+ * Implements hook_libraries_info().
+ */
+function agenda_libraries_info() {
+  $libraries['google-api-php-client'] = array(
+    'name' => 'Google API Client Library for PHP',
+    'vendor url' => 'https://github.com/google/google-api-php-client',
+    'download url' => 'https://github.com/google/google-api-php-client/archive/1.1.2.zip',
+    'version arguments' => array(
+      'file' => 'src/Google/Client.php',
+      'pattern' => '/LIBVER = "([0-9\.a-z]+)/',
+      'lines' => 29,
+    ),
+    'versions' => array(
+      AGENDA_MIN_API_VERSION => array(),
+    ),
+    'files' => array(
+      'php' => array(
+        'src/Google/Client.php',
+      ),
+    ),
+  );
+
+  return $libraries;
 }
 
 
@@ -127,6 +167,9 @@ function agenda_block_view($delta) {
   return array(
     'subject' => t('Agenda'),
     'content' => array(
+      '#contextual_links' => array(
+        'agenda' => array('admin/config/services/agenda', array($delta)),
+      ),
       '#markup'   => $markup,
       '#attached' => array(
         'css' => array($basepath . '/agenda.css'),
@@ -337,17 +380,17 @@ function _agenda_parse_event($google_response, $block) {
   $event['timezone']        = $block->timezone;
 
   $event['start original']  = (string) $google_response->start->dateTime;
-  $event['start date']      = $start->format($block->dateformat);
-  $event['start time']      = $start->format($block->timeformat);
+  $event['start date']      = format_date(strtotime($start->format('c')), 'custom', $block->dateformat, $block->timezone);
+  $event['start time']      = format_date(strtotime($start->format('c')), 'custom', $block->timeformat, $block->timezone);
   $event['start timestamp'] = strtotime($start->format('c')); // Use strtotime instead of getTimestamp for < PHP5.3
 
   $event['end original']    = (string) $google_response->end->dateTime;
-  $event['end date']        = $end->format($block->dateformat);
-  $event['end time']        = $end->format($block->timeformat);
+  $event['end date']        = format_date(strtotime($end->format('c')), 'custom', $block->dateformat, $block->timezone);
+  $event['end time']        = format_date(strtotime($end->format('c')), 'custom', $block->timeformat, $block->timezone);
   $event['end timestamp']   = strtotime($end->format('c'));
 
   // Published date and time are not available in v3.
-  $event['updated']         = $updated->format($block->dateformat);
+  $event['updated']         = format_date(strtotime($updated->format('c')), 'custom', $block->dateformat, $block->timezone);
 
   $event['url']             = (string) $google_response->htmlLink;
   $event['link']            = l($block->linktext, $event['url'].'&ctz='.$block->timezone);
@@ -358,7 +401,7 @@ function _agenda_parse_event($google_response, $block) {
   //new fields added for google api v3.
   $event['event id']               = $google_response->id;
   $event['hangout url']            = $google_response->hangoutLink;
-  $event['hangout link']           = l($block->hangoutlinktext, $event['hangout url']);
+  $event['hangout link']           = !empty($block->hangoutlinktext) ? l($block->hangoutlinktext, $event['hangout url']) : NULL;
   $event['iCalUID']                = $google_response->iCalUID;
   $event['recurringEventId']       = $google_response->recurringEventId;
   $event['creator email']          = $google_response->creator->email;
@@ -429,7 +472,9 @@ function _agenda_load_google($address, $key, $block) {
   //Including the google-api-php-client library (required).
   $autoload_path = libraries_get_path('google-api-php-client') . '/autoload.php';
   if (!file_exists($autoload_path)) {
-    drupal_set_message('Agenda: The google-api-php-client library was not found.', 'error');
+    drupal_set_message('Agenda: The google-api-php-client library was not found.
+      See admin/reports/status and/or the Agenda module\'s README for more
+      information.', 'error');
     return;
   }
   include_once($autoload_path);

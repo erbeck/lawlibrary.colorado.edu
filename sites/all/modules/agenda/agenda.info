@@ -9,9 +9,9 @@ files[] = agenda.install
 files[] = agenda.module
 files[] = agenda.test
 
-; Information added by Drupal.org packaging script on 2014-11-23
-version = "7.x-2.0-beta1"
+; Information added by Drupal.org packaging script on 2015-02-20
+version = "7.x-2.0-beta2"
 core = "7.x"
 project = "agenda"
-datestamp = "1416781087"
+datestamp = "1424442027"
 
