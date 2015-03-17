@@ -33,7 +33,6 @@ function backstretch_field_formatter_info() {
         'delta' => '',
         'center_x' => TRUE,
         'center_y' => TRUE,
-        'random' => FALSE,
       ),
     ),
   );
@@ -165,6 +164,7 @@ function backstretch_field_formatter_settings_form($field, $instance, $view_mode
     ),
   );
 
+
   $element['duration'] = array(
     '#type' => 'textfield',
     '#title' => t('Duration'),
@@ -214,14 +214,6 @@ function backstretch_field_formatter_settings_form($field, $instance, $view_mode
     '#title' => t('Vertically centered'),
     '#default_value' => $settings['center_y'],
     '#description' => t('Should we center the image on the Y axis?'),
-  );
-
-  $element['random'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Random'),
-    '#default_value' => $settings['random'],
-    '#description' => t('Check when a random image should be displayed instead of a slideshow.'),
-    '#access' => $field['cardinality'] != 1,
   );
 
   return $element;
@@ -309,10 +301,6 @@ function backstretch_field_formatter_settings_summary($field, $instance, $view_m
  * Implements hook_field_formatter_view().
  */
 function backstretch_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
-  if (!count($items)) {
-    return '';
-  }
-
   // This is where the output will be.
   $element = array();
   // Store the field formatter settings.
@@ -358,19 +346,14 @@ function backstretch_field_formatter_view($entity_type, $entity, $field, $instan
   // We need the entity id here because there could be multiple images with
   // Backstretch.
   $ids = entity_extract_ids($entity_type, $entity);
-  $id = drupal_clean_css_identifier($entity_type . '-' . $ids[0]);
+  $id = str_replace('_', '-', $entity_type) . '-' . $ids[0];
 
-  if ($settings['random']) {
-    $random_key = array_rand($items);
-    $items = array($items[$random_key]);
-  }
-
-  // Special handling for entity reference fields.
+  // Special handling for entityreference fields.
   if ($field['type'] == 'entityreference') {
     // Store the set entity type.
     $target_entity_type = $field['settings']['target_type'];
 
-    // We store all images from referenced entities here temporary.
+    // We store all images from referenced entites here temporary.
     $new_items = array();
 
     // Iterate all entity references.
@@ -489,10 +472,6 @@ function backstretch_formatter_options() {
     'center_y' => array(
       'label' => t('Vertically centered'),
       'js' => 'centeredY',
-      'type' => 'bool',
-    ),
-    'random' => array(
-      'label' => t('Random'),
       'type' => 'bool',
     ),
   );

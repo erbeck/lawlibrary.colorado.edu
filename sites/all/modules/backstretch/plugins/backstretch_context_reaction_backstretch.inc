@@ -201,11 +201,8 @@ class backstretch_context_reaction_backstretch extends context_reaction {
       ),
     );
 
+    // @see https://drupal.org/node/2140009
     /*
-     * We have to figure out which tokens should be supported because in the
-     * Context reaction you can also use a path to the image so let us discuss
-     * this in https://drupal.org/node/2140009.
-
     $form['tokens'] = array(
       '#type' => 'container',
       '#theme' => 'token_tree',
@@ -250,13 +247,6 @@ class backstretch_context_reaction_backstretch extends context_reaction {
       '#title' => t('Vertically centered'),
       '#default_value' => isset($values['center_y']) ? $values['center_y'] : TRUE,
       '#description' => t('Should we center the image on the Y axis?'),
-    );
-
-    $form['random'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Random'),
-      '#default_value' => isset($values['random']) ? $values['random'] : FALSE,
-      '#description' => t('Check when a random image should be displayed instead of a slideshow.'),
     );
 
     return $form;
@@ -310,13 +300,9 @@ class backstretch_context_reaction_backstretch extends context_reaction {
               continue;
             }
 
-            /*
-             * We have to figure out which tokens should be supported because in
-             * the Context reaction you can also use a path to the image so let
-             * us discuss this in https://drupal.org/node/2140009.
-
+            // @see https://drupal.org/node/2140009
             // Replace tokens in the "Other element" field.
-            if ($name == 'element_other') {
+            /*if ($name == 'element_other') {
               $value = token_replace($value, array($entity_type => $entity));
             }*/
 
@@ -393,11 +379,6 @@ class backstretch_context_reaction_backstretch extends context_reaction {
 
             $options['items'] = $paths;
             break;
-        }
-
-        if ($settings['random']) {
-          $random_key = array_rand($options['items']);
-          $options['items'] = array($options['items'][$random_key]);
         }
 
         // Prepare a renderable array.
