@@ -1255,10 +1255,11 @@ ol.arizList li.views-row-even views-row-last {
 }
 
 /* Agenda Module css modifications  8/26/2013 tacoberly */
+/* Agenda Module css modification for hours spacing 7/2/2015 tacoberly */
 
 .agenda-block .cal_0 { background-color: #E3e4de; }
 
-.block .agenda-block ol li { margin: 1px 0; padding: 10px 0px 0px 5px; color: black; font-size: 90%; background-image: none; }
+.block .agenda-block ol li { margin: 1px 0; padding: 12px 0px 0px 5px; color: black; font-size: 90%; background-image: none; }
 
 .block .agenda-block ol { list-style-type: none; margin: 0 0 1em 0; padding: 0; }
 
