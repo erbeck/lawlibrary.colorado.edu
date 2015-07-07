@@ -1258,7 +1258,7 @@ ol.arizList li.views-row-even views-row-last {
 
 .agenda-block .cal_0 { background-color: #E3e4de; }
 
-.block .agenda-block ol li { margin: 1px 0; padding: 3px 0px 0px 10px; color: black; font-size: 90%; background-image: none; }
+.block .agenda-block ol li { margin: 1px 0; padding: 10px 0px 0px 5px; color: black; font-size: 90%; background-image: none; }
 
 .block .agenda-block ol { list-style-type: none; margin: 0 0 1em 0; padding: 0; }
 
