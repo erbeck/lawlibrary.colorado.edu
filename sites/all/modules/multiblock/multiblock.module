@@ -130,10 +130,7 @@ function multiblock_call_block($delta, $op, $edit) {
     // information about multiblock is passed. This will allow blocks to
     // contain and display different configuration information per instance.
     $block = module_invoke($block_info->module, 'block_'. $op, $block_info->orig_delta, $edit);
-    if (module_exists('i18n')) {
-      $block['content'] = i18n_string(array('blocks', 'block', $block_info->orig_delta, 'body'), $block['content']);
-    }
-        return $block;
+    return $block;
   }
   // No such multiblock, shouldn't ever happen.
   return;
