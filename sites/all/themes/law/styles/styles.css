@@ -730,7 +730,7 @@ body a.button-blue {
 	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	margin-left:202px;				
 }
-#digitool-submit-sessionlaws {
+#edit-submit-colorado-session-laws {
 	background-color:#045c7d;
 	background-image:-webkit-gradient(linear,left top,left bottom,from(#045c7d),to(#014863));
 	background-image:-webkit-linear-gradient(top,#045c7d,#014863);
@@ -1199,21 +1199,25 @@ ol.arizList li.views-row-even views-row-last {
 }
 #edit-field-session-newsubject-value{
 	height:22px;
-	width:330px;
+	width:250px;
 	font-size:15px;
 	padding:0px;	
 }
-#edit-field-session-title-value-wrapper {
-	padding-top:12px;	
+#views-exposed-form-colorado-session-laws-sessionlawspage {
+	margin-top:-125px;
+	position:absolute;
+}
+#block-block-13 {
+	margin-bottom:75px;
 }
 #edit-field-session-title-value {
 	height:22px;
-	width:330px;
+	width:310px;
 	font-size:15px;
 	padding:0px;	
 }
 #sessionLawsDigitoolSearch {
-	width:300px;
+	width:310px;
 	background-color:#E3E4DE;
 	padding:30px;
 	position:absolute;
