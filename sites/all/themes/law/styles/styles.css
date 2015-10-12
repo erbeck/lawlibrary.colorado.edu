@@ -1292,13 +1292,6 @@ ol.arizList li.views-row-even views-row-last {
 	padding: 0px;	
 }
 
-/* Vanilla calendar view */
-.hoursType {
-	font-size:14px;
-}
-.hoursTime {
-	font-size:12px;
-}
 /* FullCalendar - messing with css to add border around days -tc 12/3/2014 */
 
 .fc-border-separate th, .fc-border-separate td {
