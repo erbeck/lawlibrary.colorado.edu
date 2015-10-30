@@ -1308,6 +1308,12 @@ ol.arizList li.views-row-even views-row-last {
 }
 
 /* Search tab box */
+#quicktabs-search_with_summon {
+	background-image: url("../images/searchBackground.png");
+	padding-top:20px;
+	padding-left:15px;
+	padding-bottom:20px;
+}
 .summon-search-widget {
 	display: block;
 	margin-left:25px;
@@ -1323,7 +1329,7 @@ ol.arizList li.views-row-even views-row-last {
 	padding-left:8px;
 }
 .summon-search-submit {
-	background-image:url("http://localhost/lawlibrary.colorado.edu//sites/default/files/images/betabutton.png");
+	background-image:url("http://lawlibrary.colorado.edu/sites/default/files/images/betabutton.png");
 	/*background-color:#045c7d;
 	background-image:-webkit-gradient(linear,left top,left bottom,from(#045c7d),to(#014863));
 	background-image:-webkit-linear-gradient(top,#045c7d,#014863);
@@ -1352,7 +1358,7 @@ input[required] + label {
 	font-weight:lighter; 
 	position:absolute;
 	top:6px;
-	left:114px;
+	left:113px;
 }
 /* show the placeholder when input has no content (no content = invalid) */
 input[required]:invalid + label {
