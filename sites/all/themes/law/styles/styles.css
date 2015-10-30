@@ -1312,6 +1312,7 @@ ol.arizList li.views-row-even views-row-last {
 	display: block;
 	margin-left:25px;
 	margin-top:30px;
+	position:relative;
 }
 .summon-search-box {
 	vertical-align:middle;
@@ -1322,26 +1323,43 @@ ol.arizList li.views-row-even views-row-last {
 	padding-left:8px;
 }
 .summon-search-submit {
-background-color:#045c7d;
+	background-image:url("http://localhost/lawlibrary.colorado.edu//sites/default/files/images/betabutton.png");
+	/*background-color:#045c7d;
 	background-image:-webkit-gradient(linear,left top,left bottom,from(#045c7d),to(#014863));
 	background-image:-webkit-linear-gradient(top,#045c7d,#014863);
 	background-image:-moz-linear-gradient(top,#045c7d,#014863);
 	background-image:-o-linear-gradient(top,#045c7d,#014863);
 	background-image:-ms-linear-gradient(top,#045c7d,#014863);
-	background-image:linear-gradient(top,#045c7d,#014863);
-	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#045c7d',EndColorStr='#014863');	
-	color:#fff;
-	-webkit-border-radius:5px;
-	-moz-border-radius:5px;
-	border-radius:5px;
+	background-image:linear-gradient(top,#045c7d,#014863);*/
+	
 	display:inline-block;
-	padding:6px 9px;
-	text-shadow:0px 1px 1px #000;
-	-webkit-box-shadow:0px 1px 1px 0px #888;
-	-moz-box-shadow:0px 1px 1px 0px #888;
-	box-shadow:0px 1px 1px 0px #888;
-	border:1px solid #014863;
-	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;	
+	width:108px;
+	height:39px;
+	border:none;
+	position:relative;
+	bottom:5px;
+	
 	margin-left:20px;
-	font-size:14px;
+	font-size:0;
+}
+input[required]:invalid  {
+	box-shadow:0 0 5px #D0B87C;
+}
+input[required] + label {
+	color:#D0B87C;
+	font-family:Arial;
+	font-size:24px;
+	font-weight:lighter; 
+	position:absolute;
+	top:6px;
+	left:114px;
+}
+/* show the placeholder when input has no content (no content = invalid) */
+input[required]:invalid + label {
+    display: inline-block;
+}
+
+/* hide the placeholder when input has some text typed in */
+input[required]:valid + label{
+    display: none;
 }
