@@ -1348,10 +1348,10 @@ ol.arizList li.views-row-even views-row-last {
 	margin-left:20px;
 	font-size:0;
 }
-input[required]:invalid  {
+input.summon-search-field[required]:invalid  {
 	box-shadow:0 0 5px #D0B87C;
 }
-input[required] + label {
+input[required] + label.summon-search-label {
 	color:#D0B87C;
 	font-family:Arial;
 	font-size:24px;
@@ -1361,11 +1361,11 @@ input[required] + label {
 	left:113px;
 }
 /* show the placeholder when input has no content (no content = invalid) */
-input[required]:invalid + label {
+input[required]:invalid + label.summon-search-label {
     display: inline-block;
 }
 
 /* hide the placeholder when input has some text typed in */
-input[required]:valid + label{
+input[required]:valid + label.summon-search-label {
     display: none;
 }
