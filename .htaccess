@@ -113,7 +113,7 @@ DirectoryIndex index.php index.html index.htm
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_URI} !=/favicon.ico
   RewriteCond %{REQUEST_URI} ^/arizona-v-california
-  RewriteRule ^ index.php [L]
+  RewriteRule ^/index.php [L]
   
   # Pass all requests not referring directly to files in the filesystem to
   # index.php. Clean URLs are handled in drupal_environment_initialize().
