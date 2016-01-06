@@ -865,9 +865,10 @@ input#frontSearchBox {
 	border: 1px solid #666;
 }
 input#frontSearchButton {
-	padding: 5px 20px;
-	font-size: 18px;
+	padding: 5px 15px;
+	font-size: 17px;
 	background-color: #D0B87C;
+	margin-left:20px;
 }
 #featured-text {
 	padding-left: 10px;
@@ -1329,24 +1330,30 @@ ol.arizList li.views-row-even views-row-last {
 	padding-left:8px;
 }
 .summon-search-submit {
-	background-image:url("http://lawlibrary.colorado.edu/sites/default/files/images/betabutton.png");
-	/*background-color:#045c7d;
+	background-color:#045c7d;
 	background-image:-webkit-gradient(linear,left top,left bottom,from(#045c7d),to(#014863));
 	background-image:-webkit-linear-gradient(top,#045c7d,#014863);
 	background-image:-moz-linear-gradient(top,#045c7d,#014863);
 	background-image:-o-linear-gradient(top,#045c7d,#014863);
 	background-image:-ms-linear-gradient(top,#045c7d,#014863);
-	background-image:linear-gradient(top,#045c7d,#014863);*/
-	
+	background-image:linear-gradient(top,#045c7d,#014863);
+	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#045c7d',EndColorStr='#014863');	
+	color:#fff;
+	-webkit-border-radius:3px;
+	-moz-border-radius:5px;
+	border-radius:5px;
 	display:inline-block;
-	width:108px;
-	height:39px;
-	border:none;
-	position:relative;
-	bottom:5px;
+	padding:5px 8px;
+	text-shadow:0px 1px 1px #000;
+	-webkit-box-shadow:0px 1px 1px 0px #888;
+	-moz-box-shadow:0px 1px 1px 0px #888;
+	box-shadow:0px 1px 1px 0px #888;
+	border:1px solid #014863;
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	
 	margin-left:20px;
-	font-size:0;
+	margin-bottom:8px;
+	font-size:16px;
 }
 input.summon-search-field[required]:invalid  {
 	box-shadow:0 0 5px #D0B87C;
