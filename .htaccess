@@ -124,11 +124,6 @@ DirectoryIndex index.php index.html index.htm
   RewriteCond %{REQUEST_URI} ^/colorado-law-videos/.*
   RewriteRule ^(.*)$ /colorado-law-videos/index.php?q=$1 [L,QSA]
   
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_URI} ^/colorado-session-laws/.*
-  RewriteRule ^(.*)$ /colorado-session-laws/index.php?q=$1 [L,QSA]
-  
   # Pass all requests not referring directly to files in the filesystem to
   # index.php. Clean URLs are handled in drupal_environment_initialize().
   RewriteCond %{REQUEST_FILENAME} !-f
