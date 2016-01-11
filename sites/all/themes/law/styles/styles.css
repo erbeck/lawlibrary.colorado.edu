@@ -359,7 +359,19 @@ ul#secondary-menu a:hover {
 	width:160px;
 	padding:5px;	
 }
+#block-menu-menu-find {
+	float:left;
+	width:160px;
+	padding:5px;	
+}
 #block-multiblock-2 {
+	float:left;
+	width:160px;
+	padding:5px;	
+	position:absolute;
+	margin-top:185px
+}
+#block-menu-menu-help {
 	float:left;
 	width:160px;
 	padding:5px;	
@@ -371,7 +383,17 @@ ul#secondary-menu a:hover {
 	width:180px;
 	padding:5px;	
 }
+#block-menu-menu-about {
+	float:left;
+	width:180px;
+	padding:5px;	
+}
 #block-multiblock-3 {
+	float:left;
+	width:180px;
+	padding:5px;	
+}
+#block-menu-menu-students {
 	float:left;
 	width:180px;
 	padding:5px;	
@@ -380,9 +402,18 @@ ul#secondary-menu a:hover {
 	float:left;
 	width:180px;
 	padding:5px 5px 5px 10px;	
-
+}
+#block-menu-menu-faculty-and-staff {
+	float:left;
+	width:180px;
+	padding:5px 5px 5px 10px;	
 }
 #block-multiblock-5 {
+	float:left;
+	width:180px;
+	padding:5px 0px 5px 5px;	
+}
+#block-menu-menu-public {
 	float:left;
 	width:180px;
 	padding:5px 0px 5px 5px;	
