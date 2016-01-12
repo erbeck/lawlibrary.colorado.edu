@@ -116,8 +116,8 @@ DirectoryIndex index.php index.html index.htm
   
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_URI} ^/arizona-v-california
-  RewriteRule ^(.*)$ /arizona-v-california/index.php?q=$1 [L,QSA]
+  RewriteCond %{REQUEST_URI} ^/arizonavcalifornia/.*
+  RewriteRule ^(.*)$ /arizonavcalifornia/index.php?q=$1 [L,QSA]
   
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
