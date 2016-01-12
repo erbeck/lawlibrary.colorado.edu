@@ -121,11 +121,6 @@ DirectoryIndex index.php index.html index.htm
   
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_URI} ^/arizona-v-california-collection
-  RewriteRule ^(.*)$ /arizona-v-california-collection/ [L,QSA]
-  
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_URI} ^/colorado-house-and-senate-journals/.*
   RewriteRule ^(.*)$ /colorado-house-and-senate-journals/index.php?q=$1 [L,QSA]
   
