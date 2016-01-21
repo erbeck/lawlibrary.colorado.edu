@@ -126,6 +126,11 @@ DirectoryIndex index.php index.html index.htm
   
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} ^/colorado-municipal-codes/.*
+  RewriteRule ^(.*)$ /colorado-municipal-codes/index.php?q=$1 [L,QSA]
+  
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_URI} ^/colorado-law-videos/.*
   RewriteRule ^(.*)$ /colorado-law-videos/index.php?q=$1 [L,QSA]
   
