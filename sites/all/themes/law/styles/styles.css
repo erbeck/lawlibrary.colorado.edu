@@ -1407,3 +1407,10 @@ input[required]:invalid + label.summon-search-label {
 input[required]:valid + label.summon-search-label {
     display: none;
 }
+input+.summon-search-label {
+animation: repaint 1000s infinite linear;
+}
+@keyframes repaint {
+    from { opacity: 1; }
+    to { opacity: 0.99999; }
+}
