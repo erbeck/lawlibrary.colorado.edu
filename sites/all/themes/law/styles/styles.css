@@ -1303,3 +1303,6 @@ ol.arizList li.views-row-even views-row-last {
 .fc-widget-header, .fc-widget-content {
     border: 1px solid #ddd !important;
 }
+
+/* month  - css change to font in calendar tc 1/26/2016 */
+.month-view {font-family: arial; sans-serif; font-weight: bold;}
