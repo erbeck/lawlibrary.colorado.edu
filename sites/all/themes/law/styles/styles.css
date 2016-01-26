@@ -1339,9 +1339,12 @@ ol.arizList li.views-row-even views-row-last {
     border: 1px solid #ddd !important;
 }
 
-<<<<<<< HEAD
+
 /* month  - css change to font in calendar tc 1/26/2016 */
-.month-view {font-family: arial; sans-serif; font-weight: bold;}
+.month-view {font-family: arial, sans-serif; font-weight: bold;}
+
+<<<<<<< HEAD
+
 =======
 /* Search tab box */
 #quicktabs-search_with_summon {
