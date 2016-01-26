@@ -109,6 +109,31 @@ DirectoryIndex index.php index.html index.htm
   # uncomment the following line:
   # RewriteBase /
 
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} ^/coloradosessionlaws/.*
+  RewriteRule ^(.*)$ /coloradosessionlaws/index.php?q=$1 [L,QSA]
+  
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} ^/arizonavcalifornia/.*
+  RewriteRule ^(.*)$ /arizonavcalifornia/index.php?q=$1 [L,QSA]
+  
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} ^/colorado-house-and-senate-journals/.*
+  RewriteRule ^(.*)$ /colorado-house-and-senate-journals/index.php?q=$1 [L,QSA]
+  
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} ^/colorado-municipal-codes/.*
+  RewriteRule ^(.*)$ /colorado-municipal-codes/index.php?q=$1 [L,QSA]
+  
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} ^/colorado-law-videos/.*
+  RewriteRule ^(.*)$ /colorado-law-videos/index.php?q=$1 [L,QSA]
+  
   # Pass all requests not referring directly to files in the filesystem to
   # index.php. Clean URLs are handled in drupal_environment_initialize().
   RewriteCond %{REQUEST_FILENAME} !-f
@@ -140,4 +165,10 @@ DirectoryIndex index.php index.html index.htm
       Header append Vary Accept-Encoding
     </FilesMatch>
   </IfModule>
+</IfModule>
+
+# Add headers to all responses.
+<IfModule mod_headers.c>
+  # Disable content sniffing, since it's an attack vector.
+  Header always set X-Content-Type-Options nosniff
 </IfModule>

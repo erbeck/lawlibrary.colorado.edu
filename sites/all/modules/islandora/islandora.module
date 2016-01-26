@@ -49,6 +49,9 @@ define('ISLANDORA_POST_INGEST_HOOK', 'islandora_ingest_post_ingest');
 define('ISLANDORA_PRE_PURGE_OBJECT_HOOK', 'islandora_pre_purge_object');
 define('ISLANDORA_POST_PURGE_OBJECT_HOOK', 'islandora_post_purge_object');
 define('ISLANDORA_UPDATE_RELATED_OBJECTS_PROPERTIES_HOOK', 'islandora_update_related_objects_properties');
+define('ISLANDORA_METADATA_OBJECT_ALTER', 'islandora_metadata_object');
+define('ISLANDORA_METADATA_OBJECT_DESCRIPTION_ALTER', 'islandora_metadata_object_description');
+define('ISLANDORA_BREADCRUMB_FILTER_PREDICATE_HOOK', 'islandora_get_breadcrumb_query_predicates');
 
 // @todo Add Documentation.
 define('ISLANDORA_OBJECT_INGESTED_HOOK', 'islandora_object_ingested');
@@ -59,10 +62,6 @@ define('ISLANDORA_DATASTREAM_MODIFIED_HOOK', 'islandora_datastream_modified');
 define('ISLANDORA_DATASTREAM_PURGED_HOOK', 'islandora_datastream_purged');
 define('ISLANDORA_INGEST_STEP_HOOK', 'islandora_ingest_steps');
 define('ISLANDORA_DERIVATIVE_CREATION_HOOK', 'islandora_derivative');
-// The "ISLANDORA_DERVIATIVE_CREATION_HOOK" constant has deprecated as of
-// 7.x-1.5, and should be removed after the next release.
-define('ISLANDORA_DERVIATIVE_CREATION_HOOK', ISLANDORA_DERIVATIVE_CREATION_HOOK);
-
 
 // Autocomplete paths.
 define('ISLANDORA_CONTENT_MODELS_AUTOCOMPLETE', 'islandora/autocomplete/content-models');
@@ -472,7 +471,19 @@ function islandora_theme() {
         'objects' => NULL,
         'display' => NULL,
         'page_size' => 20,
+        'limit' => 12,
+      ),
+    ),
+    // Render a bunch of objects as either a grid or a list.
+    'islandora_objects_subset' => array(
+      'file' => 'theme/theme.inc',
+      'template' => 'theme/islandora-objects',
+      'variables' => array(
+        'objects' => NULL,
+        'display' => 'grid',
         'limit' => 10,
+        'total' => NULL,
+        'pager_element' => 0,
       ),
     ),
     // Render a bunch of objects as a grid.
@@ -1638,12 +1649,13 @@ function islandora_download_clip(AbstractObject $object) {
 /**
  * Implements hook_file_mimetype_mapping_alter().
  *
- * Grab custom islandora mime type list
- * and add any missing ext/mimes to the drupal mapping
+ * Grab custom Islandora mime type list
+ * and add any missing ext/mimes to the Drupal mapping
  */
 function islandora_file_mimetype_mapping_alter(&$mapping) {
-  $mime_detect = new MimeDetect();
-  $types = $mime_detect->getMimeTypes();
+  module_load_include('inc', 'islandora', 'includes/mimetype.utils');
+
+  $types = islandora_mime_mapping();
 
   $diff = array_diff_key($types, $mapping['extensions']);
   foreach ($diff as $ext => $mime) {
@@ -1651,6 +1663,12 @@ function islandora_file_mimetype_mapping_alter(&$mapping) {
     end($mapping['mimetypes']);
     $mapping['extensions'][$ext] = key($mapping['mimetypes']);
   }
+  // Get the current XML mapping and unset it so it comes last when we do our
+  // reverse when getting mimetypes from extensions for use in downloads.
+  // @see islandora_get_extension_for_mimetype.
+  $xml_int = $mapping['extensions']['xml'];
+  unset($mapping['extensions']['xml']);
+  $mapping['extensions']['xml'] = $xml_int;
 }
 
 /**
@@ -1779,6 +1797,14 @@ function islandora_islandora_object_ingested(AbstractObject $object) {
     return;
   }
   islandora_run_derivatives($object, NULL);
+  islandora_conditionally_clear_cache();
+}
+
+/**
+ * Implements hook_islandora_object_modified().
+ */
+function islandora_islandora_object_modified(AbstractObject $object) {
+  islandora_conditionally_clear_cache();
 }
 
 /**
@@ -1794,6 +1820,7 @@ function islandora_islandora_datastream_ingested(AbstractObject $object, Abstrac
     return;
   }
   islandora_run_derivatives($object, $datastream->id);
+  islandora_conditionally_clear_cache();
 }
 
 /**
@@ -1810,6 +1837,22 @@ function islandora_islandora_datastream_modified(AbstractObject $object, Abstrac
     'force' => TRUE,
   ));
   islandora_derivative_logging($logging_results);
+  islandora_conditionally_clear_cache();
+}
+
+/**
+ * Implements hook_islandora_object_purged().
+ */
+function islandora_islandora_object_purged($pid) {
+  islandora_conditionally_clear_cache();
+}
+
+
+/**
+ * Implements hook_islandora_datastream_purged().
+ */
+function islandora_islandora_datastream_purged(AbstractObject $object, $dsid) {
+  islandora_conditionally_clear_cache();
 }
 
 /**
@@ -1823,14 +1866,14 @@ function islandora_form_simpletest_test_form_alter(array &$form) {
   $filter_status = is_writable($filter_path);
   if ($filter_status) {
     $filter_status_message = theme_image(array('path' => 'misc/watchdog-ok.png', 'attributes' => array())) . " ";
-    $filter_status_message .= t("Drupal filter at <b>!filter_path</b> is writable by the server.", array(
-      '!filter_path' => $filter_path,
+    $filter_status_message .= t("Drupal filter at <strong>@filter_path</strong> is writable by the server.", array(
+      '@filter_path' => $filter_path,
     ));
   }
   else {
     $filter_status_message = theme_image(array('path' => 'misc/watchdog-error.png', 'attributes' => array())) . " ";
-    $filter_status_message .= t("Drupal filter at <b>!filter_path</b> is not writable by the server. Please make sure your webserver has permission to write to the Drupal filter. If the path given is incorrect, you will need to change it in your server's test config file, located in the Islandora module's 'tests' folder as test_config.ini or default.test_config.ini.", array(
-      '!filter_path' => $filter_path,
+    $filter_status_message .= t("Drupal filter at <strong>@filter_path</strong> is not writable by the server. Please make sure your webserver has permission to write to the Drupal filter. If the path given is incorrect, you will need to change it in your server's test config file, located in the Islandora module's 'tests' folder as test_config.ini or default.test_config.ini.", array(
+      '@filter_path' => $filter_path,
     ));
   }
 
@@ -2060,4 +2103,98 @@ function islandora_entity_set_property(&$data, $name, $value, $langcode) {
   if (is_object($data)) {
     $data->$name = $value;
   }
+}
+
+/**
+ * Conditionally clear cache to alleviate cache thrashing.
+ *
+ * If we are responding to form submission or during a batch which ingested,
+ * modified or purged an object or datastream, we want to be sure to clear the
+ * cache at the end of the process.
+ */
+function islandora_conditionally_clear_cache() {
+  static $clear;
+  if (!isset($clear)) {
+    $clear =& drupal_static(__FUNCTION__, FALSE);
+  }
+
+  if ($clear || !variable_get('cache', 0)) {
+    // Already set, no need to do so again, or page caching is disabled... Let's
+    // avoid a call to attempt to clear it.
+    return;
+  }
+
+  $functions = array(
+    // Object changes in response to a form.
+    'form_execute_handlers' => 'islandora_cache_clear_all',
+    // Object changes in response to a batch. Note that this will not match on
+    // a drush batch, as drush uses a different set of functions to run
+    // batches. We intentionally do not clear batches in response to drush
+    // batches, since they are not in response to GUI actions.
+    '_batch_process' => 'islandora_schedule_cache_clear_for_batch',
+  );
+
+  foreach (debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS & ~DEBUG_BACKTRACE_PROVIDE_OBJECT) as $frame) {
+    $function_name = strtolower($frame['function']);
+    if (isset($functions[$function_name])) {
+      $clear = TRUE;
+      $function = $functions[$function_name];
+      $function();
+      return;
+    }
+  }
+}
+
+/**
+ * Clear the page and block caches at the end of the request.
+ */
+function islandora_cache_clear_all() {
+  // Advanced "static" handling, as this may be called fairly often.
+  static $clear;
+  if (isset($clear)) {
+    $clear =& drupal_static(__FUNCTION__, FALSE);
+  }
+
+  if (!$clear) {
+    $clear = TRUE;
+    drupal_register_shutdown_function('cache_clear_all');
+  }
+}
+
+/**
+ * Set a batch to clear the page and block caches.
+ */
+function islandora_schedule_cache_clear_for_batch() {
+  $batch =& batch_get();
+  static $scheduled;
+
+  $scheduled = isset($scheduled) || isset($batch['islandora_cache_clear_scheduled']);
+
+  if ($scheduled || !isset($batch['id'])) {
+    // We do not wish to do anything if we are either already scheduled or the
+    // batch is not running.
+    return;
+  }
+
+  $clear_batch = array(
+    'operations' => array(
+      array('islandora_cache_clear_all', array()),
+    ),
+  );
+  batch_set($clear_batch);
+
+  // Set our flag, to avoid setting the batch multiple times during multiple
+  // iterations/operations of a single batch.
+  $batch['islandora_cache_clear_scheduled'] = TRUE;
+}
+
+/**
+ * Implements hook_islandora_get_breadcrumb_query_predicates().
+ */
+function islandora_islandora_get_breadcrumb_query_predicates(AbstractObject $object) {
+  return array(
+    'fedora-rels-ext:isPartOf',
+    'fedora-rels-ext:isMemberOfCollection',
+    'fedora-rels-ext:isMemberOf',
+  );
 }

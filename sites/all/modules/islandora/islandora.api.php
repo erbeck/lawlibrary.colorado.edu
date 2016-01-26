@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * This file documents all available hook functions to manipulate data.
@@ -28,15 +27,14 @@ function hook_islandora_view_object($object, $user, $page_number, $page_size) {
       'title' => $object->label,
       'path' => $resource_url,
     );
-
     // Theme the image seperatly.
     $variables['islandora_img'] = theme('image', $params);
     $output = theme('islandora_default_print', array(
     'islandora_content' => $variables['islandora_img']));
   }
-
   return $output;
 }
+
 /**
  * Generate a print friendly page for the given object.
  *
@@ -44,7 +42,9 @@ function hook_islandora_view_object($object, $user, $page_number, $page_size) {
  *   The object form to print.
  */
 function hook_islandora_view_print_object($object) {
+
 }
+
 /**
  * Generate an object's display for the given content model.
  *
@@ -58,8 +58,8 @@ function hook_islandora_view_print_object($object) {
  *   An array whose values are markup.
  */
 function hook_cmodel_pid_islandora_view_object($object) {
-}
 
+}
 
 /**
  * Alter display output after it has been generated.
@@ -70,6 +70,7 @@ function hook_cmodel_pid_islandora_view_object($object) {
  *   The array of rendered views.
  */
 function hook_islandora_view_object_alter(&$object, &$rendered) {
+
 }
 
 /**
@@ -83,6 +84,7 @@ function hook_islandora_view_object_alter(&$object, &$rendered) {
  *   The array of rendered views.
  */
 function hook_cmodel_pid_islandora_view_object_alter(&$object, &$rendered) {
+
 }
 
 /**
@@ -95,6 +97,7 @@ function hook_cmodel_pid_islandora_view_object_alter(&$object, &$rendered) {
  *   An array whose values are markup.
  */
 function hook_islandora_edit_object($object) {
+
 }
 
 /**
@@ -110,6 +113,7 @@ function hook_islandora_edit_object($object) {
  *   An array whose values are markup.
  */
 function hook_cmodel_pid_islandora_edit_object($object) {
+
 }
 
 /**
@@ -121,6 +125,7 @@ function hook_cmodel_pid_islandora_edit_object($object) {
  *   an arr of rendered views
  */
 function hook_islandora_edit_object_alter(&$object, &$rendered) {
+
 }
 
 /**
@@ -153,6 +158,7 @@ function hook_islandora_edit_object_alter(&$object, &$rendered) {
  * @see FedoraApiM::modifyObject()
  */
 function hook_islandora_object_alter(AbstractObject $object, array &$context) {
+
 }
 
 /**
@@ -161,6 +167,7 @@ function hook_islandora_object_alter(AbstractObject $object, array &$context) {
  * @see hook_islandora_object_alter()
  */
 function hook_cmodel_pid_islandora_object_alter(AbstractObject $object, array &$context) {
+
 }
 
 /**
@@ -202,6 +209,7 @@ function hook_cmodel_pid_islandora_object_alter(AbstractObject $object, array &$
  * @see FedoraApiM::modifyDatastream()
  */
 function hook_islandora_datastream_alter(AbstractObject $object, AbstractDatastream $datastream, array &$context) {
+
 }
 
 /**
@@ -210,6 +218,7 @@ function hook_islandora_datastream_alter(AbstractObject $object, AbstractDatastr
  * @see hook_islandora_datastream_alter()
  */
 function hook_cmodel_pid_dsid_islandora_datastream_alter(AbstractObject $object, AbstractDatastream $datastream, array &$context) {
+
 }
 
 /**
@@ -226,6 +235,7 @@ function hook_cmodel_pid_dsid_islandora_datastream_alter(AbstractObject $object,
  *   The object that was ingested.
  */
 function hook_islandora_object_ingested(AbstractObject $object) {
+
 }
 
 /**
@@ -234,6 +244,7 @@ function hook_islandora_object_ingested(AbstractObject $object) {
  * @see hook_islandora_object_ingested()
  */
 function hook_cmodel_pid_islandora_object_ingested(AbstractObject $object) {
+
 }
 
 /**
@@ -245,20 +256,22 @@ function hook_cmodel_pid_islandora_object_ingested(AbstractObject $object) {
  * modifications, where as manipulating an object's datstreams are not.
  *
  * @param AbstractObject $object
- *   The object that was ingested.
+ *   The object that was modified.
  *
  * @todo We should also include what changes were made in a additional
  *   parameter.
  */
 function hook_islandora_object_modified(AbstractObject $object) {
+
 }
 
 /**
- * Notify modules that the given object was ingested.
+ * Notify modules that the given object was modified.
  *
  * @see hook_islandora_object_modified()
  */
 function hook_cmodel_pid_islandora_object_modified(AbstractObject $object) {
+
 }
 
 /**
@@ -271,6 +284,7 @@ function hook_cmodel_pid_islandora_object_modified(AbstractObject $object) {
  *   The ID of the object that was purged/deleted.
  */
 function hook_islandora_object_purged($pid) {
+
 }
 
 /**
@@ -279,6 +293,7 @@ function hook_islandora_object_purged($pid) {
  * @see hook_islandora_object_purged()
  */
 function hook_cmodel_pid_islandora_object_purged($pid) {
+
 }
 
 /**
@@ -296,6 +311,7 @@ function hook_cmodel_pid_islandora_object_purged($pid) {
  *   The ingested datastream.
  */
 function hook_islandora_datastream_ingested(AbstractObject $object, AbstractDatastream $datastream) {
+
 }
 
 /**
@@ -304,6 +320,7 @@ function hook_islandora_datastream_ingested(AbstractObject $object, AbstractData
  * @see hook_islandora_object_ingested()
  */
 function hook_cmodel_pid_dsid_islandora_datastream_ingested(AbstractObject $object, AbstractDatastream $datastream) {
+
 }
 
 /**
@@ -323,6 +340,7 @@ function hook_cmodel_pid_dsid_islandora_datastream_ingested(AbstractObject $obje
  *   parameter.
  */
 function hook_islandora_datastream_modified(AbstractObject $object, AbstractDatastream $datastream) {
+
 }
 
 /**
@@ -331,6 +349,7 @@ function hook_islandora_datastream_modified(AbstractObject $object, AbstractData
  * @see hook_islandora_datastream_modified()
  */
 function hook_cmodel_pid_islandora_datastream_modified(AbstractObject $object, AbstractDatastream $datastream) {
+
 }
 
 /**
@@ -345,6 +364,7 @@ function hook_cmodel_pid_islandora_datastream_modified(AbstractObject $object, A
  *   The ID of the datastream that was purged/deleted.
  */
 function hook_islandora_datastream_purged(AbstractObject $object, $dsid) {
+
 }
 
 /**
@@ -353,6 +373,7 @@ function hook_islandora_datastream_purged(AbstractObject $object, $dsid) {
  * @see hook_islandora_datastream_purged()
  */
 function hook_cmodel_pid_islandora_datastream_purged(AbstractObject $object, $dsid) {
+
 }
 
 /**
@@ -370,12 +391,10 @@ function hook_cmodel_pid_islandora_datastream_purged(AbstractObject $object, $ds
  */
 function hook_islandora_edit_datastream_registry($object, $dsid) {
   $routes = array();
-
   $routes[] = array(
     'name' => t('My Awesome Edit Route'),
     'url' => "go/edit/here/{$object->id}/{$dsid}",
   );
-
   return $routes;
 }
 
@@ -391,6 +410,7 @@ function hook_islandora_edit_datastream_registry($object, $dsid) {
  * @example islandora_islandora_required_objects()
  */
 function hook_islandora_required_objects() {
+
 }
 
 /**
@@ -403,6 +423,7 @@ function hook_islandora_required_objects() {
  * @see islandora_get_viewer_callback()
  */
 function hook_islandora_viewer_info() {
+
 }
 
 /**
@@ -490,6 +511,7 @@ function hook_islandora_ingest_steps(array $form_state) {
  *   An array containing the Drupal form_state.
  */
 function hook_islandora_ingest_steps_alter(array &$steps, array &$form_state) {
+
 }
 
 /**
@@ -503,6 +525,7 @@ function hook_islandora_ingest_steps_alter(array &$steps, array &$form_state) {
  * @see hook_islandora_ingest_steps()
  */
 function hook_cmodel_pid_islandora_ingest_steps(array $form_state) {
+
 }
 
 /**
@@ -515,6 +538,7 @@ function hook_cmodel_pid_islandora_ingest_steps(array $form_state) {
  *   An array containing the Drupal form_state.
  */
 function hook_cmodel_pid_islandora_ingest_steps_alter(array &$steps, array &$form_state) {
+
 }
 
 /**
@@ -544,7 +568,6 @@ function hook_islandora_object_access($op, $object, $user) {
 
     case 'do a barrel roll!':
       return NULL;
-
   }
 }
 
@@ -554,6 +577,7 @@ function hook_islandora_object_access($op, $object, $user) {
  * @see hook_islandora_object_access()
  */
 function hook_cmodel_pid_islandora_object_access($op, $object, $user) {
+
 }
 
 /**
@@ -583,7 +607,6 @@ function hook_islandora_datastream_access($op, $object, $user) {
 
     case 'do a barrel roll!':
       return NULL;
-
   }
 }
 
@@ -593,6 +616,7 @@ function hook_islandora_datastream_access($op, $object, $user) {
  * @see hook_islandora_datastream_access()
  */
 function hook_cmodel_pid_islandora_datastream_access($op, $object, $user) {
+
 }
 
 /**
@@ -610,6 +634,7 @@ function hook_islandora_overview_object(AbstractObject $object) {
 function hook_cmodel_pid_islandora_overview_object(AbstractObject $object) {
   return drupal_render(drupal_get_form('some_form', $object));
 }
+
 /**
  * Lets one alter the overview tab in object management.
  */
@@ -669,7 +694,6 @@ function hook_cmodel_pid_islandora_overview_object_alter(AbstractObject &$object
  *     is being called from.
  */
 function hook_islandora_derivative(AbstractObject $object = NULL) {
-
   $derivatives[] = array(
     'source_dsid' => 'OBJ',
     'destination_dsid' => 'DERIV',
@@ -689,7 +713,6 @@ function hook_islandora_derivative(AbstractObject $object = NULL) {
       ),
     );
   }
-
   $derivatives[] = array(
     'source_dsid' => NULL,
     'destination_dsid' => 'NOSOURCE',
@@ -698,7 +721,6 @@ function hook_islandora_derivative(AbstractObject $object = NULL) {
       'islandora_derivatives_test_create_nosource_datastream',
     ),
   );
-
   return $derivatives;
 }
 
@@ -725,6 +747,7 @@ function hook_islandora_update_related_objects_properties(AbstractObject $object
   }
   return $pids_to_return;
 }
+
 /**
  * Alters breadcrumbs used on Solr search results and within Islandora views.
  *
@@ -769,5 +792,41 @@ function hook_islandora_metadata_display_info() {
       'description callback' => 'hookable_displays_some_function_that_returns_description_markup',
       'configuration' => 'admin/hookable_displays_yay/somepath',
     ),
+  );
+}
+
+/**
+ * Allows modifications to the object whose metadata is being rendered.
+ *
+ * @param AbstractObject $object
+ *   An AbstractObject representing an object within Fedora.
+ */
+function hook_islandora_metadata_object_alter(AbstractObject &$object) {
+  $this_other_object = islandora_object_load('awild:indirectionappears');
+  $object = $this_other_object;
+}
+
+/**
+ * Allows modifications to the object whose metadata is being rendered.
+ *
+ * @param AbstractObject $object
+ *   An AbstractObject representing an object within Fedora.
+ */
+function hook_islandora_metadata_object_description_alter(AbstractObject &$object) {
+  $this_other_object = islandora_object_load('awild:indirectionappears');
+  $object = $this_other_object;
+}
+
+/**
+ * Defines predicates to be searched for when constructing breadcrumbs.
+ *
+ * @return array
+ *   An array containing strings of predicates to be ORed together to be
+ *   matched on in SPARQL.
+ */
+function hook_islandora_get_breadcrumb_query_predicates() {
+  return array(
+    'somepredicate',
+    'someotherpredicate',
   );
 }

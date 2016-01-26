@@ -17,7 +17,7 @@ function template_preprocess_islandora_basic_collection_grid(&$variables) {
  */
 function template_preprocess_islandora_basic_collection_wrapper(&$variables) {
   $page_number = (empty($_GET['page'])) ? 0 : $_GET['page'];
-  $page_size = (empty($_GET['pagesize'])) ? variable_get('islandora_basic_collection_page_size', '10') : $_GET['pagesize'];
+  $page_size = (empty($_GET['pagesize'])) ? variable_get('islandora_basic_collection_page_size', '12') : $_GET['pagesize'];
   $islandora_object = $variables['islandora_object'];
   try {
     $dc = $islandora_object['DC']->content;
@@ -29,7 +29,15 @@ function template_preprocess_islandora_basic_collection_wrapper(&$variables) {
   $variables['islandora_dublin_core'] = isset($dc_object) ? $dc_object : NULL;
   $variables['dc_array'] = isset($dc_object) ? $dc_object->asArray() : array();
   $variables['islandora_object_label'] = $islandora_object->label;
-
+  $variables['display_metadata'] = variable_get('islandora_collection_metadata_display', FALSE);
+  if ($variables['display_metadata']) {
+    drupal_add_js('misc/form.js');
+    drupal_add_js('misc/collapse.js');
+    module_load_include('inc', 'islandora', 'includes/metadata');
+    $variables['parent_collections'] = islandora_get_parents_from_rels_ext($islandora_object);
+    $variables['metadata'] = islandora_retrieve_metadata_markup($islandora_object);
+    $variables['description'] = islandora_retrieve_description_markup($islandora_object);
+  }
   list($total_count, $results) = islandora_basic_collection_get_member_objects($islandora_object, $page_number, $page_size);
 
   pager_default_initialize($total_count, $page_size);
@@ -89,7 +97,7 @@ function template_preprocess_islandora_basic_collection(&$variables) {
     drupal_set_message(t('Error retrieving object %s %t', array('%s' => $islandora_object->id, '%t' => $e->getMessage())), 'error', FALSE);
   }
   $page_number = (empty($_GET['page'])) ? 0 : $_GET['page'];
-  $page_size = (empty($_GET['pagesize'])) ? variable_get('islandora_basic_collection_page_size', '10') : $_GET['pagesize'];
+  $page_size = (empty($_GET['pagesize'])) ? variable_get('islandora_basic_collection_page_size', '12') : $_GET['pagesize'];
   $results = $variables['collection_results'];
   $total_count = count($results);
   $variables['islandora_dublin_core'] = isset($dc_object) ? $dc_object : array();
@@ -182,9 +190,10 @@ function theme_islandora_basic_collection_policy_management_table(array $variabl
     $row_element = $row_elements[$key];
     foreach (element_children($row_element) as $key) {
       $column_element = $row_element[$key];
+      $class = "collection_policy_table_${key}";
       $columns[] = array(
         'data' => drupal_render($column_element),
-        'class' => isset($cell_element['#attributes']['class']) ? $column_element['#attributes']['class'] : NULL,
+        'class' => isset($cell_element['#attributes']['class']) ? $column_element['#attributes']['class'] : $class,
       );
     }
     $rows[] = $columns;

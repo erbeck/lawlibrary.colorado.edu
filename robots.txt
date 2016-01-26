@@ -55,3 +55,12 @@ Disallow: /?q=user/password/
 Disallow: /?q=user/register/
 Disallow: /?q=user/login/
 Disallow: /?q=user/logout/
+# Subjects Plus
+Disallow: /SubjectsPlus/subjects/guide.php?subject=LAWS6836
+# Islandorables
+Disallow: /coloradosessionlaws
+Disallow: /arizona-v-california
+Disallow: /colorado-house-and-senate-journals
+Disallow: /colorado-law-videos
+
+

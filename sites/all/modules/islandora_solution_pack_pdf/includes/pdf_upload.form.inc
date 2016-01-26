@@ -24,7 +24,7 @@ function islandora_pdf_pdf_upload_form(array $form, array &$form_state) {
     '#title' => t('PDF File'),
     '#type' => 'managed_file',
     '#required' => TRUE,
-    '#description' => t('Select file to upload.<br/>Files must be less than <b>@size MB.</b><br/>Allowed file types: <b>@ext.</b>', array('@size' => $upload_size, '@ext' => $extensions[0])),
+    '#description' => t('Select file to upload.<br/>Files must be less than <strong>@size MB.</strong><br/>Allowed file types: <strong>@ext.</strong>', array('@size' => $upload_size, '@ext' => $extensions[0])),
     '#default_value' => isset($form_state['values']['files']) ? $form_state['values']['files'] : NULL,
     '#upload_location' => 'temporary://',
     '#upload_validators' => array(
@@ -44,7 +44,7 @@ function islandora_pdf_pdf_upload_form(array $form, array &$form_state) {
       '#title' => t('PDF text'),
       '#type' => 'managed_file',
       '#required' => FALSE,
-      '#description' => t('Select text file to upload.<br/>Files must be less than <b>@size MB.</b><br/>Allowed file types: <b>@ext.</b><br />This file is optional.', array('@size' => $upload_size, '@ext' => 'txt')),
+      '#description' => t('Select text file to upload.<br/>Files must be less than <strong>@size MB.</strong><br/>Allowed file types: <strong>@ext.</strong><br />This file is optional.', array('@size' => $upload_size, '@ext' => 'txt')),
       '#default_value' => isset($form_state['values']['files']) ? $form_state['values']['files'] : NULL,
       '#upload_location' => 'temporary://',
       '#upload_validators' => array(
@@ -71,7 +71,7 @@ function islandora_pdf_pdf_upload_form(array $form, array &$form_state) {
  *   The drupal form state.
  */
 function islandora_pdf_pdf_upload_form_submit(array $form, array &$form_state) {
-  $object = $form_state['islandora']['objects'][0];
+  $object = islandora_ingest_form_get_object($form_state);
   if (empty($object['OBJ'])) {
     $ds = $object->constructDatastream('OBJ', 'M');
     $object->ingestDatastream($ds);

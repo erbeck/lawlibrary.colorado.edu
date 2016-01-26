@@ -359,7 +359,19 @@ ul#secondary-menu a:hover {
 	width:160px;
 	padding:5px;	
 }
+#block-menu-menu-find {
+	float:left;
+	width:160px;
+	padding:5px;	
+}
 #block-multiblock-2 {
+	float:left;
+	width:160px;
+	padding:5px;	
+	position:absolute;
+	margin-top:185px
+}
+#block-menu-menu-help {
 	float:left;
 	width:160px;
 	padding:5px;	
@@ -371,7 +383,17 @@ ul#secondary-menu a:hover {
 	width:180px;
 	padding:5px;	
 }
+#block-menu-menu-about {
+	float:left;
+	width:180px;
+	padding:5px;	
+}
 #block-multiblock-3 {
+	float:left;
+	width:180px;
+	padding:5px;	
+}
+#block-menu-menu-students {
 	float:left;
 	width:180px;
 	padding:5px;	
@@ -380,9 +402,18 @@ ul#secondary-menu a:hover {
 	float:left;
 	width:180px;
 	padding:5px 5px 5px 10px;	
-
+}
+#block-menu-menu-faculty-and-staff {
+	float:left;
+	width:180px;
+	padding:5px 5px 5px 10px;	
 }
 #block-multiblock-5 {
+	float:left;
+	width:180px;
+	padding:5px 0px 5px 5px;	
+}
+#block-menu-menu-public {
 	float:left;
 	width:180px;
 	padding:5px 0px 5px 5px;	
@@ -779,7 +810,6 @@ body a.button-blue {
 
 h1, h2, h3, h4, h5, h6, a.button, ul.menu {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-align: left;
 }
 h2 {
   font-size:160%;
@@ -866,9 +896,10 @@ input#frontSearchBox {
 	border: 1px solid #666;
 }
 input#frontSearchButton {
-	padding: 5px 20px;
-	font-size: 18px;
+	padding: 5px 15px;
+	font-size: 17px;
 	background-color: #D0B87C;
+	margin-left:20px;
 }
 #featured-text {
 	padding-left: 10px;
@@ -1293,6 +1324,10 @@ ol.arizList li.views-row-even views-row-last {
 	padding: 0px;	
 }
 
+/* Vanilla calendar view */
+.hoursType {
+	font-size:12px;
+}
 
 /* FullCalendar - messing with css to add border around days -tc 12/3/2014 */
 
@@ -1304,5 +1339,83 @@ ol.arizList li.views-row-even views-row-last {
     border: 1px solid #ddd !important;
 }
 
+<<<<<<< HEAD
 /* month  - css change to font in calendar tc 1/26/2016 */
 .month-view {font-family: arial; sans-serif; font-weight: bold;}
+=======
+/* Search tab box */
+#quicktabs-search_with_summon {
+	background-image: url("../images/searchBackground.png");
+	padding-top:20px;
+	padding-left:13px;
+	padding-bottom:20px;
+}
+.summon-search-widget {
+	display: block;
+	margin-left:25px;
+	margin-top:30px;
+	position:relative;
+}
+.summon-search-box {
+	vertical-align:middle;
+}
+.summon-search-field {
+	border: 1px solid #666;
+	font:24px Ariel, sans-serif;
+	padding-left:8px;
+}
+.summon-search-submit {
+	background-color:#045c7d;
+	background-image:-webkit-gradient(linear,left top,left bottom,from(#045c7d),to(#014863));
+	background-image:-webkit-linear-gradient(top,#045c7d,#014863);
+	background-image:-moz-linear-gradient(top,#045c7d,#014863);
+	background-image:-o-linear-gradient(top,#045c7d,#014863);
+	background-image:-ms-linear-gradient(top,#045c7d,#014863);
+	background-image:linear-gradient(top,#045c7d,#014863);
+	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#045c7d',EndColorStr='#014863');	
+	color:#fff;
+	-webkit-border-radius:3px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	display:inline-block;
+	padding:5px 8px;
+	text-shadow:0px 1px 1px #000;
+	-webkit-box-shadow:0px 1px 1px 0px #888;
+	-moz-box-shadow:0px 1px 1px 0px #888;
+	box-shadow:0px 1px 1px 0px #888;
+	border:1px solid #014863;
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+	
+	margin-left:20px;
+	margin-bottom:8px;
+	font-size:16px;
+}
+input.summon-search-field[required]:invalid  {
+	box-shadow:0 0 5px #D0B87C;
+}
+input[required] + label.summon-search-label {
+	color:#D0B87C;
+	font-family:Arial;
+	font-size:24px;
+	font-weight:lighter; 
+	position:absolute;
+	top:6px;
+	left:113px;
+}
+/* show the placeholder when input has no content (no content = invalid) */
+input[required]:invalid + label.summon-search-label {
+    display: inline-block;
+}
+
+/* hide the placeholder when input has some text typed in */
+input[required]:valid + label.summon-search-label {
+    display: none;
+}
+input+.summon-search-label {
+animation: repaint 1000s infinite linear;
+}
+@keyframes repaint {
+    from { opacity: 1; }
+    to { opacity: 0.99999; }
+}
+>>>>>>> origin/master

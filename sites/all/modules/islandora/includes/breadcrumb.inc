@@ -25,10 +25,13 @@
  *   drupal_set_breadcrumb().
  */
 function islandora_get_breadcrumbs($object) {
-  $breadcrumbs = islandora_get_breadcrumbs_recursive($object->id, $object->repository);
-  array_pop($breadcrumbs);
-  $context = 'islandora';
-  drupal_alter('islandora_breadcrumbs', $breadcrumbs, $context, $object);
+  $breadcrumbs = array();
+  if (variable_get('islandora_render_drupal_breadcrumbs', TRUE)) {
+    $breadcrumbs = islandora_get_breadcrumbs_recursive($object->id, $object->repository);
+    array_pop($breadcrumbs);
+    $context = 'islandora';
+    drupal_alter('islandora_breadcrumbs', $breadcrumbs, $context, $object);
+  }
   return $breadcrumbs;
 }
 
@@ -51,6 +54,8 @@ function islandora_get_breadcrumbs($object) {
  *   An array of links representing the breadcrumb trail, "root" first.
  */
 function islandora_get_breadcrumbs_recursive($pid, FedoraRepository $repository, array &$context = NULL) {
+  module_load_include('inc', 'islandora', 'includes/utilities');
+
   // Before executing the query, we have a base case of accessing the top-level
   // collection.
   if ($context === NULL) {
@@ -99,9 +104,13 @@ EOQ;
     $filter_map = function ($filter) {
       return "FILTER($filter)";
     };
-    $collection_predicate_filters = "sameTerm(?collection_predicate, <fedora-rels-ext:isPartOf>)";
-    $collection_predicate_filters .= " || sameTerm(?collection_predicate, <fedora-rels-ext:isMemberOfCollection>) || sameTerm(?collection_predicate, <fedora-rels-ext:isMemberOf>)";
-    $query_filters[] = $collection_predicate_filters;
+    $object = islandora_object_load($pid);
+    $breadcrumb_predicates = islandora_invoke_hook_list(ISLANDORA_BREADCRUMB_FILTER_PREDICATE_HOOK, $object->models, array($object));
+    $same_term_map = function ($predicate) {
+      return "sameTerm(?collection_predicate, <$predicate>)";
+    };
+    $collection_predicate_filters = array_map($same_term_map, $breadcrumb_predicates);
+    $query_filters[] = implode(' || ', $collection_predicate_filters);
     $query_order = "ORDER BY DESC(?label)";
     $query = format_string($query, array(
       '!optionals' => !empty($query_optionals) ? ('OPTIONAL {{' . implode('} UNION {', $query_optionals) . '}}') : '',
@@ -111,7 +120,6 @@ EOQ;
     $query = format_string($query, array(
       '!pid' => $pid,
     ));
-
     $results = $repository->ri->sparqlQuery($query, 'unlimited');
 
     if (count($results) > 0 && $context['level'] > 0) {

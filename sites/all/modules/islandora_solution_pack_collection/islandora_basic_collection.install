@@ -31,6 +31,17 @@ function islandora_basic_collection_uninstall() {
     'islandora_basic_collection_object_count_listing_content_models_to_restrict',
     'islandora_basic_collection_object_count_listing_phrase',
     'islandora_basic_collection_object_count_listing_placeholder',
+    'islandora_basic_collection_display_backend',
   );
   array_walk($variables, 'variable_del');
+}
+
+/**
+ * Default collection paging update.
+ */
+function islandora_basic_collection_update_7001() {
+  $old_var = variable_get('islandora_basic_collection_page_size');
+  if ($old_var == '10') {
+    variable_set('islandora_basic_collection_page_size', '12');
+  }
 }

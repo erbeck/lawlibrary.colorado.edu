@@ -26,6 +26,10 @@ Configure the image-tool kit to use ImageMagick rather than GD in Administration
 
 If you wish to prevent image upscaling for images under 500x700 select the configuration option present at Administration > Islandora > Solution pack configuration > Basic Image Solution Pack (admin/islandora/solution_pack_config/basic_image).
 
+## Documentation
+
+Further documentation for this module is available at [our wiki](https://wiki.duraspace.org/display/ISLANDORA/Basic+Image+Solution+Pack)
+
 ## Troubleshooting/Issues
 
 Having problems or solved a problem? Check out the Islandora google groups for a solution.
@@ -36,11 +40,11 @@ Having problems or solved a problem? Check out the Islandora google groups for a
 ## Maintainers/Sponsors
 Current maintainers:
 
-* [Alan Stanley](https://github.com/ajstanley)
+* [Nick Ruest](https://github.com/ruebot)
 
 ## Development
 
-If you would like to contribute to this module, please check out our helpful [Documentation for Developers](https://github.com/Islandora/islandora/wiki#wiki-documentation-for-developers) info, as well as our [Developers](http://islandora.ca/developers) section on the [Islandora.ca](http://islandora.ca) site.
+If you would like to contribute to this module, please check out [CONTRIBUTING.md](CONTRIBUTING.md). In addition, we have helpful [Documentation for Developers](https://github.com/Islandora/islandora/wiki#wiki-documentation-for-developers) info, as well as our [Developers](http://islandora.ca/developers) section on the [Islandora.ca](http://islandora.ca) site.
 
 ## License
 
