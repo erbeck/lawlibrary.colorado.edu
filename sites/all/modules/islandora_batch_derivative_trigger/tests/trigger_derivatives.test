@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ * SimpleTest derivative triggering.
+ */
+
+class IslandoraBatchDerivativeTriggerDerivativesTestCase extends IslandoraBatchDerivativeTriggerTestCase {
+
+  /**
+   * Test info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Derivative Regeneration',
+      'description' => 'Test that derivative regeneration triggers properly',
+      'group' => 'Islandora Batch Derivative Trigger',
+    );
+  }
+
+  /**
+   * Tests generation where the DERIVED datastream doesn't exist.
+   */
+  protected function testDeriveNotExisting() {
+    $object = $this->ingestBatchDerivativeTestObject(FALSE, TRUE);
+    $this->triggerBatchDerivatives($this->testCollection, 'islandora:batch_testCM', 'DERIVED');
+  }
+
+  /**
+   * Tests generation where the DERIVED datastream exists.
+   */
+  protected function atestDeriveExisting() {
+    $object = $this->ingestBatchDerivativeTestObject(FALSE, TRUE, TRUE);
+  }
+
+  /**
+   * Tests forced generation where the DERIVED datastream doesn't exist.
+   */
+  protected function atestForceDeriveNotExisting() {
+    $object = $this->ingestBatchDerivativeTestObject(FALSE, TRUE);
+  }
+
+  /**
+   * Tests forced generation where the DERIVED datastream exists.
+   */
+  protected function atestForceDeriveExisting() {
+    $object = $this->ingestBatchDerivativeTestObject(FALSE, TRUE, TRUE);
+  }
+
+  /**
+   * Tests generating all where the DERIVED datastream doesn't exist.
+   */
+  protected function atestCollectionDeriveNotExisting() {
+    $object = $this->ingestBatchDerivativeTestObject(FALSE, TRUE);
+  }
+
+  /**
+   * Tests generating all where the DERIVED datastream exists.
+   */
+  protected function atestCollectionDeriveExisting() {
+    $object = $this->ingestBatchDerivativeTestObject(FALSE, TRUE, TRUE);
+  }
+
+  /**
+   * Tests generating all where the DERIVED datastream doesn't exist.
+   */
+  protected function atestCollectionForceDeriveNotExisting() {
+    $object = $this->ingestBatchDerivativeTestObject(FALSE, TRUE);
+  }
+
+  /**
+   * Tests forced generation where the DERIVED datastream exists.
+   */
+  protected function atestCollectionForceDeriveExisting() {
+    $object = $this->ingestBatchDerivativeTestObject(FALSE, TRUE, TRUE);
+  }
+}

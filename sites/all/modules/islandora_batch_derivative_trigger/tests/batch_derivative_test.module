@@ -1,0 +1,126 @@
+<?php
+
+/**
+ * @file
+ * Batch derivative triggering test CM.
+ */
+
+/**
+ * Implements hook_islandora_required_objects().
+ */
+function batch_derivative_test_islandora_required_objects(IslandoraTuque $connection) {
+  $path = drupal_get_path('module', 'batch_derivative_test') . "/fixtures";
+  $repository = $connection->repository;
+  // Content model.
+  $cm = $repository->constructObject('islandora:batch_testCM');
+  $cm->owner = 'fedoraAdmin';
+  $cm->label = 'Islandora Test Content Model';
+  $cm->models = 'fedora-system:ContentModel-3.0';
+  // DS-COMPOSITE-MODEL.
+  $ds_cm = $cm->constructDatastream('DS-COMPOSITE-MODEL', 'X');
+  $ds_cm->label = 'DS-COMPOSITE-MODEL';
+  $ds_cm->mimetype = 'application/xml';
+  $ds_cm->setContentFromFile("$path/batch_derivative_test_ds_composite_model.xml", FALSE);
+  $cm->ingestDatastream($ds_cm);
+
+  return array(
+    'batch_derivative_test' => array(
+      'title' => 'Batch Derivative Test',
+      'objects' => array($cm),
+    ),
+  );
+}
+
+/**
+ * Implements hook_cmodel_pid_islandora_derivative().
+ */
+function batch_derivative_test_islandora_batch_testcm_islandora_derivative() {
+  return array(
+    array(
+      'source_dsid' => 'OBJ',
+      'destination_dsid' => 'DERIVED',
+      'weight' => '0',
+      'function' => array(
+        'batch_derivative_test_derive_derived_datastream',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_xml_form_builder_forms().
+ */
+function batch_derivative_test_islandora_xml_form_builder_forms() {
+  return array(
+    'Test Form' => array(
+      'form_file' => drupal_get_path('module', 'batch_derivative_test') . '/fixtures/batch_derivative_test_stub_form.xml',
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_xml_form_builder_get_transforms().
+ */
+function batch_derivative_test_islandora_xml_form_builder_get_transforms() {
+  return array(
+    'mods_to_dc_duplicate.xsl' => drupal_get_path('module', 'batch_derivative_test') . '/fixtures/mods_to_dc_duplicate.xsl',
+  );
+}
+
+/**
+ * Implements hook_islandora_xml_form_builder_form_associations().
+ */
+function batch_derivative_test_islandora_xml_form_builder_form_associations() {
+  return array(
+    'batch_derivative_test_cm_mods_form' => array(
+      'content_model' => 'islandora:batch_testCM',
+      'form_name' => 'Test Form',
+      'dsid' => 'MODS',
+      'title_field' => array('titleInfo', 'title'),
+      'transform' => 'No Transform',
+      'template' => FALSE,
+    ),
+  );
+}
+
+/**
+ * Transforms the OBJ datastream into the DERIVED datastream.
+ *
+ * @param AbstractObject $object
+ *   The object passed in.
+ * @param bool $force
+ *   Whether or not generation is being forced.
+ *
+ * @return array
+ *   The message array from the results.
+ */
+function batch_derivative_test_derive_derived_datastream($object, $force = FALSE) {
+  if (isset($object['OBJ'])) {
+    if (!isset($object['DERIVED'])) {
+      $derived = $object->constructDatastream('DERIVED', 'M');
+      $derived->mimetype = 'text/plain';
+      $derived->label = 'DERIVED Datastream';
+      $derived->setContentFromString($object['OBJ']->content . " DERIVED");
+      $object->ingestDatastream($derived);
+    }
+    elseif ($force) {
+      $object['DERIVED']->setContentFromString($object['OBJ']->content . " DERIVED");
+    }
+    $success = TRUE;
+    $message = "Derived DERIVED datastream for @obj.";
+  }
+  else {
+    $success = FALSE;
+    $message = "OBJ datastream not found on @obj.";
+  }
+  return array(
+    'success' => $success,
+    'messages' => array(
+      'message' => $message,
+      'message_sub' => array(
+        '@obj' => $object->id,
+      ),
+      'type' => 'dsm',
+    ),
+  );
+}
