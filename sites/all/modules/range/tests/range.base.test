@@ -75,7 +75,7 @@ class RangeBaseWebTestCase extends DrupalWebTestCase {
    *   Raw field name.
    */
   protected function getTestFieldNameRaw($field_type = 'range_integer') {
-    return "test_field_$field_type";
+    return "$field_type";
   }
 
   /**

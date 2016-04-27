@@ -19,9 +19,9 @@ files[] = views/range_handler_argument_numeric_range.inc
 ; Migrate handlers
 files[] = migrate/destinations/range.inc
 
-; Information added by Drupal.org packaging script on 2016-02-29
-version = "7.x-1.4"
+; Information added by Drupal.org packaging script on 2016-04-27
+version = "7.x-1.6"
 core = "7.x"
 project = "range"
-datestamp = "1456759140"
+datestamp = "1461764678"
 
