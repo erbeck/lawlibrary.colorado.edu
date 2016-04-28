@@ -376,7 +376,6 @@ ul#secondary-menu a:hover {
 	width:160px;
 	padding:5px;	
 	position:absolute;
-	margin-top:185px
 }
 #block-multiblock-1 {
 	float:left;
@@ -1394,8 +1393,11 @@ ol.arizList li.views-row-even views-row-last {
 #edit-title-govdoc {
 	height: 22px;
 	font-size: 15px;
-	width: 360px;
+	width: 380px;
 	padding: 0px;	
+}
+form#views-exposed-form-government-document-item-selection-list-page-1 {
+	width: 500px;
 }
 
 /* Vanilla calendar view */
