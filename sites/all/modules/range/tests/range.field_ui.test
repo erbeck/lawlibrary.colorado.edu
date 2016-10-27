@@ -35,7 +35,7 @@ class RangeFieldUIWebTestCase extends RangeBaseWebTestCase {
    */
   public static function getInfo() {
     return array(
-      'name' => 'Range field UI tests',
+      'name' => 'Field UI',
       'description' => 'Tests adding range fields and their settings via field UI.',
       'group' => 'Range',
     );
@@ -48,9 +48,9 @@ class RangeFieldUIWebTestCase extends RangeBaseWebTestCase {
     $modules[] = 'field_ui';
     parent::setUp($modules);
 
-    $account = $this->drupalCreateUser(array('administer content types', 'administer nodes'));
-    $this->drupalLogin($account);
     $this->createTestContentType();
+    $account = $this->drupalCreateUser(array('administer content types', 'administer nodes', 'administer fields', "create $this->contentType content"));
+    $this->drupalLogin($account);
   }
 
   /**

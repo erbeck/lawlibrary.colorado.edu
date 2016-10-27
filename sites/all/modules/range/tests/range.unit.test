@@ -15,7 +15,7 @@ class RangeUnitTestCase extends DrupalUnitTestCase {
    */
   public static function getInfo() {
     return array(
-      'name' => 'Range unit tests',
+      'name' => 'Unit tests',
       'description' => 'Tests range formatter layer.',
       'group' => 'Range',
     );

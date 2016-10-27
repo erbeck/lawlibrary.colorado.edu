@@ -8,32 +8,20 @@
 /**
  * Tests translatability of range fields.
  */
-class RangeInternationalizationWebTestCase extends RangeBaseWebTestCase {
+class RangeInternationalizationWebTestCase extends RangeFieldWidgetBaseWebTestCase {
 
   const INSTANCE_LABEL_TRANSLATED = 'FIELD_LABEL_TRANSLATED';
-
   const INSTANCE_SETTINGS_FIELD_PREFIX_TRANSLATED = 'FIELD_PREFIX_TRANSLATED';
-
   const INSTANCE_SETTINGS_FIELD_SUFFIX_TRANSLATED = 'FIELD_SUFFIX_TRANSLATED';
-
   const INSTANCE_SETTINGS_COMBINED_PREFIX_TRANSLATED = 'COMBINED_PREFIX_TRANSLATED';
-
   const INSTANCE_SETTINGS_COMBINED_SUFFIX_TRANSLATED = 'COMBINED_SUFFIX_TRANSLATED';
-
   const INSTANCE_SETTINGS_FROM_LABEL_TRANSLATED = 'FROM_LABEL_TRANSLATED';
-
   const INSTANCE_SETTINGS_FROM_PREFIX_TRANSLATED = 'FROM_PREFIX_TRANSLATED';
-
   const INSTANCE_SETTINGS_FROM_SUFFIX_TRANSLATED = 'FROM_SUFFIX_TRANSLATED';
-
   const INSTANCE_SETTINGS_TO_LABEL_TRANSLATED = 'TO_LABEL_TRANSLATED';
-
   const INSTANCE_SETTINGS_TO_PREFIX_TRANSLATED = 'TO_PREFIX_TRANSLATED';
-
   const INSTANCE_SETTINGS_TO_SUFFIX_TRANSLATED = 'TO_SUFFIX_TRANSLATED';
-
   const PRIMARY_LANGUAGE = 'en';
-
   const SECONDARY_LANGUAGE = 'uk';
 
   /**
@@ -41,7 +29,7 @@ class RangeInternationalizationWebTestCase extends RangeBaseWebTestCase {
    */
   public static function getInfo() {
     return array(
-      'name' => 'Range i18n tests',
+      'name' => 'Internationalization',
       'description' => 'Tests translatability of range fields.',
       'group' => 'Range',
     );
@@ -63,7 +51,7 @@ class RangeInternationalizationWebTestCase extends RangeBaseWebTestCase {
    * Adds a secondary language.
    */
   protected function addSecondaryLanguage() {
-    include_once DRUPAL_ROOT . '/includes/language.inc';
+    include_once DRUPAL_ROOT . '/includes/locale.inc';
     // Add secondary language.
     locale_add_language(static::SECONDARY_LANGUAGE);
     // Configure language negotiation.
@@ -161,7 +149,7 @@ class RangeInternationalizationWebTestCase extends RangeBaseWebTestCase {
 
     $languages = language_list();
     // First, test with combined value off.
-
+    //
     // Test default language (field instance settings should be in the original
     // language - English).
     $this->drupalGet("node/$node->nid", array('language' => $languages[static::PRIMARY_LANGUAGE]));
@@ -246,23 +234,23 @@ class RangeInternationalizationWebTestCase extends RangeBaseWebTestCase {
     $this->drupalGet("node/add/$this->contentType", array('language' => $languages[static::PRIMARY_LANGUAGE]));
 
     // Test field widget form.
-    $this->assertFieldLabel(static::INSTANCE_SETTINGS_FROM_LABEL, 'original');
-    $this->assertFieldLabel(static::INSTANCE_SETTINGS_TO_LABEL, 'original');
-    $this->assertFieldPrefix(static::INSTANCE_SETTINGS_FIELD_PREFIX . static::INSTANCE_SETTINGS_FROM_PREFIX, 'original');
-    $this->assertFieldSuffix(static::INSTANCE_SETTINGS_FROM_SUFFIX, 'original');
-    $this->assertFieldPrefix(static::INSTANCE_SETTINGS_TO_PREFIX, 'original');
-    $this->assertFieldSuffix(static::INSTANCE_SETTINGS_TO_SUFFIX . static::INSTANCE_SETTINGS_FIELD_SUFFIX, 'original');
+    $this->assertFieldLabel(static::INSTANCE_SETTINGS_FROM_LABEL, format_string('Correct original field label %label found on the page', array('%label' => static::INSTANCE_SETTINGS_FROM_LABEL)));
+    $this->assertFieldLabel(static::INSTANCE_SETTINGS_TO_LABEL, format_string('Correct original field label %label found on the page', array('%label' => static::INSTANCE_SETTINGS_TO_LABEL)));
+    $this->assertFieldPrefix(static::INSTANCE_SETTINGS_FIELD_PREFIX . static::INSTANCE_SETTINGS_FROM_PREFIX, format_string('Correct original field prefix %prefix found on the page', array('%prefix' => static::INSTANCE_SETTINGS_FIELD_PREFIX . static::INSTANCE_SETTINGS_FROM_PREFIX)));
+    $this->assertFieldSuffix(static::INSTANCE_SETTINGS_FROM_SUFFIX, format_string('Correct original field suffix %suffix found on the page', array('%suffix' => static::INSTANCE_SETTINGS_FROM_SUFFIX)));
+    $this->assertFieldPrefix(static::INSTANCE_SETTINGS_TO_PREFIX, format_string('Correct original field prefix %prefix found on the page', array('%prefix' => static::INSTANCE_SETTINGS_TO_PREFIX)));
+    $this->assertFieldSuffix(static::INSTANCE_SETTINGS_TO_SUFFIX . static::INSTANCE_SETTINGS_FIELD_SUFFIX, format_string('Correct original field suffix %suffix found on the page', array('%suffix' => static::INSTANCE_SETTINGS_TO_SUFFIX . static::INSTANCE_SETTINGS_FIELD_SUFFIX)));
 
     // Test secondary language (field instance settings should be translated to
     // the secondary language).
     $this->drupalGet("node/add/$this->contentType", array('language' => $languages[static::SECONDARY_LANGUAGE]));
 
-    $this->assertFieldLabel(static::INSTANCE_SETTINGS_FROM_LABEL_TRANSLATED, 'translated');
-    $this->assertFieldLabel(static::INSTANCE_SETTINGS_TO_LABEL_TRANSLATED, 'translated');
-    $this->assertFieldPrefix(static::INSTANCE_SETTINGS_FIELD_PREFIX_TRANSLATED . static::INSTANCE_SETTINGS_FROM_PREFIX_TRANSLATED, 'translated');
-    $this->assertFieldSuffix(static::INSTANCE_SETTINGS_FROM_SUFFIX_TRANSLATED, 'translated');
-    $this->assertFieldPrefix(static::INSTANCE_SETTINGS_TO_PREFIX_TRANSLATED, 'translated');
-    $this->assertFieldSuffix(static::INSTANCE_SETTINGS_TO_SUFFIX_TRANSLATED . static::INSTANCE_SETTINGS_FIELD_SUFFIX_TRANSLATED, 'translated');
+    $this->assertFieldLabel(static::INSTANCE_SETTINGS_FROM_LABEL_TRANSLATED, format_string('Correct translated field label %label found on the page', array('%label' => static::INSTANCE_SETTINGS_FROM_LABEL_TRANSLATED)));
+    $this->assertFieldLabel(static::INSTANCE_SETTINGS_TO_LABEL_TRANSLATED, format_string('Correct translated field label %label found on the page', array('%label' => static::INSTANCE_SETTINGS_TO_LABEL_TRANSLATED)));
+    $this->assertFieldPrefix(static::INSTANCE_SETTINGS_FIELD_PREFIX_TRANSLATED . static::INSTANCE_SETTINGS_FROM_PREFIX_TRANSLATED, format_string('Correct translated field prefix %prefix found on the page', array('%prefix' => static::INSTANCE_SETTINGS_FIELD_PREFIX_TRANSLATED . static::INSTANCE_SETTINGS_FROM_PREFIX_TRANSLATED)));
+    $this->assertFieldSuffix(static::INSTANCE_SETTINGS_FROM_SUFFIX_TRANSLATED, format_string('Correct translated field suffix %suffix found on the page', array('%suffix' => static::INSTANCE_SETTINGS_FROM_SUFFIX_TRANSLATED)));
+    $this->assertFieldPrefix(static::INSTANCE_SETTINGS_TO_PREFIX_TRANSLATED, format_string('Correct translated field prefix %prefix found on the page', array('%prefix' => static::INSTANCE_SETTINGS_TO_PREFIX_TRANSLATED)));
+    $this->assertFieldSuffix(static::INSTANCE_SETTINGS_TO_SUFFIX_TRANSLATED . static::INSTANCE_SETTINGS_FIELD_SUFFIX_TRANSLATED, format_string('Correct translated field suffix %suffix found on the page', array('%suffix' => static::INSTANCE_SETTINGS_TO_SUFFIX_TRANSLATED . static::INSTANCE_SETTINGS_FIELD_SUFFIX_TRANSLATED)));
   }
 
   /**
@@ -277,11 +265,11 @@ class RangeInternationalizationWebTestCase extends RangeBaseWebTestCase {
 
     $languages = language_list();
     $field_name = $this->getTestFieldName();
-    $form_element_key = $field_name. '[' . LANGUAGE_NONE . '][0]';
+    $form_element_key = $field_name . '[' . LANGUAGE_NONE . '][0]';
 
     // Test default language (field instance settings should be in the original
     // language - English).
-
+    //
     // Test widget validation error messages.
     $edit = array(
       "{$form_element_key}[from]" => 'A',
@@ -304,7 +292,7 @@ class RangeInternationalizationWebTestCase extends RangeBaseWebTestCase {
 
     // Test secondary language (field instance settings should be translated to
     // the secondary language).
-
+    //
     // Test widget validation error messages.
     $edit = array(
       "{$form_element_key}[from]" => 'A',
@@ -362,48 +350,4 @@ class RangeInternationalizationWebTestCase extends RangeBaseWebTestCase {
     cache_clear_all('locale:', 'cache', TRUE);
   }
 
-  /**
-   * Checks if a label HTML element with a given text exists.
-   *
-   * @param string $label
-   *   Label text to search for.
-   * @param string $type
-   *   Type of message to display. Possible values:
-   *     - original
-   *     - translated
-   */
-  protected function assertFieldLabel($label, $type) {
-    $result = $this->xpath("//label[contains(text(),:label)]", array(':label' => $label));
-    $this->assertTrue($result, format_string('Correct !type field label %label found on the page', array('!type' => $type, '%label' => $label)));
-  }
-
- /**
-   * Checks if a field prefix element with a given text exists.
-   *
-   * @param string $prefix
-   *   Prefix text to search for.
-   * @param string $type
-   *   Type of message to display. Possible values:
-   *     - original
-   *     - translated
-   */
-  protected function assertFieldPrefix($prefix, $type) {
-    $result = $this->xpath("//span[@class='field-prefix'][contains(text(),:prefix)]", array(':prefix' => $prefix));
-    $this->assertTrue($result, format_string('Correct !type field prefix %prefix found on the page', array('!type' => $type, '%prefix' => $prefix)));
-  }
-
- /**
-   * Checks if a field suffix element with a given text exists.
-   *
-   * @param string $suffix
-   *   Suffix text to search for.
-   * @param string $type
-   *   Type of message to display. Possible values:
-   *     - original
-   *     - translated
-   */
-  protected function assertFieldSuffix($suffix, $type) {
-    $result = $this->xpath("//span[@class='field-suffix'][contains(text(),:suffix)]", array(':suffix' => $suffix));
-    $this->assertTrue($result, format_string('Correct !type field suffix %suffix found on the page', array('!type' => $type, '%suffix' => $suffix)));
-  }
 }
