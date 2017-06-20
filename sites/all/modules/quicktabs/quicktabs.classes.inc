@@ -343,11 +343,6 @@ interface QuickContentRenderable {
    */
   public function getAjaxKeys();
   
-  /**
-   * Returns an array of keys, sufficient to represent the content uniquely.
-   */
-  public function getUniqueKeys();
-
 }
 
 /**
@@ -466,13 +461,6 @@ class QuickPreRenderedContent implements QuickContentRenderable {
    */
   protected $rendered_content;
 
-  /**
-   * An array containing the information that defines the tab content, specific
-   * to its type.
-   * @var array
-   */
-  protected $settings;
-
 
   /**
    * Constructor
@@ -486,9 +474,6 @@ class QuickPreRenderedContent implements QuickContentRenderable {
     $this->rendered_content = $contents;
 
     $this->title = isset($item['title']) ? $item['title'] : '';
-
-    unset($item['title'], $item['contents']);
-    $this->settings = $item;
   }
   
   /**
@@ -499,10 +484,10 @@ class QuickPreRenderedContent implements QuickContentRenderable {
   }
 
   /**
-   * Accessor for the tab settings.
+   * Prerendered content doesn't need any extra settings.
    */
   public function getSettings() {
-    return $this->settings;
+    return array();
   }
 
 
@@ -519,10 +504,6 @@ class QuickPreRenderedContent implements QuickContentRenderable {
    */
   public function getAjaxKeys() {
     return array();
-  }
-
-  public function getUniqueKeys() {
-    return array('class_suffix');
   }
 
 }
