@@ -919,6 +919,8 @@ input#frontSearchButton {
 	display: inline;
 	border: 1px solid #9D3F15;
 	width:120px;
+	margin-left:525px;
+	position:absolute; 
 }
 .lawpac-search-widget {
 	display: block;
@@ -933,6 +935,8 @@ input#frontSearchButton {
 	font:24px Ariel, sans-serif;
 	padding-left:8px;
 	width:506px;
+	margin-right:230px;
+	position:absolute;
 }
 .lawpac-search-submit {
 	background-color:#9D3F15;
@@ -955,8 +959,8 @@ input#frontSearchButton {
 	box-shadow:0px 1px 1px 0px #888;
 	border:1px solid #722f10;
 	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-	
-	margin-left:20px;
+
+	margin-left:665px;
 	margin-bottom:8px;
 	font-size:16px;
 }
