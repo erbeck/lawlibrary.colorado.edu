@@ -1,0 +1,12 @@
+name = HFS (Header Footer Scripts)
+description = "This plugin allows you to add the scripts and styles on overall site from the front-end. No need to open files and add them there"
+core = 7.x
+package = HFS
+configure = admin/config/development/hfs
+
+; Information added by Drupal.org packaging script on 2017-08-15
+version = "7.x-2.1"
+core = "7.x"
+project = "header_and_footer_scripts"
+datestamp = "1502827447"
+
