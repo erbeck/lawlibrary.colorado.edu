@@ -122,7 +122,9 @@ RewriteRule ^SubjectsPlus/subjects/database.*$ http://coloradolaw.libguides.com/
 RewriteRule ^SubjectsPlus/subjects/search.*$ http://coloradolaw.libguides.com/srch.php [R=301,L]
 RewriteRule ^SubjectsPlus/subjects/$ http://coloradolaw.libguides.com [R=301,L]
 RewriteRule ^arizona-v-california-collection$ http://lawcollections.colorado.edu/arizona-v-california [R=301,L]
+RewriteRule ^arizona-v-california-collection/$ http://lawcollections.colorado.edu/arizona-v-california [R=301,L]
 RewriteRule ^colorado-session-laws$ http://lawcollections.colorado.edu/colorado-session-laws [R=301,L]
+RewriteRule ^colorado-session-laws/$ http://lawcollections.colorado.edu/colorado-session-laws [R=301,L]
 
 #end custom redirects
 
