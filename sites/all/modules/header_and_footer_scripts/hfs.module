@@ -10,20 +10,20 @@
  */
 function hfs_menu() {
 
-  $items['admin/config/development/hfs'] = array(
-    'title'            => 'HFS (Header Footer Scripts)',
+  $items['admin/config/development/header-and-footer-scripts'] = array(
+    'title'            => 'Header and Footer Scripts',
     'page callback'    => 'drupal_get_form',
-    'page arguments'   => array('hfs_header_settings_form'),
+    'page arguments'   => array('hfs_header_settings'),
     'access arguments' => array('administer hfs module'),
     'description'      => 'Allow to add scripts and styles from the frontend under Head section.',
     'file'             => 'hfs.admin.inc',
     'weight'           => 10,
   );
 
-  $items['admin/config/development/hfs/header'] = array(
+  $items['admin/config/development/header-and-footer-scripts/header'] = array(
     'title'            => 'Header Scripts',
     'page callback'    => 'drupal_get_form',
-    'page arguments'   => array('hfs_header_settings_form'),
+    'page arguments'   => array('hfs_header_settings'),
     'access arguments' => array('administer hfs module'),
     'description'      => 'Allow to add scripts and styles from the frontend under Head section.',
     'file'             => 'hfs.admin.inc',
@@ -31,10 +31,10 @@ function hfs_menu() {
     'weight'           => 20,
   );
 
-  $items['admin/config/development/hfs/body'] = array(
+  $items['admin/config/development/header-and-footer-scripts/body'] = array(
     'title'            => 'Body Scripts',
     'page callback'    => 'drupal_get_form',
-    'page arguments'   => array('hfs_body_settings_form'),
+    'page arguments'   => array('hfs_body_settings'),
     'access arguments' => array('administer hfs module'),
     'description'      => 'Allow to add scripts and styles from the frontend at the start of BODY Tag.',
     'file'             => 'hfs.admin.inc',
@@ -42,10 +42,10 @@ function hfs_menu() {
     'weight'           => 30,
   );
 
-  $items['admin/config/development/hfs/footer'] = array(
+  $items['admin/config/development/header-and-footer-scripts/footer'] = array(
     'title'            => 'Footer Scripts',
     'page callback'    => 'drupal_get_form',
-    'page arguments'   => array('hfs_footer_settings_form'),
+    'page arguments'   => array('hfs_footer_settings'),
     'access arguments' => array('administer hfs module'),
     'description'      => 'Allow to add scripts and styles from the frontend just before the end of BODY Tag.',
     'file'             => 'hfs.admin.inc',
@@ -71,15 +71,48 @@ function hfs_permission() {
 }
 
 /**
+ * Implements hook_help().
+ */
+function hfs_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#header_and_footer_scripts':
+
+      $filepath = dirname(__FILE__) . '/README.txt';
+      if (file_exists($filepath)) {
+        $readme = file_get_contents($filepath);
+      }
+      if (!isset($readme)) {
+        return NULL;
+      }
+      if (module_exists('markdown')) {
+        $filters = module_invoke('markdown', 'filter_info');
+        $info = $filters['filter_markdown'];
+
+        if (function_exists($info['process callback'])) {
+          $output = $info['process callback']($readme, NULL);
+        }
+        else {
+          $output = '<pre>' . $readme . '</pre>';
+        }
+      }
+      else {
+        $output = '<pre>' . $readme . '</pre>';
+      }
+
+      return $output;
+  }
+}
+
+/**
  * Implements hook_process_html().
  *
  * Add scripts on overall the site which are defined on the settings page.
  */
 function hfs_process_html(&$variables) {
 
-  $header_scripts = variable_get('hfs_header_scripts');
-  $body_scripts   = variable_get('hfs_body_scripts');
-  $footer_scripts = variable_get('hfs_footer_scripts');
+  $header_scripts = variable_get('header_and_footer_scripts_header_settings');
+  $body_scripts   = variable_get('header_and_footer_scripts_body_settings');
+  $footer_scripts = variable_get('header_and_footer_scripts_footer_settings');
 
   if (isset($body_scripts) && !empty($body_scripts)) {
     if (!empty($body_scripts['styles'])) {
