@@ -1,5 +1,0 @@
-name = Views Placeholder
-description = "Adds placeholder text to exposed filter fields specified in module's code"
-package = "Wise Law Library Custom Modules"
-core = 7.x
-files[] = views_placeholder.module

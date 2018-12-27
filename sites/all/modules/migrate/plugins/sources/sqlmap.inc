@@ -6,15 +6,18 @@
  */
 
 class MigrateSQLMap extends MigrateMap {
+
   /**
    * Names of tables created for tracking the migration.
    *
    * @var string
    */
   protected $mapTable, $messageTable;
+
   public function getMapTable() {
     return $this->mapTable;
   }
+
   public function getMessageTable() {
     return $this->messageTable;
   }
@@ -36,7 +39,13 @@ class MigrateSQLMap extends MigrateMap {
       return $this->mapTable;
     }
     else {
-      return $options['database'] . '.' . $this->mapTable;
+      $dbname = $options['database'];
+
+      if (!empty($options['driver']) && $options['driver'] == 'mysql') {
+        // Backtick the db name on mysql to ensure dbs with hyphens work.
+        $dbname = "`{$dbname}`";
+      }
+      return $dbname . '.' . $this->mapTable;
     }
   }
 
@@ -49,15 +58,18 @@ class MigrateSQLMap extends MigrateMap {
   public function getSourceKey() {
     return $this->sourceKey;
   }
+
   public function getDestinationKey() {
     return $this->destinationKey;
   }
 
   /**
    * Drupal connection object on which to create the map/message tables
+   *
    * @var DatabaseConnection
    */
   protected $connection;
+
   public function getConnection() {
     return $this->connection;
   }
@@ -69,19 +81,52 @@ class MigrateSQLMap extends MigrateMap {
    */
   protected $ensured;
 
+  /**
+   * Provide caching for Source or Desination Map Lookups.
+   */
+  protected $cacheMapLookups;
+
+  /**
+   * Constructor.
+   *
+   * @param string $machine_name
+   *   The unique reference to the migration that we are mapping.
+   * @param array $source_key
+   *   The database schema for the source key.
+   * @param array $destination_key
+   *   The database schema for the destination key.
+   * @param string $connection_key
+   *   Optional - The connection used to create the mapping tables. By default
+   *   this is the destination (Drupal). If it's not possible to make joins
+   *   between the destination database and your source database you can specify
+   *   a different connection to create the mapping tables on.
+   * @param array $options
+   *   Optional - Options applied to this source.
+   */
   public function __construct($machine_name, array $source_key,
-      array $destination_key, $connection_key = 'default', $options = array()) {
+                              array $destination_key, $connection_key = 'default', $options = array()) {
     if (isset($options['track_last_imported'])) {
       $this->trackLastImported = TRUE;
     }
+
+    if (isset($options['cache_map_lookups'])) {
+      $this->cacheMapLookups = $options['cache_map_lookups'];
+    }
+    else {
+      $this->cacheMapLookups = FALSE;
+    }
+
+    $this->connection = Database::getConnection('default', $connection_key);
+
     // Default generated table names, limited to 63 characters
+    $prefixLength = strlen($this->connection->tablePrefix());
     $this->mapTable = 'migrate_map_' . drupal_strtolower($machine_name);
-    $this->mapTable = drupal_substr($this->mapTable, 0, 63);
+    $this->mapTable = drupal_substr($this->mapTable, 0, 63 - $prefixLength);
     $this->messageTable = 'migrate_message_' . drupal_strtolower($machine_name);
-    $this->messageTable = drupal_substr($this->messageTable, 0, 63);
+    $this->messageTable = drupal_substr($this->messageTable, 0, 63 - $prefixLength);
     $this->sourceKey = $source_key;
     $this->destinationKey = $destination_key;
-    $this->connection = Database::getConnection('default', $connection_key);
+
     // Build the source and destination key maps
     $this->sourceKeyMap = array();
     $count = 1;
@@ -110,6 +155,7 @@ class MigrateSQLMap extends MigrateMap {
         foreach ($this->sourceKey as $field_schema) {
           $mapkey = 'sourceid' . $count++;
           $source_key_schema[$mapkey] = $field_schema;
+          $source_key_schema[$mapkey]['not null'] = TRUE;
           $pks[] = $mapkey;
         }
 
@@ -121,6 +167,7 @@ class MigrateSQLMap extends MigrateMap {
         foreach ($this->destinationKey as $field_schema) {
           // Allow dest key fields to be NULL (for IGNORED/FAILED cases)
           $field_schema['not null'] = FALSE;
+          $field_schema['default'] = NULL;
           $mapkey = 'destid' . $count++;
           $fields[$mapkey] = $field_schema;
         }
@@ -146,6 +193,12 @@ class MigrateSQLMap extends MigrateMap {
           'not null' => TRUE,
           'default' => 0,
           'description' => 'UNIX timestamp of the last time this row was imported',
+        );
+        $fields['hash'] = array(
+          'type' => 'varchar',
+          'length' => '32',
+          'not null' => FALSE,
+          'description' => 'Hash of source row data, for detecting changes',
         );
         $schema = array(
           'description' => t('Mappings from source key to destination key'),
@@ -182,6 +235,30 @@ class MigrateSQLMap extends MigrateMap {
         );
         $this->connection->schema()->createTable($this->messageTable, $schema);
       }
+      else {
+        // Add any missing columns to the map table
+        if (!$this->connection->schema()->fieldExists($this->mapTable,
+          'rollback_action')) {
+          $this->connection->schema()->addField($this->mapTable,
+            'rollback_action', array(
+              'type' => 'int',
+              'size' => 'tiny',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+              'description' => 'Flag indicating what to do for this item on rollback',
+            ));
+        }
+        if (!$this->connection->schema()
+          ->fieldExists($this->mapTable, 'hash')) {
+          $this->connection->schema()->addField($this->mapTable, 'hash', array(
+            'type' => 'varchar',
+            'length' => '32',
+            'not null' => FALSE,
+            'description' => 'Hash of source row data, for detecting changes',
+          ));
+        }
+      }
       $this->ensured = TRUE;
     }
   }
@@ -194,7 +271,7 @@ class MigrateSQLMap extends MigrateMap {
   public function getRowBySource(array $source_id) {
     migrate_instrument_start('mapRowBySource');
     $query = $this->connection->select($this->mapTable, 'map')
-              ->fields('map');
+      ->fields('map');
     foreach ($this->sourceKeyMap as $key_name) {
       $query = $query->condition("map.$key_name", array_shift($source_id), '=');
     }
@@ -211,7 +288,7 @@ class MigrateSQLMap extends MigrateMap {
   public function getRowByDestination(array $destination_id) {
     migrate_instrument_start('getRowByDestination');
     $query = $this->connection->select($this->mapTable, 'map')
-              ->fields('map');
+      ->fields('map');
     foreach ($this->destinationKeyMap as $key_name) {
       $query = $query->condition("map.$key_name", array_shift($destination_id), '=');
     }
@@ -225,16 +302,17 @@ class MigrateSQLMap extends MigrateMap {
    *
    * @param int $count
    *  Maximum rows to return; defaults to 10,000
+   *
    * @return array
    *  Array of map row objects with needs_update==1.
    */
   public function getRowsNeedingUpdate($count) {
     $rows = array();
     $result = $this->connection->select($this->mapTable, 'map')
-                      ->fields('map')
-                      ->condition('needs_update', MigrateMap::STATUS_NEEDS_UPDATE)
-                      ->range(0, $count)
-                      ->execute();
+      ->fields('map')
+      ->condition('needs_update', MigrateMap::STATUS_NEEDS_UPDATE)
+      ->range(0, $count)
+      ->execute();
     foreach ($result as $row) {
       $rows[] = $row;
     }
@@ -242,45 +320,79 @@ class MigrateSQLMap extends MigrateMap {
   }
 
   /**
-   * Given a (possibly multi-field) destination key, return the (possibly multi-field)
-   * source key mapped to it.
+   * Given a (possibly multi-field) destination key, return the (possibly
+   * multi-field) source key mapped to it.
    *
    * @param array $destination_id
    *  Array of destination key values.
+   *
    * @return array
    *  Array of source key values, or NULL on failure.
    */
   public function lookupSourceID(array $destination_id) {
     migrate_instrument_start('lookupSourceID');
+    // Try a cache lookup if enabled.
+    if ($this->cacheMapLookups) {
+      $cache = &drupal_static($this->mapTable . '_sourceIDCache');
+      $serialized = json_encode($destination_id);
+      if (isset($cache[$serialized])) {
+        migrate_instrument_stop('lookupSourceID');
+        return $cache[$serialized];
+      }
+    }
+
     $query = $this->connection->select($this->mapTable, 'map')
-              ->fields('map', $this->sourceKeyMap);
+      ->fields('map', $this->sourceKeyMap);
     foreach ($this->destinationKeyMap as $key_name) {
       $query = $query->condition("map.$key_name", array_shift($destination_id), '=');
     }
     $result = $query->execute();
     $source_id = $result->fetchAssoc();
+
+    // Store the id in a cache if enabled.
+    if ($this->cacheMapLookups) {
+      $cache[$serialized] = $destination_id;
+    }
+
     migrate_instrument_stop('lookupSourceID');
     return $source_id;
   }
 
   /**
-   * Given a (possibly multi-field) source key, return the (possibly multi-field)
-   * destination key it is mapped to.
+   * Given a (possibly multi-field) source key, return the (possibly
+   * multi-field) destination key it is mapped to.
    *
    * @param array $source_id
    *  Array of source key values.
+   *
    * @return array
    *  Array of destination key values, or NULL on failure.
    */
   public function lookupDestinationID(array $source_id) {
     migrate_instrument_start('lookupDestinationID');
+    // Try a cache lookup if enabled.
+    if ($this->cacheMapLookups) {
+      $cache = &drupal_static($this->mapTable . '_destinationIDCache');
+      $serialized = json_encode($source_id);
+      if (isset($cache[$serialized])) {
+        migrate_instrument_stop('lookupDestinationID');
+        return $cache[$serialized];
+      }
+    }
+
     $query = $this->connection->select($this->mapTable, 'map')
-              ->fields('map', $this->destinationKeyMap);
+      ->fields('map', $this->destinationKeyMap);
     foreach ($this->sourceKeyMap as $key_name) {
       $query = $query->condition("map.$key_name", array_shift($source_id), '=');
     }
     $result = $query->execute();
     $destination_id = $result->fetchAssoc();
+
+    // Store the id in a cache if enabled.
+    if ($this->cacheMapLookups) {
+      $cache[$serialized] = $destination_id;
+    }
+
     migrate_instrument_stop('lookupDestinationID');
     return $destination_id;
   }
@@ -300,27 +412,31 @@ class MigrateSQLMap extends MigrateMap {
    * @param int $rollback_action
    *  How to handle the destination object on rollback. Defaults to
    *  ROLLBACK_DELETE.
+   * $param string $hash
+   *  If hashing is enabled, the hash of the raw source row.
    */
   public function saveIDMapping(stdClass $source_row, array $dest_ids,
-      $needs_update = MigrateMap::STATUS_IMPORTED, $rollback_action = MigrateMap::ROLLBACK_DELETE) {
+                                $needs_update = MigrateMap::STATUS_IMPORTED,
+                                $rollback_action = MigrateMap::ROLLBACK_DELETE, $hash = NULL) {
     migrate_instrument_start('saveIDMapping');
     // Construct the source key
     $keys = array();
     foreach ($this->sourceKeyMap as $field_name => $key_name) {
       // A NULL key value will fail.
-      if (is_null($source_row->$field_name)) {
+      if (is_null($source_row->{$field_name})) {
         Migration::displayMessage(t(
           'Could not save to map table due to NULL value for key field !field',
           array('!field' => $field_name)));
         migrate_instrument_stop('saveIDMapping');
         return;
       }
-      $keys[$key_name] = $source_row->$field_name;
+      $keys[$key_name] = $source_row->{$field_name};
     }
 
     $fields = array(
-      'needs_update' => (int)$needs_update,
-      'rollback_action' => (int)$rollback_action,
+      'needs_update' => (int) $needs_update,
+      'rollback_action' => (int) $rollback_action,
+      'hash' => $hash,
     );
     $count = 1;
     if (!empty($dest_ids)) {
@@ -354,8 +470,8 @@ class MigrateSQLMap extends MigrateMap {
     if (is_array($source_key)) {
       foreach ($source_key as $key_value) {
         $fields['sourceid' . $count++] = $key_value;
-        // If any key value is empty, we can't save - print out and abort
-        if (empty($key_value)) {
+        // If any key value is not set, we can't save - print out and abort
+        if (!isset($key_value)) {
           print($message);
           return;
         }
@@ -379,8 +495,8 @@ class MigrateSQLMap extends MigrateMap {
    */
   public function prepareUpdate() {
     $this->connection->update($this->mapTable)
-    ->fields(array('needs_update' => MigrateMap::STATUS_NEEDS_UPDATE))
-    ->execute();
+      ->fields(array('needs_update' => MigrateMap::STATUS_NEEDS_UPDATE))
+      ->execute();
   }
 
   /**
@@ -404,7 +520,10 @@ class MigrateSQLMap extends MigrateMap {
   public function importedCount() {
     $query = $this->connection->select($this->mapTable);
     $query->addExpression('COUNT(*)', 'count');
-    $query->condition('needs_update', array(MigrateMap::STATUS_IMPORTED, MigrateMap::STATUS_NEEDS_UPDATE), 'IN');
+    $query->condition('needs_update', array(
+      MigrateMap::STATUS_IMPORTED,
+      MigrateMap::STATUS_NEEDS_UPDATE,
+    ), 'IN');
     $count = $query->execute()->fetchField();
     return $count;
   }
@@ -450,7 +569,8 @@ class MigrateSQLMap extends MigrateMap {
   }
 
   /**
-   * Delete the map entry and any message table entries for the specified source row.
+   * Delete the map entry and any message table entries for the specified
+   * source row.
    *
    * @param array $source_key
    */
@@ -475,7 +595,8 @@ class MigrateSQLMap extends MigrateMap {
   }
 
   /**
-   * Delete the map entry and any message table entries for the specified destination row.
+   * Delete the map entry and any message table entries for the specified
+   * destination row.
    *
    * @param array $destination_key
    */
@@ -504,7 +625,7 @@ class MigrateSQLMap extends MigrateMap {
    */
   public function setUpdate(array $source_key) {
     $query = $this->connection->update($this->mapTable)
-                              ->fields(array('needs_update' => MigrateMap::STATUS_NEEDS_UPDATE));
+      ->fields(array('needs_update' => MigrateMap::STATUS_NEEDS_UPDATE));
     $count = 1;
     foreach ($source_key as $key_value) {
       $query->condition('sourceid' . $count++, $key_value);
@@ -552,7 +673,7 @@ class MigrateSQLMap extends MigrateMap {
    */
   public function clearMessages() {
     $this->connection->truncate($this->messageTable)
-                     ->execute();
+      ->execute();
   }
 
   /**
@@ -564,15 +685,18 @@ class MigrateSQLMap extends MigrateMap {
   }
 
   protected $result = NULL;
+
   protected $currentRow = NULL;
+
   protected $currentKey = array();
+
   public function getCurrentKey() {
     return $this->currentKey;
   }
 
   /**
-   * Implementation of Iterator::rewind() - called before beginning a foreach loop.
-   * TODO: Support idlist, itemlimit
+   * Implementation of Iterator::rewind() - called before beginning a foreach
+   * loop. TODO: Support idlist, itemlimit
    */
   public function rewind() {
     $this->currentRow = NULL;
@@ -604,17 +728,18 @@ class MigrateSQLMap extends MigrateMap {
   }
 
   /**
-   * Implementation of Iterator::key - called when entering a loop iteration, returning
-   * the key of the current row. It must be a scalar - we will serialize
-   * to fulfill the requirement, but using getCurrentKey() is preferable.
+   * Implementation of Iterator::key - called when entering a loop iteration,
+   * returning the key of the current row. It must be a scalar - we will
+   * serialize to fulfill the requirement, but using getCurrentKey() is
+   * preferable.
    */
   public function key() {
     return serialize($this->currentKey);
   }
 
   /**
-   * Implementation of Iterator::next() - called at the bottom of the loop implicitly,
-   * as well as explicitly from rewind().
+   * Implementation of Iterator::next() - called at the bottom of the loop
+   * implicitly, as well as explicitly from rewind().
    */
   public function next() {
     $this->currentRow = $this->result->fetchObject();
@@ -624,16 +749,16 @@ class MigrateSQLMap extends MigrateMap {
     }
     else {
       foreach ($this->sourceKeyMap as $map_field) {
-        $this->currentKey[$map_field] = $this->currentRow->$map_field;
+        $this->currentKey[$map_field] = $this->currentRow->{$map_field};
         // Leave only destination fields
-        unset($this->currentRow->$map_field);
+        unset($this->currentRow->{$map_field});
       }
     }
   }
 
   /**
-   * Implementation of Iterator::valid() - called at the top of the loop, returning
-   * TRUE to process the loop and FALSE to terminate it
+   * Implementation of Iterator::valid() - called at the top of the loop,
+   * returning TRUE to process the loop and FALSE to terminate it
    */
   public function valid() {
     // TODO: Check numProcessed against itemlimit

@@ -1,0 +1,144 @@
+<div id="frontBox">
+    <div id="frontSearchForm">
+        <form class="lawpac-search-widget" action="http://lawpac.colorado.edu/search/" method="get" target="_blank">          
+            <input class="lawpac-search-field" type="text" name="searcharg" placeholder="Search for Law Library Books (Online & Print)">
+			 <select class="lawpac-select-field" name="searchtype">
+                <option selected="selected" value="X">
+                    Keyword
+                </option>
+                <option value="t">
+                    Title
+                </option>
+                <option value="a">
+                    Author
+                </option>
+                <option value="d">
+                    Subject
+                </option>
+                <option value="X">
+                    Study Aids
+                </option>
+            </select>
+            <script type="text/javascript">
+                // <![CDATA[
+                (function($) {
+                    Drupal.behaviors.exampleModule = {
+                        attach: function(context, settings) {
+
+                            $('#searchSubmit').click(function() {
+                                var studyAids = $('option:selected').index();
+                                if (studyAids == 4) {
+                                    $('input[name="searcharg"]').map(function() {
+                                        $(this).val($(this).val() + ' "Study Aids"');
+                                    });
+                                }
+
+                            });
+                            $('input[name="searcharg"]').click(function() {
+                                $(this).val('');
+                            });
+
+                        }
+                    };
+                }(jQuery));
+                // ]]>
+            </script>
+            <input id="lawpac-search-submit" class="button-gold" type="submit" value="Search" />
+            &nbsp;
+        </form>
+        <form class="summon-search-widget" action="http://culaw.summon.serialssolutions.com/search" method="get" accept-charset="utf-8"
+        target="_blank">
+            <p>
+                <input type="hidden" name="utf8" value="✓" />
+                <input id="s.q" class="summon-search-field" type="text" name="s.q" placeholder="Search Full Text Articles & More">
+                <input id="summon-search-submit" class="button-blue" type="submit" value="Search" />
+                <br />
+                <a href="http://lawlibrary.colorado.edu/two-search-box-guide" title="Searchbox Guide">
+                    What's the difference?
+                </a>
+            </p>
+        </form>
+        <div id="researchResources">
+            <p>
+                <strong>
+                    Catalogs:
+                </strong>
+                &nbsp;&nbsp;
+                
+                <a href="http://libraries.colorado.edu/" target="_blank" title="CU Libraries">
+                    University (Chinook)
+                </a>
+                &nbsp;|&nbsp;
+                <a href="http://prospectorhome.coalliance.org/" target="_blank" title="Prospector">
+                    Regional (Prospector)
+                </a>
+                &nbsp;|&nbsp;
+                <a href="http://firstsearch.oclc.org/fsip?autho=100113121&amp;dbname=WorldCat" target="_blank" title="WorldCat">
+                    National (WorldCat)
+                </a>
+				&nbsp;|&nbsp;
+                <a href="">
+                    More
+                </a>
+           <p>
+		   </p>
+                <strong>
+                    Databases:
+                </strong>
+                &nbsp;&nbsp;
+                
+                <a href="http://coloradolaw.idm.oclc.org/login?url=http://www.heinonline.org/HOL/Welcome" target="_blank" title="Hein">
+                    HeinOnline
+                </a>
+                &nbsp;|&nbsp;
+                <a href="http://coloradolaw.idm.oclc.org/login?url=http://search.proquest.com/congressional" target="_blank" title="ProQuest">
+                    ProQuest Congressional
+                </a>
+                &nbsp;|&nbsp;
+				<a href="http://coloradolaw.idm.oclc.org/login?url=http://www.lexisnexis.com/hottopics/lnacademic/?verb=sf&amp;sfi=AC00NBEasySrch"
+                target="_blank" title="LexisNexis">
+                    Lexis Academic
+                </a>
+				&nbsp;|&nbsp;
+                <a href="">
+                    More
+                </a>
+            <p>
+		   </p>
+				<strong>
+                    Digital Collections:
+                </strong>
+                &nbsp;&nbsp;
+				
+				<a href="https://scholar.law.colorado.edu/colorado-law-faculty-scholarship/" target="_blank" title="CU Law Scholarship">
+                    Colorado Law Scholarly Commons
+                </a>
+                &nbsp;|&nbsp;
+                <a href="http://lawcollections.colorado.edu/colorado-session-laws/" target="_blank" title="Colorado Primary Law">
+                    Primary Law Digital Archive
+                </a>
+                &nbsp;|&nbsp;
+                <a href="" target="_blank" >
+                    More
+                </a>
+			<p>
+		   </p>
+				<strong>
+                    Research Guides:
+                </strong>
+                &nbsp;&nbsp;
+                <a href="http://coloradolaw.libguides.com/c.php?g=704570" target="_blank" title="Study Aids Guide">
+                    1L Subject Study Aids
+                </a>
+                &nbsp;|&nbsp;
+                <a href="http://coloradolaw.libguides.com/c.php?g=677298" title="Colorado Legislative Branch Guide">
+                    Colorado Statutory Research
+                </a>           
+				&nbsp;|&nbsp;
+                <a href="http://coloradolaw.libguides.com" title="CU Law Library Research Guides">
+                    More
+                </a>
+			</p>	
+        </div>
+    </div>
+</div>
